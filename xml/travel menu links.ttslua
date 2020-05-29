@@ -1,0 +1,15 @@
+return
+{
+  {
+    name = "travel_to_city",
+    url = "https://www.dropbox.com/s/3dvf5wryxy3uxy2/city.png?raw=1"
+  },
+  {
+    name = "travel_to_town",
+    url = "https://www.dropbox.com/s/zl4nst4qg5veght/town.png?raw=1"
+  },
+  {
+    name = "travel_to_village",
+    url = "https://www.dropbox.com/s/3otswh43gwrvduv/village.png?raw=1"
+  },
+}

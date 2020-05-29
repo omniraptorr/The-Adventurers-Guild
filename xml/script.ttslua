@@ -1,0 +1,66 @@
+local CustomUIAssets = {}
+local function add_assets(sourceTable)
+  local names = {}
+  for _,entry in ipairs(CustomUIAssets) do
+    names[entry.name] = true
+  end
+  for _,v in ipairs(sourceTable) do
+    if names[v.name] then
+      error("name " .. v.name .. " already in list of assets!")
+    end
+    CustomUIAssets[#CustomUIAssets + 1] = v
+  end
+end
+
+add_assets(require("warhammer quest/xml/main menu links"))
+add_assets(require("warhammer quest/xml/travel menu links"))
+
+-- local xml_table = require "warhammer quest/xml/uitable"
+
+local formatui = require "xmlui/formatui"
+
+function onLoad(save_state)
+  -- UI.setCustomAssets({})
+  UI.setCustomAssets(CustomUIAssets)
+  -- UI.setXmlTable({})
+  Wait.frames(function() print("waited") end, 10)
+  -- Wait.frames(function() UI.setXmlTable(xml_table) end, 15)
+  -- Wait.frames(function() print("xml is", formatui()) end, 20)
+  -- print(formatui())
+end
+
+local serpent = require "IO/serpent/src/serpent"
+
+local function menuClicked(player, value, id)
+  if player.host then
+    local mode = string.sub(id, 12)
+    game_mode = mode
+    print(string.format("%s chose %s mode.", player.steam_name, mode))
+    -- Global.UI.setAttribute("start_menu_panel", "active", "false")
+
+    local menutab = UI.getXmlTable()[2].children[2].children
+    -- print(formatui(menutab))
+    for k,v in ipairs(menutab) do
+      if v.attributes.class == "start_menu" then
+        Global.UI.setAttribute(v.attributes.id, "active", "0")
+      else
+        Global.UI.setAttribute(v.attributes.id, "active", "1")
+      end
+    end
+  end
+end
+
+local class_click_functions = {
+  start_menu = menuClicked
+}
+
+function UIButtonClick(player, value, id)
+  local buttonClass = UI.getAttribute(id, "class")
+  local click_func = class_click_functions[buttonClass]
+
+  if click_func then
+    click_func(player, value, id)
+  else
+    print("this class (" .. buttonClass .. ") does not have an associated function")
+  end
+end

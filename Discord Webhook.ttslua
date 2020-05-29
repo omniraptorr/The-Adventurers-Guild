@@ -1,0 +1,106 @@
+local hook = "https://ptb.discordapp.com/api/webhooks/700118933826437152/yViNM39VOlM-htLvmTPMQhamdjhI62eY-qJ6DHTTCzcvZJKFUJBy7nW2d27d78PHU7Ne"
+
+
+local icons = {} -- table of steam icon urls
+function registerIcon(steamID)
+    url = string.format('https://steamcommunity.com/profiles/%s?xml=1', steamID)
+    id = steamID
+    WebRequest.get(url, function(web) storeIcon(id, web) end)
+end
+function storeIcon(steamID, request)
+    local request = request.text
+    _, firstpos = request:find('<avatarFull><![CDATA[', nil, true)
+    lastpos = request:find(']]></avatarFull>', nil, true)
+    icons[steamID] = request:sub(firstpos + 1, lastpos - 1)
+    log(icons)
+    forwardDiscord(hook, Player.White)
+end
+
+function forwardDiscord(hook, player, message)
+  local name = player.steam_name
+  -- if player.promoted then
+  --     name = '\u{1f6e1} 🛡🛡' .. name
+  -- elseif player.host then
+  --     name = '\u{1f451} ' .. name
+  -- end
+
+  local steamID = player.steam_id
+  print(type(steamID), steamID)
+  local steamicon = icons[steamID]
+
+  local payload = {
+    username = "Roll Results",
+    avatar_url = "https://cdn.discordapp.com/icons/672107321698156544/879274c2acd3d888c0e27ab2bb177066.png?size=128", -- guild icon
+    embeds = {
+      {
+        author = {
+          icon_url = steamicon,
+          name = name,
+          url = "https://steamcommunity.com/profiles/" .. steamID
+        },
+        title = "title supports ~~(did you know you can have some markdown here too?)~~", -- but no named links
+        url = "https://google.com", -- title url
+        thumbnail = {
+          url = "https://cdn.discordapp.com/embed/avatars/0.png"
+        },
+        description = "this 🤔 supports named links on top of the previously shown subset of markdown. ```\nyes, even code blocks```", -- character info can go here.
+        color = 6618151, -- must be an integer for some reason, not hex. can be
+        fields = {
+          {
+            name = "🤔",
+            value = "some of these properties have certain limits..."
+          }, {
+            name = "😱🤔🙄",
+            value = " 🤔 try exceeding some of them!"
+          }, {
+            name = "🙄",
+            value = "🤔an informative error should show up, and this view will remain as-is until all issues are fixed"
+          }, {
+            inline = true,
+            name = "field1",
+            value = "these last two "
+          }, {
+            inline = true,
+            name = "field2",
+            value = "are inline fields"
+          },{
+            inline = true,
+            name = "field3",
+            value = "are inline fields"
+          },{
+            inline = true,
+            name = "field4",
+            value = "are inline fields"
+          },
+        },
+        footer = {
+          icon_url = "https://cdn.discordapp.com/embed/avatars/0.png",
+          text = "footer text"
+        },
+        -- image = {
+        --   url = "https://cdn.discordapp.com/embed/avatars/0.png"
+        -- },
+        timestamp = os.date("!%FT%T.000Z"), -- discord timestamp format.
+      },
+    },
+  }
+ -- WebRequest.post(hook, {content = "🤔"})
+  WebRequest.post(hook, {payload_json = JSON.encode(payload)})
+end
+
+function onLoad(save_state)
+    players = Player.getPlayers()
+    for _, player in ipairs(players) do
+        registerIcon(player.steam_id)
+    end
+    -- WebRequest.post(hook, { avatar_url = "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/2b/2b6ddcf55724a21a0da84ea82d5ac15b190eaa68_full.jpg", payload_json = JSON.encode(jtab)}, printResults)
+end
+function onPlayerConnect(person)
+    registerIcon(person.steam_id)
+end
+
+-- function onChat(message, player)
+--   if hook then
+--       forwardDiscord(name, message, icons[id])
+--   end
+-- end

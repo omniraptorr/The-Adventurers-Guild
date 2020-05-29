@@ -1,0 +1,23 @@
+return
+{
+  {
+    name = "menu_background",
+    url = "http://cloud-3.steamusercontent.com/ugc/1028455403165548767/471D70EDB76E3AD4279110773AB95040818EE8DC/"
+  },
+  {
+    name = "menu_adventure",
+    url = "http://cloud-3.steamusercontent.com/ugc/1028455403165549146/AC16C3332C33902C143875D4D2B1F5F6436DCE58/"
+  },
+  {
+    name = "menu_traveling",
+    url = "http://cloud-3.steamusercontent.com/ugc/1028455403165550242/D84E859AB64591B637701D71E5CB00A9BE781966/"
+  },
+  {
+    name = "menu_settlements",
+    url = "http://cloud-3.steamusercontent.com/ugc/1028455403165550036/C7BAF7D4324A1CDE57F2DC734807FD513191C836/"
+  },
+  {
+    name = "menu_guild",
+    url = "http://cloud-3.steamusercontent.com/ugc/1028455403165550821/FFD78E865DAB137468F99632A932B2230F726971/"
+  }
+}

@@ -1,0 +1,79 @@
+print("hi")
+return
+{
+  require "warhammer quest/xml/defaults",
+  -- { -- idk what this is for
+  --   tag = "Text",
+  --   attributes = {},
+  --   value = "Displayed Text",
+  --   children = {}
+  -- },
+  { -- main menu panel
+    tag = "Panel",
+    attributes = {
+      class = "menu_background",
+      active = "true",
+      height = "341",
+      id = "start_menu_panel",
+      visibility = "Host",
+      width = "343"
+    },
+    children = {
+      {
+        tag = "Image",
+        attributes = {
+          id = "start_menu_background",
+          image = "menu_background"
+        },
+        children = {}
+      },
+      {
+        tag = "VerticalLayout",
+        attributes = {
+          height = "236",
+          id = "start_menu_buttons",
+          spacing = "4",
+          width = "243"
+        },
+        children = {
+          {
+            tag = "Button",
+            attributes = {
+              class = "start_menu",
+              icon = "menu_adventure",
+              id = "start_menu_adventure"
+            },
+            children = {}
+          },
+          {
+            tag = "Button",
+            attributes = {
+              class = "start_menu",
+              icon = "menu_traveling",
+              id = "start_menu_traveling"
+            },
+            children = {}
+          },
+          {
+            tag = "Button",
+            attributes = {
+              class = "start_menu",
+              icon = "menu_settlements",
+              id = "start_menu_settlements"
+            },
+            children = {}
+          },
+          {
+            tag = "Button",
+            attributes = {
+              class = "start_menu",
+              icon = "menu_guild",
+              id = "start_menu_guild"
+            },
+            children = {}
+          }
+        }
+      }
+    }
+  }
+}
