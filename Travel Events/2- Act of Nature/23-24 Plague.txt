@@ -1,0 +1,25 @@
+ 
+23-24 Plague
+
+The Warriors arrive at a large town in the grip of a terrible 
+plague. All roads, bar the one the Warriors entered by, are 
+blocked. Their journey is over and they must now either go 
+straight into the next Adventure, or they may stay in the 
+afflicted town. 
+
+If the Warriors stay, use the normal rules to determine what 
+they do there (see the Settlement section), but each time a 
+Warrior makes a roll on any table for any reason your must 
+make roll another 1D6 on the following table: 
+
+1 The Warrior contracts the plague. They are at -1 
+	Strength for the duration of the next Dungeon. 
+2 The Warrior contracts the plague. They are at -1 
+	Toughness for the duration of the next Dungeon. 
+3-6 The Warrior remains unaffected by the plague – for 
+	now! 
+ 
+Once a Warrior has rolled a 1 or 2 on the table above, they 
+need not roll on the table for the rest of their stay in the 
+Plague Town. 
+ 
