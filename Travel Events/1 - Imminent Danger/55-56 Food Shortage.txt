@@ -1,0 +1,12 @@
+55-56 Food Shortage
+
+Whether through too many late nights carousing around the 
+fire, carelessness, or simply throwing out supplies to carry 
+more gold, the Warriors find themselves dealing with a 
+dangerous food shortage.
+ 
+Roll 1D6 for each Warrior. If the roll is a 1, the Warrior’s 
+stamina is poor and their foraging skills awful. They are -1 
+Toughness for the next Adventure. If the score is 2 or more, 
+the Warrior’s constitution is sound and foraging skills are 
+sufficient to sustain them.

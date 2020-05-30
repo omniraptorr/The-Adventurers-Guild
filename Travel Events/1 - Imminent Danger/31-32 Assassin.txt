@@ -1,0 +1,17 @@
+31-32 Assassin
+
+While travelling on the road, one of the Warriors (determined 
+randomly) is struck by a poisoned arrow fired from the 
+bushes. The assailant promptly disappears without a trace.
+ 
+ The poisoned Warrior is able to travel but must receive 
+medical treatment from a healer as soon as possible. For every 
+week the Warriors continue their journey, the poisoned Warrior 
+must roll 1D6. If the result is a 1 or 2, then the Warrior must 
+deduct -1 Wound from their Starting Wounds score 
+permanently. If their Starting Wounds every reaches zero, or if 
+they do not reach a Settlement, then they are dead and 
+removed from the game. 
+ 
+ If the Warrior reaches a Settlement, the local healer is able 
+to cure their condition, although Wounds lost are permanent. 

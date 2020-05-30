@@ -1,0 +1,34 @@
+15-16 Dragons
+
+The Warriors spot a group of dragons up in the sky in the 
+direction they are travelling. The dragons appear to be circling 
+for prey. If the Warriors continue on their present course roll 
+1D6 on the table below:
+ 
+1 Attacked! As the Warriors near the area where the 
+	dragons were spotted, they are viciously attacked by 
+	the monsters! Although they manage to find refuge in 
+	a small cave where they can tend to their injuries, each 
+	Warrior must deduct -1 from their Starting Wounds 
+	score permanently! 
+
+2-3 Spotted! The dragons spot the Warriors approaching 
+	and immediately swoop down on them to feast! 
+	Although the Warriors take refuge in a dense forest, 
+	the dragons wait patiently for them to re-emerge. The 
+	Warriors have no choice but to alter their route which 
+	adds another week to their journey. 
+
+4-6 By the time the Warriors reach the area where they 
+	had spotted the dragons, the beasts are no longer 
+	there and the Warriors may continue on their journey 
+	without delay. 
+ 
+If the Warriors change course roll 1D6 below:
+ 
+1-4 The way chosen adds a week to their journey.
+ 
+5 The way chosen is the same distance with no loss of 
+	time. 
+
+6 The way chosen knocks a week off their journey! 

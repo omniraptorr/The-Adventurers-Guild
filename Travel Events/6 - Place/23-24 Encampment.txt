@@ -1,0 +1,27 @@
+23-24 Encampment
+
+The Warriors come upon the encampment of a small group of 
+soldiers who are being deployed to a nearby province. They 
+welcome the Warriors to sit and rest with them. 
+
+Each Warrior may engage in military conversation with one 
+of the soldiers in the encampment by rolling 1D6 below: 
+
+1-3 The soldier is tired and does not wish to talk about 
+	combat or weaponry. 
+
+4-5 The soldier enjoys the Warrior’s company. He is 
+	skilled in the art of weapon sharpening and, in a show 
+	of friendship, offers to put a nice edge on your 
+	Warrior’s blade. For the next Adventure, one of the 
+	Warrior’s weapons (their choice) causes an extra 
+	Wound each time it hits.
+ 
+6 The soldier is quite taken with the Warrior and 
+	excitedly discusses the fighting arts. The soldier is 
+	skilled in defence with the blade and shows the 
+	Warrior a new manuever. Once per combat, the 
+	Warrior may attempt to turn aside a blow by rolling 
+	1D6. If the number rolled is equal to or greater than 
+	the attacker’s Strength, the blow is blocked and 
+	causes no Damage.

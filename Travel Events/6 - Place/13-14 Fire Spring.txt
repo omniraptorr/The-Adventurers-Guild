@@ -1,0 +1,32 @@
+13-14 Fire Spring
+
+From the top of a hill, the Warriors spot a beautiful spring 
+down in the valley where they can quench their thirst. Upon 
+reaching it, the Warriors discover a dancing blue fire burning 
+just beneath the water. 
+
+The Warriors realise that they have found the fabled 
+weapon-quenching pool from an ancient Dwarf clan! 
+
+Each Warrior may choose one weapon to thrust into the 
+magical spring before rolling 1D6 on the table below: 
+
+1 The weapon is now magical. 
+
+2 The weapon can block one Attack once per Combat, 
+	which completely negates any Damage the attack 
+	would have caused. 
+
+3 The weapon now adds +1 Damage when it strikes. 
+
+4 The weapon now adds +1 Strength to the wielder. 
+
+5 The weapon now conveys +1 Toughness to the wielder.
+ 
+6 The weapon now causes an extra 1D6 Wounds the first 
+time it hits in each combat. 
+ 
+Roll another 1D6. If the score is a 6, the effect is permanent! 
+On any other score, the weapon’s new effect lasts until the 
+end of the next Adventure after which the weapon returns to 
+normal. 

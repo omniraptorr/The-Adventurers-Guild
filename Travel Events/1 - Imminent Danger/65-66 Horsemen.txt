@@ -1,0 +1,32 @@
+65-66 Horsemen
+
+A large band of tough-looking horsemen accost the Warriors.  
+Each Warrior must roll 1D6, adding +1 if the Warrior is riding a 
+Horse and +2 if the Warrior is riding a Warhorse. The roll 
+cannot be modified by any other means (Faith, etc.). Look up 
+the result on the table below:
+ 
+1-2 Your Warrior is no match for the horsemen and is 
+	severely trampled and defeated. They relieve the 
+	Warrior of an item of Treasure (determined randomly) 
+	before galloping off. 
+
+3-4 Your Warrior is beaten and humiliated. The horsemen 
+	relieve them of 1D6x100 gold.
+
+5-6 Your Warrior successfully keeps an eye on their purse 
+	whilst managing to hold their own against the 
+	brigands. The horsemen get nothing before they are 
+	finally driven off. 
+  
+7 From atop their horse, your Warrior proves to be the 
+	better rider and the better fighter. After dispatching a 
+	few of the horsemen, the rest gallop away in fear.  
+	Your Warrior finds 1D6x50 gold on the bodies of the 
+	slain horsemen. 
+
+8 In a glorious display of horsemanship and weaponry, 
+	your Warrior humiliates many of the brigands. Once 
+	the horsemen have been driven off, the Warrior 
+	dismounts and loots the fallen for 1D6 x 10 gold and 
+	one item of Dungeon Room Treasure! 

@@ -1,0 +1,16 @@
+13-14 Kidnapped
+
+One of the Warriors (determined randomly) has been 
+kidnapped while on watch during the night! After a thorough 
+search of the area, the kidnapped Warrior is discovered 
+battered, bound and gagged. The abducted Warrior must roll 
+1D6 to see what has been stolen: 
+
+1 Everything! Your Warrior has been stripped of all their 
+	possessions (as well as their self-esteem)! 
+
+2-5 2D6x100 gold pieces.
+ 
+4-5 One magical item (chosen at random).
+ 
+6 One item of equipment (chosen at random).

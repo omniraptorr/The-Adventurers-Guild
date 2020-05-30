@@ -1,0 +1,11 @@
+33-34 Hungry Wolves
+
+While traversing through a grove the Warriors are threatened 
+by hungry wolves. The Warriors must toss a total of 2D3 food 
+items to pacify the pack or the wild canines will attack.
+ 
+If the Warriors don’t have enough food or if they choose not 
+to feed them the Warriors eventually dispatch the attacking 
+wolves. However, during the conflict each Warrior has one 
+item of Equipment damaged beyond repair (determined 
+randomly). It must be discarded immediately. 

@@ -1,0 +1,22 @@
+31-32 Witch's Cave
+
+Deep in a gloomy ravine the Warriors come across the 
+entrance to a dark cave. Inside it dwells a twisted, ugly hag 
+who claims to be a witch. 
+
+Each Warrior may purchase a single potion by paying the 
+woman 1D6x10 gold (it must be drunk immediately). Roll 1D6 
+on the following table: 
+
+1 Your Warrior falls unconscious, writhing in agony as if 
+	a fire were burning through them. When they awaken 
+	they feel deathly weak. They are -1 Toughness for the 
+	duration of the next Adventure. 
+
+2-4 The potion warms your Warrior to the core. They gain 
+	+1D6 Wounds for the duration of the next Adventure. 
+
+5-6 A powerful heat surges through your Warrior, and they 
+	feel energy coursing through their muscles and sinews. 
+	They are +1 Toughness for the duration of the next 
+	Adventure. 

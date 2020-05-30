@@ -1,0 +1,11 @@
+53-54 Swamp
+
+As the Warriors pass by a vile swamp, they fail to notice a 
+magical green mist that seeps from the murky waters and 
+slowly moves toward them. The mist absorbs energy from 
+everything in the vicinity and each Warrior finds that one of 
+their magical weapons (their choice) has been drained of its 
+magical properties. For all intents and purposes (including its 
+Gold Value) the weapon functions as a non-magical weapon of 
+its kind. At the end of the next Adventure it reverts back to its 
+magical state. 
