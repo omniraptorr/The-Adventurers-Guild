@@ -1,0 +1,12 @@
+25-26 Guests
+
+The Warriors arrive in a small hamlet as a local festival is in full 
+swing, and they are invited to stay as guests.  They are wined 
+and fed to excess, and have a most enjoyable evening.
+ 
+	Waking up the next morning, they feel it is only fair to offer 
+payment for the hospitality that the villagers have offered. 
+Roll 1D6 for each Warrior.  The Warrior with the lowest score 
+has to pay the villagers (1D6x20) gold. If two or more 
+Warriors score equally low, they must roll off until only one 
+player is left to foot the bill.

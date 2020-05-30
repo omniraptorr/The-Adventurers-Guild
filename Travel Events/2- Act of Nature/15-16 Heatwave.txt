@@ -1,0 +1,11 @@
+15-16 Heatwave
+
+This region is in the grip of an unprecedented heatwave and 
+the Warriors are only able to travel at night which adds 2 more 
+weeks to their journey. 
+ 
+	At the beginning of every week until they reach a 
+Settlement, each Warrior must roll 1D6. If the result is a 1, the 
+Warrior must deduct -1 Wound from their Starting Wounds 
+score permanently. If they ever reach zero Starting Wounds, 
+they are dead and removed from the game.

@@ -1,0 +1,27 @@
+43-44 Warrant
+
+As the Warriors approach a make-shift militia checkpoint, they 
+are surrounded by dozens of armed soldiers. The captain steps 
+forward and points at one of the Warriors, shouting, “You are 
+under arrest!” 
+
+Roll 1D6 for each Warrior, with the lowest score being the 
+target of the captain’s words. They are dragged away 
+immediately. The other Warriors have two options: 
+
+a) The Warriors can continue on their way without delay 
+	in which case the jailed Warrior must pay 1D6x50 gold 
+	in bribes (selling any Equipment or Treasure if 
+	necessary) and may continue their journey to a 
+	Settlement on their own. If the Warrior cannot pay, 
+	they are held in a dank prison where they catch a 
+	sickly fever. They are finally freed many weeks later 
+	and can meet up with the other Warriors at the 
+	entrance to the next Dungeon. Due to the fever, 
+	however, they are -1 Toughness for the next 
+	Adventure. 
+
+b) The Warriors may bribe the captain into releasing their 
+	comrade and letting them go on their way. The bribe 
+	amounts to 150 gold from each of the remaining 
+	Warriors.

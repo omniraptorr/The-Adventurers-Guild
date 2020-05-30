@@ -1,0 +1,11 @@
+25-26 Volcanic Eruption
+
+Travelling through a Mountain pass, the Warriors are shaken 
+violently by a thunderous explosion. From the sky fall chunks 
+of molten lava! As the area is sprayed with volcanic fire and 
+ash the Warriors are pelted and smothered. Each Warrior must 
+roll 1D6 and add their Toughness and Armour. If the score is 
+less than 8, the Warrior is scalded and burned badly, and must 
+deduct -1 from the Starting Wounds score permanently. In 
+addition, the group must flee the area, thus adding one week 
+to their journey.

@@ -1,0 +1,27 @@
+21-22 Tornado
+
+The Warriors are resting when a tornado unexpectedly tears 
+through their camp. The winds are ferocious and the Warriors 
+have to fight to prevent being sucked up and blown away.
+ 
+Roll 1D6 for each Warrior and look up the lowest number 
+rolled on the following table to determine what happened to 
+the Warrior with that score. If two or more Warriors have the 
+same score, re-roll until the victim is determined. 
+
+1 Unable to resist, your Warrior is sucked up high into 
+	the air before crashing back to the ground. They must 
+	be carried to safety by the other Warriors, adding one 
+	week to the journey time. As soon as the party arrives 
+	at its destination, the Warrior must pay 100 gold to be 
+	healed. If the injured Warrior cannot afford it, the 
+	healer takes all the gold they do have plus one piece of 
+	Equipment or Treasure as payment. 
+
+2 Desperately clinging to a large boulder, your Warrior 
+	only keeps their grip by lightening the weight of their 
+	coin purse by 1D6x50 gold. 
+
+3-6 Your Warrior resists the howling winds but at a cost as 
+	a weapon is plucked from their grasp. Discard any one 
+	of your Warrior’s weapons. 

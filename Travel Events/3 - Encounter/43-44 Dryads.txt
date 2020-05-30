@@ -1,0 +1,27 @@
+43-44 Dryads
+
+In the shadowy depths of the forest, the Warriors encounter a 
+group of Dryads who protect the area. They are easily 
+provoked and the Warriors must be careful not to offend 
+them. 
+
+Each Warrior must roll 1D6 on the table below (the Elf 
+Warrior, the Wardancer, and the Albion Druid may add +1 to 
+their dice roll): 
+
+1 The Dryads perceive your Warrior as a threat to the 
+	forest and punish them accordingly. Your Warrior 
+	must deduct -1 from their Starting Wounds score 
+	permanently. 
+
+2-3 Your Warrior offends the Dryads and is beatebn 
+	senseless. Your Warrior -1 Strength until the end of 
+	the next Adventure. 
+
+4-5 Your Warrior befriends the Dryads and they are 
+	allowed to pass through unharmed.
+ 
+6 Your Warrior impresses the Dryads and is seen as an 
+	ally of the forest. They gift your Warrior a healing 
+	potion that when drunk will heal your Warrior back up 
+	to full Wounds. 

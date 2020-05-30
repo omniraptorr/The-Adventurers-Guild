@@ -1,0 +1,28 @@
+61-62 Dense Fog
+
+While the Warriors are crossing a steep ridge, a dense fog 
+quickly descends into the area. If the Warriors circumvent the 
+fog, they must add one week to their journey.
+ 
+If they decide to continue through the dangerous fog, they 
+must roll 1D6 on the table below:
+ 
+1 The Warriors emerge from the foggy ridge in front of a 
+	Village and discover that they have been travelling in 
+	the wrong direction! Their journey has ended. 
+
+2 One of the Warriors (determined randomly) nearly falls 
+	off the ridge. Another Warrior pulls them to safety but 
+	one of the falling Warrior’s belongings (your choice) 
+	plunges into the gully below and out of sight. Roll on 
+	this table again. 
+
+3-4 The fog is thick and the Warriors proceed cautiously 
+	along the ridge. Roll on this table again. 
+
+5 The fog eventually lifts and the Warriors manage to 
+	cross the ridge without further incident. 
+
+6 The Warriors cross the ridge and when the fog lifts 
+	they can see a city in the distance! They may stop here 
+	or continue on to their original destination.

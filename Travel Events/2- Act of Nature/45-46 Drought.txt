@@ -1,0 +1,27 @@
+45-46 Drought
+
+The days become hotter and hotter and no rain falls from the 
+sky. Water holes are empty upon arrival and streams have 
+dried up in the surrounding area. Each Warrior must roll 1D6 
+below: 
+
+1 Your Warrior is severely dehydrated and their throat 
+	feels like a raging fire. They collapse often and their 
+	companions must frequently carry them thus adding 1 
+	week to the journey (cumulative with other Warriors 
+	who roll result 1 & 2). In addition, the Warrior must 
+	deduct -1 Wound permanently from their Starting 
+	Wounds score permanently. 
+
+2 Your Warrior does everything they can to trudge 
+	onward but slows the group down by 1 week 
+	(cumulative with other Warriors who roll result 1 & 2.) 
+
+3-5 Your Warrior is occasionally overwhelmed. Although 
+	they are parched and their skin blistered, they press 
+	onward. 
+
+6 Your Warrior wills themself to continue. When they 
+	emerge from the drought, they are much stronger. 
+	Your Warrior permanently adds +1 to their Starting 
+	Wounds score! 

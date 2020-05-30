@@ -1,0 +1,11 @@
+13-14 Relgious Pilgrims
+
+Stopping to rest at a nearby river, the Warriors encounter a 
+group of religious pilgrims who are aggressively passionate 
+about their spiritual journey and turn out to be extremely 
+persuasive speakers.
+ 
+Each Warrior must roll 1D6 and add their Willpower. If the 
+score is 7 or less, the Warrior is convinced to donate 2D6x100 
+gold to their cause. If the Warrior does not have that amount, 
+they give the pilgrims whatever gold they have. 

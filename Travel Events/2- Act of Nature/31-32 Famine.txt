@@ -1,0 +1,29 @@
+31-32 Famine
+
+On the Warriors’ travels, they pass through lands cursed by 
+famine and drought. Being the worthy hero that they are, each 
+Warrior gives the poverty stricken peasants a proportion of 
+their gold. Roll 1D6 for each Warrior on the following table:
+ 
+1-2 Your Warrior gives any one item of treasure to the 
+peasants. 
+
+3 Your Warrior gives 100 gold to the poor.
+ 
+4-5 Your Warrior gives 1D6x10 gold to the poor. 
+
+6 Touched by your kindness and concern, the village 
+	elder brings a carefully wrapped sword out of his 
+	house, presenting it to your Warrior in exchange for 
+	1D6x50 gold. 
+ 
+	The magical blade is a Sword of Sharpness, and each time it 
+is used is causes +2 Wounds on any Monster it hits.
+ 
+	However, the sword can never be sold, as any attempt to 
+get rid of it results in it mysteriously finding its way back to 
+the village. 
+
+	If more than one player rolls a 6, draw a Warrior counter to 
+determine whose Warrior gets the sword and roll again for the 
+other Warriors. 

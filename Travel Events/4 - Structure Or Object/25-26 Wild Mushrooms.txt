@@ -1,0 +1,16 @@
+25-26 Wild Mushrooms
+
+The Warriors discover a patch of wild mushrooms which they 
+can pick and dry in the sun as they travel. When they reach 
+the next Settlement each Warrior can make 1D6 special 
+provisions from the dried mushrooms. Keep those provisions 
+separate from any others. 
+
+When consumed, each mushroom provision heals 1D6 
+Wounds but if you roll a ‘1’ then your Warrior begins to 
+hallucinate believing that they are surrounded by evil 
+creatures. In a wild panic they lash out all around and every 
+model adjacent to your Warrior suffers 1D3 Wounds with no 
+modifiers for anything. 
+
+The mushroom provisions never spoil.

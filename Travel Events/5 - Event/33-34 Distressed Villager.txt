@@ -1,0 +1,31 @@
+33-34 Distressed Villager
+
+The Warriors come upon a farmer from a nearby village who 
+begs for the Warriors’ help in defending the village from an 
+impending bandit attack. The Warriors cannot refuse such a 
+noble cause and follow the man confidently back to the Village 
+Elders to formulate a plan of defence. The Warriors’ journey is 
+over, but the battle has just begun! Roll 1D6 on the following 
+table:
+ 
+1 The bandits are not to be trifled with! Their first attack 
+	is devastating and the Warriors find themselves in full 
+	retreat! Regretfully determining that the village is lost, 
+	the Warriors have no other choice but to abandon the 
+	poor villagers and immediately proceed to the next 
+	Adventure. Because of the terrible defeat, each 
+	Warrior is -1 Willpower during the next Adventure. 
+
+2-3 The bandits are stronger than anticipated. The 
+	Warriors eventually defeat them, but the village 
+	suffers many losses. The Warriors each donate 
+	1D6x50 per Battle-level gold to the villagers to help 
+	pay for repairs to the village and proper burials for the 
+	dead. 
+
+4-6 The battle is glorious! With cunning strategy and 
+	brave actions, the Warriors triumph over the bandits. 
+	The cheering villagers regard the Warriors as heroes 
+	for their efforts and offer them thanks. For the 
+	duration of the Warriors’ stay, all items are reduced to 
+	half price and they pay no Living Expenses! 

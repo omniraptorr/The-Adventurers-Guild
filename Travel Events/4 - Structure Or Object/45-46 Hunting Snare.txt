@@ -1,0 +1,26 @@
+45-46 Hunting Snare
+
+Trudging through the wilderness, one of the Warriors 
+(determine randomly) inadvertently steps into a foot noose.  In 
+the blink of an eye, the foot noose hauls the Warrior high up 
+into a tree. They can easily cut their foot loose but the 
+resulting fall would be fatal!
+ 
+One of the other Warriors will have to try and catch their 
+unfortunate companion. The Warriors may either decide 
+amongst themselves or draw lots (determine randomly) to see 
+who will attempt the catch. Once a catcher has been chosen, 
+the suspended Warrior cuts the cord holding them aloft and 
+plummets towards their wide-eyed comrade. The catcher must 
+roll 2D6 and add their Strength and their Initiative. 
+
+If the score is less than 16, the ensuing impact is as much 
+comical as it is alarming. Both Warriors are -1D3 Wounds to 
+start the next Adventure which can be healed by normal 
+means. If a double ‘1’ is rolled, however, the catch goes 
+terribly wrong and both Warriors must deduct -1D3 Wounds 
+from their Starting Wounds score permanently. 
+
+If the total score is 16+, the crazy idea worked and both 
+Warriors end up with nothing more than minor bumps and 
+bruises.  

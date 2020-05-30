@@ -1,0 +1,33 @@
+53-54 Tombstone
+
+On the side of the road is an elaborate tombstone with one of 
+the Warrior’s name engraved upon it! Each Warrior must roll 
+1D6. The name on the tombstone is that of the Warrior with 
+the lowest score.
+ 
+ As the Warriors stand dumbfounded, a black-robed figure 
+emerges from the shadows. The grim figure points a skeletal 
+finger accusingly at the Warrior whose name whose name is 
+on the tombstone. Somehow, in a previous Adventure, your 
+Warrior cheated death! The Warrior must roll 1D6 below:
+ 
+1 The cloaked figure has come to take them away. If 
+	your Warrior is Battle-level 1, the skeletal figure drags 
+	them away screaming in terror. If your Warrior is any 
+	other Battle-level, they feel a stabbing pain in their 
+	stomach. Your Warrior is -1 Toughness, -1 Strength,   
+	-1 Weapon Skill  and -1 Luck until the end of  the next 
+	Adventure! 
+
+2 Your Warrior feels the life force draining away and 
+	must deduct -1D3 Wounds from their Starting 
+	Wounds score permanently!
+ 
+3-4 Faced with such a stark reminder of their own 
+	mortality your Warrior is -1 Willpower, -1 on their To 
+	Hit rolls and -1 to all Fear and Terrors rolls during the 
+	next Adventure! 
+
+5-6 Your Warrior is sapped of energy and must deduct -1 
+	Wound from their Starting Wounds score 
+	permanently! 

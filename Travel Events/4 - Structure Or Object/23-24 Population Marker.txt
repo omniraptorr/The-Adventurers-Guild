@@ -1,0 +1,13 @@
+23-24 Population Marker
+
+Approaching a waypoint, the Warriors find out more about 
+their destination and its population. Roll 1D6 to see what the 
+population marker says:
+ 
+1-2 The Warriors’ target Settlement is one size smaller 
+	than they were lead to believe! 
+
+3-4 The Warriors’ target Settlement size is accurate.
+ 
+5-6 The Warriors’ target Settlement is one size larger than 
+	they were lead to believe! 

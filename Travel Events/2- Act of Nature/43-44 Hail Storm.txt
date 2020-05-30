@@ -1,0 +1,13 @@
+43-44 Hail Storm
+
+Chunks of ice the size of bird eggs bombard the Warriors as 
+they walk along the road. They flee for cover in a dilapidated 
+cottage but in their haste, each Warrior drops one item of 
+Dungeon Room Treasure. When the storm finally ends the 
+Warriors retrieve the item. Roll 1D6 for each Warrior to see 
+what state the item is in: 
+
+1-3 The hail has damaged the item beyond repair. Discard 
+	it immediately. 
+
+4-6 The item has suffered no damage from the hail.

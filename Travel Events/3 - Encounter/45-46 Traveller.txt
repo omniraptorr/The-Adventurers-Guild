@@ -1,0 +1,38 @@
+45-46 Traveller
+
+Passing through a small forest the Warriors catch a whiff of 
+the unmistakable smell of game cooked over an open fire. In a 
+nearby clearing they find a traveller who invites the Warriors 
+to join him for dinner. During the night, the traveller secretly 
+places an item of Treasure in one of the Warrior’s pack. In the 
+morning the traveller bids them all farewell and continues on 
+his way. Draw a Warrior counter to determine which Warrior 
+has the item and then roll 1D6 to determine what the item is. 
+On a score of 1,2, or 3 it is an item of Dungeon Room 
+Treasure. On a score of 4, 5 or 6 it is an item of Objective 
+Room Treasure. 
+ 
+ When the Warriors enter the next Settlement, the Watch 
+are frisking as part of a search for missing items. The Warrior 
+carrying the item from the traveller must roll 1D6 below:
+ 
+1 The item your Warrior is carrying is confiscated as it 
+	was recently stolen from a prominent noble. Your 
+	Warrior is flogged in the town square and thrown into 
+	jail. They are released after 7 days once they convince 
+	the authorities of their innocence. 
+
+2 The item your Warrior is carrying is confiscated as it 
+	was reported stolen by a wealthy merchant. Your 
+	Warrior spends 1D6 days in jail and fined 100 gold.
+ 
+3-4 The Watch are not interested in any items your 
+	Warrior is carrying and they are allowed entry. The 
+	moment they set foot through the settlement gates, a 
+	young knave discreetly lifts the item off of the Warrior 
+	(discard it). The Warrior has been an unsuspecting 
+	player in a smuggling ring that operates in the area.
+ 
+5-6 The item your Warrior is carrying is not the item the 
+	Watch is looking for and the puzzled Warrior may keep 
+	the item for himself.

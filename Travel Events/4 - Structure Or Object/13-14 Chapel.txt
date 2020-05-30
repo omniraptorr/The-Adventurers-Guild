@@ -1,0 +1,13 @@
+13-14 Chapel
+
+The Warriors see a small chapel. If you wish, your Warrior may 
+spend some time in prayer to their gods. After your Warrior 
+spends 1D6x20 gold per Battle-level in offerings you may roll 
+1D6 on the following table:
+ 
+1-3 The gods aren’t listening, and ignore your Warrior.
+ 
+4-6 Your Warrior has +1 Wounds added to their Starting 
+	Wounds score. This is a permanent addition. 
+ 
+Each Warrior may make one prayer and then must move on. 

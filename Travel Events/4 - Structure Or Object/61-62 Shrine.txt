@@ -1,0 +1,26 @@
+61-62 Shrine
+
+The Warriors make their way through a thicket and stumble 
+across an old shrine. A stone well sits in the middle of the 
+shrine with a cracked ornate tablet hanging above it. A plaque 
+reads: “Part with your wealth and gain enlightenment.” 
+
+A Warrior may throw 1D6x100 gold into the well one time, 
+whereupon it mysteriously vanishes and the Warrior may 
+make roll on the following table:
+ 
+1-2 The Warrior gains no knowledge. 
+
+3 The Warrior receives insight into a concept of efficient 
+	movement, gaining +1 Initiative for the next Dungeon. 
+
+4 The Warrior understands the relationship between a 
+	Warrior and their weapon. They gain +1 Weapon Skill 
+	or Ballistic Skill for the next Dungeon. 
+ 
+5 The Warrior feels a resolve deep in their soul. They 
+	are +1 Toughness for the next Dungeon. 
+
+6 The Warrior sees a glimpse of enlightenment in the 
+	waters of the well. They are +1 Luck for the next 
+	Adventure. 

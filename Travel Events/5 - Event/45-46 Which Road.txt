@@ -1,0 +1,13 @@
+45-46 Which Road
+
+The road splits into two before the Warriors.  One road leads 
+to their chosen destination, but from their map it is impossible 
+to tell which. Do they take the left fork or the right fork? 
+Once the players have agreed which road the Warriors take, 
+roll 1D6 on the following table: 
+
+1-3 The Warriors chose the correct path and may continue 
+	on their journey. 
+
+4-6 The Warriors took the wrong route and end up at a 
+	small village, finishing their journey prematurely.

@@ -1,0 +1,19 @@
+51-52 Guide
+
+A thin, wiry, and adventuring fellow approaches the Warriors 
+and claims to be a local guide of the province and will show the 
+Warriors to their destination, reducing their journey time by 
+one week. If the Warriors take him on as their guide, they 
+must each pay 1D6x20 gold. When the Warriors reach the 
+Settlement, the guide disappears into a crowded market. Roll 
+1D6 on the table below (make one roll for the entire group):
+ 
+1-3 The Warriors notice that they are each missing an 
+	item! One item of Treasure (determined randomly) has 
+	been stolen by the guide during the past week!
+ 
+4-6 The guide was actually a famous ranger from the area 
+	and the local shopkeepers are impressed to see you 
+	enter with him. Each Warrior may pick any one item 
+	for sale they find in stock from a single Trader at the 
+	Settlement and can buy it for half price!

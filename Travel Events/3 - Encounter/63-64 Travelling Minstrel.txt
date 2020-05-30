@@ -1,0 +1,19 @@
+63-64 Travelling Minstrel
+
+A travelling minstrel joins the Warriors for the rest of their 
+journey. When they reach the gates of the Settlement they are 
+travelling to, he begins to play and sing, convinced that he will 
+earn them all free entry to the Settlement. Roll 1D6 on the 
+following table when the Warriors reach their destination:
+ 
+1 The minstrels’ playing is awful, and the Warriors are 
+	forbidden to enter the Settlement. They must go 
+	straight into the next Adventure. 
+
+2-5 No one is particularly impressed, but a few inhabitants 
+	give the minstrel some gold. The Warriors meanwhile, 
+	are free to enter the Settlement as usual. 
+
+6 The minstrel’s song is so rousing that the inhabitants 
+	of the Settlement shower gold upon you. Each Warrior 
+	gains 1D6x10 gold.

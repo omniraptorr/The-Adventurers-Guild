@@ -1,0 +1,39 @@
+15-16 Pedlar
+
+The Warriors are stopped by a pedlar – a strange-looking 
+individual wearing brightly coloured rags and carrying a 
+number of wicker baskets in which he keeps his wares. He 
+capers from side to side, playing a piping tune on a reedy flute. 
+The Warriors may buy things from him: 
+
+Healing Potion. 50 gold. Heals 1D6 Wounds. One use.
+ 
+• Lucky Charm. 50 gold. A Warrior wearing this may re-roll 
+	any single dice roll once per Adventure. 
+
+• Bronze Wristbands. 30 gold. A Warrior wearing these 
+	may ignore 1 Wound during any single combat. One use, 
+	then they are broken.
+ 
+• Chalk. 20 gold. A Warrior with chalk may mark an escape 
+	route out of the Dungeon and therefore needs not roll on 
+	the Escape Table (from the Adventure Book) should they 
+	wish to leave the Dungeon. One use. 
+
+• Trinkets. 20 gold. If on the Warriors’ travels anyone 
+	demands gold from them for any reason they can try and 
+	give them these trinkets instead. Roll 1D6. On a score of 
+	1, 2 or 3 they refuse the trinkets and insist on being given 
+	the gold. On a score of 4, 5 or 6 they accept the trinkets 
+	instead of the gold. Trinkets are only acceptable to fellow 
+	travellers, and are never accepted as payment for 
+	anything in a Settlement.
+ 
+Each Warrior may buy a maximum of one of each item, except 
+trinkets, which they may buy up to six of.
+ 
+	Once the Warriors have made their purchases, the pedlar 
+vanishes into the woods. Now roll 1D6 for each object the 
+Warriors have bought. If the result is a 1, that item is shoddily 
+made and is useless. The Warrior has been conned and must 
+discard the item immediately.

@@ -1,0 +1,24 @@
+25-26 Prisoner 
+
+As the Warriors approach the crest of a hill, they hear the 
+noise of armed men approaching. Taking cover, they watch as 
+a band of swarthy mercenaries troops by dragging a wealthy 
+merchant behind them.
+ 
+The Warriors can either fight the mercenaries and free the 
+prisoner, or let them pass unhindered. If the Warriors attack 
+the mercenaries, rill 1D6 on the following table: 
+
+1-2 The mercenaries drive the Warriors off, taking some of 
+	their gold. Each Warrior loses 1D6x10 gold.
+ 
+3-4 The Warriors kill the mercenaries after a long struggle, 
+	but not quickly enough to prevent them slaughtering 
+	the prisoner. The Warriors each find 1D6x20 gold if 
+	they search the bodies. 
+
+5-6 The Warriors best the mercenaries in a fierce fight, and 
+	free the prisoner. He cannot travel very fast, and if the 
+	Warriors take him with them he adds one week to 
+	their journey time. Upon arriving at their destination, 
+	he gives each Warrior 100 gold for rescuing him.

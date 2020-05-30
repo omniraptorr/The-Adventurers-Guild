@@ -1,0 +1,13 @@
+21-22 Dungeon Map
+
+The Warriors take refuge for a night in an abandoned keep, its 
+walls crumbling and its halls long since plundered. Among the 
+debris, one of the Warriors (determined randomly) notices a 
+battered but still locked iron box. Breaking open the age-old 
+lock proves easy enough and inside the Warrior finds, what 
+appears to be the map of a dungeon. Although faded, part of 
+the map is still clearly visible. 
+
+At the start of the next Dungeon, the Warrior with the map 
+may look at (and lay out on the table) the top six cards of the 
+Dungeon Deck, forewarned as they are of what is to come.

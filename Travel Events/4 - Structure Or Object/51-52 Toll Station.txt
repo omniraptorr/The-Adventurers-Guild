@@ -1,0 +1,8 @@
+51-52 Toll Station
+
+The Warriors attempt to cross into a new area but are stopped 
+by the local militia who insist that each Warrior pay 5 gold for 
+each item of Equipment and Treasure that they are carrying. 
+The Warrior must sell Equipment and Treasure if necessary. If 
+they cannot pay, the guards take as much as they have before 
+letting them pass.   

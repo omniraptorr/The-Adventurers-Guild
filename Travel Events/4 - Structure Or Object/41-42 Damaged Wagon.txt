@@ -1,0 +1,46 @@
+41-42 Damaged Wagon
+
+The Warriors come across a broken-down wagon that looks to 
+have been discarded on the side of the road. The Warriors may 
+attempt to fix the wagon and use it to reduce their travel time 
+to the next Settlement.
+ 
+1 No matter how hard they try, the Warriors are unable 
+	to get the pile of wreckage to function as the wagon it 
+	once was. The Warriors spend so much time and 
+	energy trying to repair it that their journey time is 
+	extended by two weeks. 
+
+2 The wagon proves to be more trouble than it is worth 
+	and the Warriors properly abandon it by the side of the 
+	road. The time spent trying to fix it adds one week to 
+	their journey.
+ 
+3-4 The Warriors manage to make the wagon operational 
+	but it repeatedly breaks down and the Warriors save 
+	no time on their journey this week. For each additional 
+	week they travel with the wagon, the Warriors must 
+	roll for a Travelling Hazard as normal but must also roll 
+	on this table until they obtain a different result.
+ 
+5 The Warriors are able to fix the wagon and their 
+	journey time to the next Settlement is reduced by one 
+	week! Unfortunately, the wagon falls apart just as they 
+	reach the Settlement gates. There is no possibility to 
+	repair it and it must be discarded immediately.
+ 
+6 The Warriors restore the wagon into excellent 
+	condition. Their journey time to the next Settlement is 
+	reduced by two weeks! 
+ 
+The Warriors may keep the wagon as their own and it 
+will knock 2 weeks off their journey to any Settlement. 
+But as long as they have it, they must roll 1D6 each 
+time they reach a Settlement. If the score is a 6, the 
+owner of the wagon has discarded it as junk and the 
+Warriors no longer have to roll for the wagon when 
+they reach a Settlement. But if the result is a 1, the 
+wagon was reported stolen and authorities arrest the 
+Warriors for theft. They are thrown into jail for 1D3 
+days and fined 1D6x25 gold each and the wagon is 
+returned to its rightly owner. 

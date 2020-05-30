@@ -1,0 +1,8 @@
+41-42 Flood
+
+The weather has been bad recently and the land for miles 
+around has flooded, creating an impassable lake. The Warriors 
+can either abandon any hope they have of reaching their 
+destination, in which case they must go straight into the next 
+Adventure, or pay 20 gold each to a ferryman to take them 
+across the obstruction.
