@@ -1,9 +1,5 @@
-
-
 local genTable = require("The-Adventurers-Guild/ui_assets/_gen")
-
-
-local path = "main_menu"
+local path = "start_menu"
 local contents = {
   "adventure",
   "background",
