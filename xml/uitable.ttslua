@@ -1,6 +1,6 @@
 return
 {
-  require "warhammer quest/xml/defaults",
+  require "The-Adventurers-Guild/xml/defaults",
   -- { -- idk what this is for
   --   tag = "Text",
   --   attributes = {},
