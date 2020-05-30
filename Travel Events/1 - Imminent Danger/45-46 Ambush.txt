@@ -1,0 +1,28 @@
+45-46 Ambush
+
+As the Warriors travel through a particularly dark glade in a 
+gloomy forest, they are ambushed by Forest Goblins riding 
+Giant Spiders. Leaping from the shadows, they threaten to 
+overwhelm the hardy Warriors by sheer weight of numbers. 
+Roll 1D6 for each Warrior on the following table:
+ 
+1 Knocked out by a sneaky blow from behind, your 
+	Warrior awakes to find one of their weapons (determine 
+	randomly) and 2D6x100 gold stolen.
+ 
+2 Knocked out by a sneaky blow from behind, your 
+	Warrior awakes to find 2D6x100 pieces of their gold 
+	stolen. 
+
+3 Knocked out by a sneaky blow from behind, your 
+	Warrior awakes to find one item of equipment stolen 
+	(determine randomly).
+ 
+4 Fighting a glorious battle, your Warrior kills many Forest 
+	Goblins and gains 1D6x10 gold.
+ 
+5 Fighting a glorious battle, your Warrior kills many Forest 
+	Goblins and gains 1D6x50 gold. 
+
+6 Fighting a glorious battle, your Warrior kills many Forest 
+	Goblins and gains 1D6x100 gold. 

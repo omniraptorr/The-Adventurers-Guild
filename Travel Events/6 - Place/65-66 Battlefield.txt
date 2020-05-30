@@ -1,0 +1,31 @@
+65-66 Battlefield
+
+The area that the Warriors are travelling through was the site 
+of many historic battles. Each Warrior may comb the area on 
+the slim chance that they can uncover any weapons or armour 
+that may have been left behind. Searching the battlefield is an 
+arduous process, however, and will add another week to the 
+Warriors’ journey. 
+
+ Any Warrior who chooses to search can look for any item 
+that is available at the Armourer, Fletcher or the 
+Weaponsmith. Roll for stock as if in a Town but with a -2 
+penalty (2D6-2). If the item is in stock, it means that your 
+Warrior did indeed uncover it on the battlefield. However, the 
+item has most likely been damaged in battle and is quite 
+unusable. 
+
+ If your Warrior takes the damaged item to a trader who 
+sells ones like it, however, the trader will repair it for half the 
+normal gold of the Cost (Buy) value listed. 
+
+For example: if the Barbarian looks for a Leather Helm 
+which has a stock number of 4. He rolls a 7 on 2D6 and 
+subtracts the penalty -2 and so his final score is a 5. The stock 
+roll for the item is a 4 which means that the Barbarian does 
+find a broken Leather Helm on the battlefield. When he 
+reaches the next Settlement, he visits the Armourer who 
+repairs the item for 50 gold, which is half of the cost to buy a 
+Leather Helm. The Barbarian now has a functioning Leather 
+Helm that he can either wear, sell or give to another Warrior, 
+etc. 

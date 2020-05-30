@@ -1,0 +1,38 @@
+55-56 Den
+
+As the clouds grow dark and a savage rain begins falling 
+down, the Warriors find a narrow entrance in the cliff face 
+which opens up into a large cavern. As their eyes adjust to the 
+darkness a horror grips them. Sleeping soundly in the middle 
+of the cavern is a huge dragon surrounded by treasure.
+ 
+Your Warrior can either exit safely through the narrow 
+opening immediately or they can tempt fate and steal a 
+treasure from the sleeping dragon, hoping it doesn’t wake up 
+before the Warrior makes their escape. (A Halfling Thief 
+cannot resist the temptation and must steal a treasure.)
+ 
+If a Warrior opts to steal treasure, they must roll 1D6 on the 
+table below: 
+
+2 Loot in hand your Warrior almost makes it to the den 
+	entrance before they are violently yanked back in by 
+	the awakened dragon. Your Warrior screams their last 
+	as the creature devours them. Remove the Warrior 
+	from the game. 
+ 
+3-6 On the verge of escaping, your Warrior trips at the 
+	cavern opening, waking the dragon in the process. 
+	Scrambling to their feet, your Warrior abandons all 
+	thoughts of treasure and leaps from the cavern with 
+	the enraged beast’s fiery breath close behind. Your 
+	Warrior barely survives, empty-handed and badly 
+	burnt and must deduct -1 Wounds from their Starting 
+	Wounds score permanently. 
+
+7+ Clutching a piece of treasure tightly, your Warrior 
+	makes it to safety and the dragon lets out an ear-
+	piercing roar from within. The item of Treasure is 
+	yours! Roll another 1D6. If the score is 1, 2, 3 or 4 it is 
+	a piece of Dungeon Room Treasure and if the score is 
+	a 5 or 6 it is a piece of Objective Room Treasure.

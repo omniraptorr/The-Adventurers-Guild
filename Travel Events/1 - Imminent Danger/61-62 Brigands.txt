@@ -1,0 +1,19 @@
+61-62 Brigands
+
+As the Warriors reach the outskirts of a small Settlement, they 
+are set upon by brigands demanding gold. They outnumber 
+the Warriors, but seem wary of their superior arms and 
+armour. The Warriors have a choice:  they can either pay the 
+brigands or fight them.
+ 
+If the Warriors decide to pay the brigands, each Warrior 
+must give up 1D6x20 gold. 
+ 
+If the Warriors fight the brigands, roll 1D6 for each Warrior 
+and add them together. This is the total number of brigands 
+that the Warriors are fighting. Then roll another 1D6 for each 
+Warrior and add them together. This is the total number of 
+brigands that the Warriors manage to kill. If there are any 
+brigands left alive after this, then they overpower the 
+Warriors, steal 1D6x50 gold from each of them, and disappear 
+into the shadows. 

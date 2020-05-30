@@ -1,0 +1,22 @@
+43-44 Mysterious Hollow
+
+The Warriors travel through a misty hollow at the edge of a 
+dense forest. Unable to see but a few inches in front of them 
+for many hours, the Warriors become separated. Each Warrior 
+must roll 1D6 on the table below: 
+
+1 Your Warrior is completely lost and loses all hope of 
+	finding a Settlement. They manage to meet up with the 
+	other Warriors at the entrance to the next Dungeon.  
+
+2 Your Warrior continues their journey to a Settlement 
+	alone and will meet up with the other Warriors at the 
+	entrance to the next Dungeon. 
+
+3-4 Your Warrior resumes their journey alone but will meet 
+	up with any other Warrior who finds the same size 
+	Settlement as they do. 
+
+5-6 Your Warrior quickly rendezvous with any other 
+	Warrior who rolled this result and they may continue 
+	their journey to a Settlement together.  

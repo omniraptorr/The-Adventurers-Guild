@@ -1,0 +1,27 @@
+63-64 Abandoned Mine
+
+Against the hillside, the Warriors see an old, abandoned Dwarf 
+mine. Something is gleaming from inside and the Warriors 
+can’t resist examining further. Roll 1D6 on the table below:
+ 
+1 The old mine is dangerous and unstable! It collapses 
+	on the Warriors’ heads as they enter. If they have a 
+	way of digging out of the cave-in, the Warriors 
+	eventually exit and continue on their journey. If not, 
+	then the Warriors only exit lies straight ahead through 
+	the mines. They must proceed directly into the next 
+	Adventure. 
+
+2-3 The old mine collapses on the Warriors’ heads just as 
+	they enter. They manage to escape the falling debris 
+	but in their haste one of the Warriors (determined 
+	randomly) drops an item of Treasure (determined 
+	randomly) which disappears under the rubble. 
+
+4-5 The gleaming light is indeed gold! The Warriors rush in 
+	and begin digging, managing to scrounge up 1D6x10 
+	gold each. 
+
+6 The gleaming light is coming from a vein of gold! The 
+	Warriors have hit the mother lode and they manage to 
+	extract 1D6x100 gold each! 

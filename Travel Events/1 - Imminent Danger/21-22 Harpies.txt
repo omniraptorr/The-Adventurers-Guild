@@ -1,0 +1,15 @@
+21-22 Harpies
+
+As the Warriors pass through some rocky crags, they are set 
+upon by vicious harpies. They swoop in and claw at the 
+Warriors and snatch some of their belongings before flying off. 
+Each Warrior must roll 1D6 on the table below to see what 
+they’ve lost:
+ 
+1-2 A harpy snatches a random item of Treasure.
+ 
+3-4 A harpy snatches a money pouch containing 1D6x100 
+	gold. 
+
+5-6 A harpy snatches a coin purse containing 1D6x20 
+	gold.  

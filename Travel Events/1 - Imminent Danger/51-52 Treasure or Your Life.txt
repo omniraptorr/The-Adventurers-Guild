@@ -1,0 +1,16 @@
+51-52 Treasure or Your Life!
+
+The Warriors are surrounded by a deadly and desperate group 
+of highway robbers. The Warriors can either fight the robbers 
+or give up an item of Treasure (your choice). 
+
+If the Warriors decide to fight the highwaymen, each of 
+them must roll 1D6 and add their Initiative. The total of all their 
+scores represents the number of highway men they are facing. 
+Next, roll 1D6 for each Warrior and add their Battle-level. The 
+total of all those scores is how many highwaymen they defeat. 
+If any highway robbers remain, the Warriors are overtaken, 
+bound and left for the wolves. They are robbed of all of their 
+gold and one Item of Treasure (chosen at random), but, 
+thankfully, they manage to free themselves before they are 
+devoured by wild animals. 

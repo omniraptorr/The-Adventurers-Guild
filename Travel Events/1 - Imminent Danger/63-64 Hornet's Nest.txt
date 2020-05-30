@@ -1,0 +1,7 @@
+63-64 Hornet's Nest
+
+The Warriors inadvertently disturb a hornet’s nest. The 
+enraged insects attack the fleeing Warriors mercilessly. Each 
+Warrior must roll 1D6 and add their Toughness. If the score is 
+a 6 or less, the Warrior reacts so badly to the stings that they 
+are -1 Strength until the end of the next Adventure. 
