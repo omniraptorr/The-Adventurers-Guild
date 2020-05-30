@@ -1,6 +1,3 @@
--- package.path = package.path .. ";/Users/andrey/TTS/lib/Tabletop-Simulator-Lua-Classes/Color/?.lua"
--- local Color = require "Tabletop-Simulator-Lua-Classes/Color/color"
-
 -- color format: "normalColor|highlightedColor|pressedColor|disabledColor"
 local function makeColorString(normalColor, highlightedColor, pressedColor, disabledColor)
   local colors = {normalColor, highlightedColor, pressedColor, disabledColor}

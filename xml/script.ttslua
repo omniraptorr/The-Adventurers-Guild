@@ -20,7 +20,6 @@ add_assets(require("warhammer quest/xml/travel menu links"))
 local formatui = require "xmlui/formatui"
 
 function onLoad(save_state)
-  -- UI.setCustomAssets({})
   UI.setCustomAssets(CustomUIAssets)
   -- UI.setXmlTable({})
   Wait.frames(function() print("waited") end, 10)
@@ -38,9 +37,13 @@ local function menuClicked(player, value, id)
     print(string.format("%s chose %s mode.", player.steam_name, mode))
     -- Global.UI.setAttribute("start_menu_panel", "active", "false")
 
-    local menutab = UI.getXmlTable()[2].children[2].children
+    --todo: replace this with a serach for the menu panel's id?
+    local buttonLayout = UI.getXmlTable()[2].children[2]
+    if buttonLayout.id ~= "start_menu_buttons" then
+      error("main menu id didn't match!")
+    end
     -- print(formatui(menutab))
-    for k,v in ipairs(menutab) do
+    for k,v in ipairs(buttonLayout.children) do
       if v.attributes.class == "start_menu" then
         Global.UI.setAttribute(v.attributes.id, "active", "0")
       else
