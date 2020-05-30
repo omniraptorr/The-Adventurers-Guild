@@ -1,4 +1,4 @@
-local repoName = "Fly-n-dad/The-Adventurers-Guild/"
+local repoName = "https://raw.githubusercontent.com/"
 local branch = "self_hosted_ui"
 local basePath = "/ui_assets/"
 local baseUrl = "https://github.com/" .. repoName .. branch .. basePath
