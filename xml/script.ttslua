@@ -28,7 +28,8 @@ function onLoad(save_state)
   UI.setCustomAssets(CustomUIAssets)
   -- UI.setXmlTable({})
   Wait.frames(function() print("waited") end, 10)
-  Wait.time(function() UI.setXml(UI.getXml()) print("set") end, 10)
+  print(formatui())
+  -- Wait.time(function() UI.setXmlTable(require("The-Adventurers-Guild/xml/uitable")) print("set") end, 10)
   -- Wait.frames(function() print("xml is", formatui()) end, 20)
   -- print(formatui())
 end
@@ -60,10 +61,7 @@ local class_click_functions = {
       end
     end
   end,
-  travel_menu = function(player, value, id)
-    --placeholder
-    return
-  end,
+  travel_menu = require("The-Adventurers-Guild/xml/TravelChatInterface")
 }
 
 

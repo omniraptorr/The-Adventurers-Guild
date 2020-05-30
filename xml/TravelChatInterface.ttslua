@@ -1,1 +1,6 @@
-return 0
+local function startTravel(player, value, id)
+  log(UI.getAttributes(id))
+  print("player " .. Player.steam_name .. "started travel")
+end
+
+return startTravel

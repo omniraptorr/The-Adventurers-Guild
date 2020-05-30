@@ -1,19 +1,13 @@
 return
 {
   require "The-Adventurers-Guild/xml/defaults",
-  -- { -- idk what this is for
-  --   tag = "Text",
-  --   attributes = {},
-  --   value = "Displayed Text",
-  --   children = {}
-  -- },
   { -- main menu panel
     tag = "Panel",
     attributes = {
       class = "menu_background",
       active = "true",
       height = "341",
-      id = "start_menu_panel",
+      id = "start_menu/panel",
       visibility = "Host",
       width = "343"
     },
@@ -21,8 +15,8 @@ return
       {
         tag = "Image",
         attributes = {
-          id = "start_menu_background",
-          image = "menu_background"
+          id = "start_menu/background",
+          image = "start_menu/background"
         },
         children = {}
       },
@@ -30,7 +24,7 @@ return
         tag = "VerticalLayout",
         attributes = {
           height = "236",
-          id = "start_menu_buttons",
+          id = "start_menu/buttons",
           spacing = "4",
           width = "243"
         },
@@ -39,8 +33,8 @@ return
             tag = "Button",
             attributes = {
               class = "start_menu",
-              icon = "menu_adventure",
-              id = "start_menu_adventure"
+              icon = "start_menu/adventure",
+              id = "start_menu/adventure"
             },
             children = {}
           },
@@ -48,8 +42,8 @@ return
             tag = "Button",
             attributes = {
               class = "start_menu",
-              icon = "menu_traveling",
-              id = "start_menu_traveling"
+              icon = "start_menu/traveling",
+              id = "start_menu/traveling"
             },
             children = {}
           },
@@ -57,8 +51,8 @@ return
             tag = "Button",
             attributes = {
               class = "start_menu",
-              icon = "menu_settlements",
-              id = "start_menu_settlements"
+              icon = "start_menu/settlements",
+              id = "start_menu/settlements"
             },
             children = {}
           },
@@ -66,8 +60,38 @@ return
             tag = "Button",
             attributes = {
               class = "start_menu",
-              icon = "menu_guild",
-              id = "start_menu_guild"
+              icon = "start_menu/guild",
+              id = "start_menu/guild"
+            },
+            children = {}
+          },
+          {
+            tag = "Button",
+            attributes = {
+              active = "0",
+              class = "travel_menu",
+              icon = "travel_menu/city",
+              id = "travel_menu/city"
+            },
+            children = {}
+          },
+          {
+            tag = "Button",
+            attributes = {
+              active = "0",
+              class = "travel_menu",
+              icon = "travel_menu/town",
+              id = "travel_menu/town"
+            },
+            children = {}
+          },
+          {
+            tag = "Button",
+            attributes = {
+              active = "0",
+              class = "travel_menu",
+              icon = "travel_menu/village",
+              id = "travel_menu/village"
             },
             children = {}
           }
