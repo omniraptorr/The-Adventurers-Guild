@@ -6,12 +6,8 @@ local function makeColorString(normalColor, highlightedColor, pressedColor, disa
   end
   return table.concat(colors, "|")
 end
--- print(makeColorString("g", "f"))
 
-
-local mainMenuButtonColors = {
-
-}
+-- local mainMenuButtonColors = {}
 
 local mainMenuButton = {
   tag = "Button",

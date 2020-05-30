@@ -23,20 +23,11 @@ end
 add_assets(require("The-Adventurers-Guild/ui_assets/start_menu/_contents"))
 add_assets(require("The-Adventurers-Guild/ui_assets/travel_menu/_contents"))
 
-
+--TODO: use ge_tts event handler
 function onLoad(save_state)
   UI.setCustomAssets(CustomUIAssets)
-  -- UI.setXmlTable({})
-  Wait.frames(function() print("waited") end, 10)
-  print(formatui())
-  -- Wait.time(function() UI.setXmlTable(require("The-Adventurers-Guild/xml/uitable")) print("set") end, 10)
-  -- Wait.frames(function() print("xml is", formatui()) end, 20)
-  -- print(formatui())
+  UI.setXmlTable(require("The-Adventurers-Guild/xml/uitable")) print("set")
 end
-
--- local serpent = require "IO/serpent/src/serpent"
-
--- local startTravel = require "The-Adventurers-Guild/xml/TravelChatInterface"
 
 local class_click_functions = {
   start_menu = function(player, value, id)
