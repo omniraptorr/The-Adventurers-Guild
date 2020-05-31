@@ -14,7 +14,6 @@ local function add_assets(sourceTable)
     if names[v.name] then
       error("name " .. v.name .. " already in list of assets!")
     end
-    print(v.url)
     CustomUIAssets[#CustomUIAssets + 1] = v
   end
 end
@@ -26,7 +25,7 @@ add_assets(require("The-Adventurers-Guild/ui_assets/travel_menu/_contents"))
 --TODO: use ge_tts event handler
 function onLoad(save_state)
   UI.setCustomAssets(CustomUIAssets)
-  UI.setXmlTable(require("The-Adventurers-Guild/xml/uitable")) print("set")
+  UI.setXmlTable(require("The-Adventurers-Guild/xml/uitable"))
 end
 
 local class_click_functions = {
@@ -39,7 +38,7 @@ local class_click_functions = {
 
       --todo: replace this with a serach for the menu panel's id?
       local buttonLayout = UI.getXmlTable()[2].children[2]
-      if buttonLayout.attributes.id ~= "start_menu_buttons" then
+      if buttonLayout.attributes.id ~= "start_menu/buttons" then
         error("main menu id didn't match! it was " .. buttonLayout.attributes.id)
       end
       -- print(formatui(menutab))
