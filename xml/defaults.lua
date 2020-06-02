@@ -6,18 +6,21 @@ local function makeColorString(normalColor, highlightedColor, pressedColor, disa
   end
   return table.concat(colors, "|")
 end
--- print(makeColorString("g", "f"))
 
+-- local mainMenuButtonColors = {}
 
-local mainMenuButtonColors = {
-
-}
-
-local mainMenuButton = {
+local start_menu_button = {
   tag = "Button",
   attributes = {
-    weird = {"a", "b"},
     class = "start_menu",
+    colors = "#FFFFFF00|#FFFFFF33|#FFFFFF99|#FFFFFF00",
+    onClick = "UIButtonClick"
+  },
+}
+local travel_menu_button = {
+  tag = "Button",
+  attributes = {
+    class = "travel_menu",
     colors = "#FFFFFF00|#FFFFFF33|#FFFFFF99|#FFFFFF00",
     onClick = "UIButtonClick"
   },
@@ -27,6 +30,7 @@ return {
   tag = "Defaults",
   attributes = {},
   children = {
-    mainMenuButton,
+    start_menu_button,
+    travel_menu_button,
   }
 }

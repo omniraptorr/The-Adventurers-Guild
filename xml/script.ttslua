@@ -1,3 +1,9 @@
+
+
+-- local xml_table = require "The-Adventurers-Guild/xml/uitable"
+
+-- local formatui = require "xmlui/formatui"
+
 local CustomUIAssets = {}
 local function add_assets(sourceTable)
   local names = {}
@@ -12,50 +18,43 @@ local function add_assets(sourceTable)
   end
 end
 
-add_assets(require("warhammer quest/xml/main menu links"))
-add_assets(require("warhammer quest/xml/travel menu links"))
+-- unfortunately require is always literal. these should really be repoName .. basePath
+add_assets(require("The-Adventurers-Guild/ui_assets/start_menu/_contents"))
+add_assets(require("The-Adventurers-Guild/ui_assets/travel_menu/_contents"))
 
--- local xml_table = require "warhammer quest/xml/uitable"
-
-local formatui = require "xmlui/formatui"
-
+--TODO: use ge_tts event handler
 function onLoad(save_state)
   UI.setCustomAssets(CustomUIAssets)
-  -- UI.setXmlTable({})
-  Wait.frames(function() print("waited") end, 10)
-  -- Wait.frames(function() UI.setXmlTable(xml_table) end, 15)
-  -- Wait.frames(function() print("xml is", formatui()) end, 20)
-  -- print(formatui())
-end
-
-local serpent = require "IO/serpent/src/serpent"
-
-local function menuClicked(player, value, id)
-  if player.host then
-    local mode = string.sub(id, 12)
-    game_mode = mode
-    print(string.format("%s chose %s mode.", player.steam_name, mode))
-    -- Global.UI.setAttribute("start_menu_panel", "active", "false")
-
-    --todo: replace this with a serach for the menu panel's id?
-    local buttonLayout = UI.getXmlTable()[2].children[2]
-    if buttonLayout.id ~= "start_menu_buttons" then
-      error("main menu id didn't match!")
-    end
-    -- print(formatui(menutab))
-    for k,v in ipairs(buttonLayout.children) do
-      if v.attributes.class == "start_menu" then
-        Global.UI.setAttribute(v.attributes.id, "active", "0")
-      else
-        Global.UI.setAttribute(v.attributes.id, "active", "1")
-      end
-    end
-  end
+  UI.setXmlTable(require("The-Adventurers-Guild/xml/uitable"))
 end
 
 local class_click_functions = {
-  start_menu = menuClicked
+  start_menu = function(player, value, id)
+    if player.host then
+      local mode = string.sub(id, 12)
+      game_mode = mode
+      print(string.format("%s chose %s mode.", player.steam_name, mode))
+      -- Global.UI.setAttribute("start_menu_panel", "active", "false")
+
+      --todo: replace this with a serach for the menu panel's id?
+      local buttonLayout = UI.getXmlTable()[2].children[2]
+      if buttonLayout.attributes.id ~= "start_menu/buttons" then
+        error("main menu id didn't match! it was " .. buttonLayout.attributes.id)
+      end
+      -- print(formatui(menutab))
+      for k,v in ipairs(buttonLayout.children) do
+        if v.attributes.class == "start_menu" then
+          Global.UI.setAttribute(v.attributes.id, "active", "0")
+        else
+          Global.UI.setAttribute(v.attributes.id, "active", "1")
+        end
+      end
+    end
+  end,
+  travel_menu = require("The-Adventurers-Guild/xml/TravelChatInterface")
 }
+
+
 
 function UIButtonClick(player, value, id)
   local buttonClass = UI.getAttribute(id, "class")
@@ -64,6 +63,6 @@ function UIButtonClick(player, value, id)
   if click_func then
     click_func(player, value, id)
   else
-    print("this class (" .. buttonClass .. ") does not have an associated function")
+    error("the class " .. buttonClass .. " does not have an associated function")
   end
 end

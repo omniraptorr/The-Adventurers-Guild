@@ -1,0 +1,19 @@
+<!-- color format: "normalColor|highlightedColor|pressedColor|disabledColor"  -->
+<Defaults>
+    <Button colors = "#FFFFFF00||#FFFFFF99|#FFFFFF00" onClick = "UIButtonClick"></Button>
+    <Button class = "start_menu" colors = "#FFFFFF00||#FFFFFF99|#FFFFFF00" onClick = "UIButtonClick"></Button>
+    <Button class = "travel_menu" active = "0"></Button>
+</Defaults>
+
+<Panel id = "start_menu/panel" width = "343" height = "341" visibility = "Host" active = "true">
+  <Image id = "start_menu/background" image = "start_menu/background"></Image>
+  <VerticalLayout id = "start_menu/buttons" spacing = "4" width = "243" height = "236">
+    <Button class = "start_menu" id = "start_menu/adventure" icon = "start_menu/adventure"></Button>
+    <Button class = "start_menu" id = "start_menu/traveling" icon = "start_menu/traveling"></Button>
+    <Button class = "start_menu" id = "start_menu/settlements" icon = "start_menu/settlements"></Button>
+    <Button class = "start_menu" id = "start_menu/guild" icon = "start_menu/guild"></Button>
+    <Button class = "travel_menu" id = "travel_menu/city" icon = "travel_menu/city" active = "0"></Button>
+    <Button class = "travel_menu" id = "travel_menu/town" icon = "travel_menu/town" active = "0"></Button>
+    <Button class = "travel_menu" id = "travel_menu/village" icon = "travel_menu/village" active = "0"></Button>
+  </VerticalLayout>
+</Panel>
