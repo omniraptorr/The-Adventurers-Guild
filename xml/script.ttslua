@@ -21,6 +21,7 @@ end
 -- unfortunately require is always literal. these should really be repoName .. basePath
 add_assets(require("The-Adventurers-Guild/ui_assets/start_menu/_contents"))
 add_assets(require("The-Adventurers-Guild/ui_assets/travel_menu/_contents"))
+add_assets(require("The-Adventurers-Guild/ui_assets/save_menu/_contents"))
 
 --TODO: use ge_tts event handler
 function onLoad(save_state)
