@@ -1,5 +1,5 @@
 local genTable = require("The-Adventurers-Guild/ui_assets/_gen")
-local path = "character_menu"
+local path = "class_menu"
 local contents = {
   "please_choose_your_class",
   "barbarian",
