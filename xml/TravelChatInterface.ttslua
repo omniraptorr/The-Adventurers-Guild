@@ -1,6 +1,134 @@
+---@generic K
+---@generic V
+---@param table K[]
+---@param init V
+---@return table<K, V>
+local function makeDict(table, init)
+	if init == nil then
+		init = true
+	end
+	local out = {}
+	for _, v in ipairs(table) do
+		out[v] = init
+	end
+	return out
+end
+
+---@return table<tts__PlayerHandColor, true>
+local function makeSeatedDict()
+	return makeDict(getSeatedPlayers())
+end
+
+local EventManager = require('ge_tts/EventManager')
+local Coroutine = require('ge_tts/Coroutine')
+
+--- Creates and a handler that will be called with every event trigger until its coroutine returns, then removed.
+---@param event string @ todo: add event callback names into tts-types
+---@param co function | thread
+---@return function @Returns the created/added handler
+local function addCoroHandler(event, co)
+	if type(co) ~= "thread" then
+		co = coroutine.create(co)
+	end
+
+	if coroutine.status(co) == "dead" then
+		error("addCoroHandler(): stop stop he's already dead")
+	end
+
+	local handler
+	handler = function(...)
+		-- check if the coroutine has returned since last resume
+		if coroutine.status(co) == "dead" then
+			EventManager.removeHandler(event, handler)
+			return
+		end
+
+		local ok, result = coroutine.resume(co, ...)
+		if not ok then
+			error("Error in coroutine for " .. event .. ": " .. result)
+			-- else
+			--   print("coroutine result for " .. event .. " is " .. tostring(result))
+		end
+
+		-- remove the handler immediately if coroutine returns in the same frame.
+		if coroutine.status(co) == "dead" then
+			EventManager.removeHandler(event, handler)
+		end
+	end
+
+	EventManager.addHandler(event, handler)
+	return handler
+end
+
+-- actual code below this line
+
+local times = { city = 6, town = 4, village = 2 }
+
+local playerWeeksRemaining -- = makeDict(getSeatedPlayers(), 0)
+
+-- ripped from https://ptb.discordapp.com/channels/704033366172762254/705088130142830642/717029924661100634
+local states = makeDict {
+	"selectTravel", -- ui for travel time modifiers
+	"rollForUneventful",
+	"rollForEventType",
+	"resolveEvent", -- needs ui incl. for checkboxes of who added or subtracted a week. explicit confirmation.
+}
+
+local state = "selectTravel" -- initial state
+local function stateHandler()
+	state = states[state]()
+end
+
+function states.selectTravel()
+	printToAll("please type in your starting travel bonus e.g. +1, -2 etc")
+end
+
+local function getTravelTime()
+	printToAll("Where do you want to travel? City, Town, Village")
+end
+
+local function getTravelTimeModifiers()
+	local players = makeDict(getSeatedPlayers())
+end
+
+local function CheckObjThrown(player, obj)
+	obj.registerCollisions()
+	local function onObjectCollisionExit(hit_object, collision_info)
+		-- TODO: fill in from tts save
+	end
+
+	local function thrownCallback(player, obj)
+		Coroutine.yieldCondition(function()
+			return obj.resting
+		end)
+		log("die value " .. obj.getRotationValue() .. " thrown by player " .. Player[player].steam_name)
+	end
+end
+
+addConditionalHandler("onObjectDrop", CheckObjThrown, thrownCallback)
+
+-- you can also call coroutineFactory() directly if you want to control the event from inside the callback. here's an example where a handler removes itself after running once.
+
+-- forward declare the variable for the handler, because we need to access it from inside itself.
+local oneTimeThrowHandler
+
+-- call the factory to make the handler variable into a function that removes itself after running the predefined thrownCallback.
+oneTimeThrowHandler = coroutineFactory(
+	function(player, obj)
+		if CheckObjThrown(obj) then
+			thrownCallback(player, obj)
+			EventManager.removeHandler("onObjectDrop", oneTimeThrowHandler)
+		end
+	end
+)
+
+EventManager.addHandler("onObjectDrop", oneTimeThrowHandler)
+
 local function startTravel(player, value, id)
-  log(UI.getAttributes(id))
-  print("player " .. Player.steam_name .. "started travel")
+	local destination = id:match("travel_menu/(.*)")
+	weeksLeft = times[destination]
+	printToAll("player " .. player.steam_name .. " started traveling to a " .. destination .. ": " .. weeksLeft .. " weeks left")
+	UI.hide("start_menu/panel")
 end
 
 return startTravel

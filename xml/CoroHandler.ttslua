@@ -1,0 +1,127 @@
+--- Yields from the current coroutine. Resumes once a condition is met or an optional timeout is reached.
+---@overload fun(condition: fun(): boolean): true
+---@param condition fun(): boolean @Return true when the current coroutine should be resumed.
+---@param timeout nil|number @Timeout in seconds (optional).
+---@return boolean @True if the condition was met, or false if the (optional) timeout was reached.
+function Coroutine.yieldCondition(condition, timeout)
+	local co = coroutine.running()
+	local done, result
+
+	local conditionMet = function()
+		done, result = true, true
+		coroutine.resume(co)
+	end
+
+	if timeout then
+		Wait.condition(conditionMet, condition, --[[---@not nil]] timeout, function()
+			done, result = true, false
+			coroutine.resume(co)
+		end)
+	else
+		Wait.condition(conditionMet, condition)
+	end
+
+	coroutine.yield()
+	if not done then
+		error("Coroutine.yieldCondition(): attempt to resume before Wait was completed!")
+	end
+	return result
+end
+
+
+--- When missing element is accessed, gives an empty table
+local createWhenAccessed = {
+	__index = function(t,k)
+		t[k] = {}
+		return t[k]
+	end
+}
+
+---@shape resultsTable
+---@field results table<tts__Player, any>
+---@field callback function
+
+--- A table of pending results from handlers and their 'final' callbacks.
+--- Managed (except initial creation) from inside handlers.
+---@type table<string, resultsTable>
+local results = setmetatable({}, createWhenAccessed)
+
+---@param callback fun(handlerResults: table<tts__Player, any>)
+---@return resultsTable
+local function createResultsTable(callback)
+	local actualResults = {}
+	local function wrappedCallback()
+		return callback(actualResults)
+	end
+
+	return {results = actualResults, callback = wrappedCallback}
+end
+
+--- A table of handler callbacks that each player for each player that they can call manually.
+--- Needs to be initialized from inside each handler! i.e. forward declared and inserted as a callback here
+---@type table<tts__Player, table<function, true>>
+local cancellable = { setmetatable({}, createWhenAccessed) }
+
+--- Universal pass function. Exits from current passable prompt(s) for the given player with the current result-
+--- not guaranteed to work if the function is meant to have mandatory input.
+--- Uses any callbacks placed in the aforementioned `cancellable` table for that player.
+---@param player tts__Player
+local function pass(player)
+	for handlerCallback in next(cancellable[Player[player]]) do
+		handlerCallback()
+	end
+end
+addHotkey("Pass", pass) -- here it's a hotkey but it could also be an xml button
+
+local inspect = require("IO/inspect")
+
+-- todo: add event callback names into tts-types
+--- Creates and a handler that will be called with every event trigger until its coroutine returns, then removed.
+---@param event string
+---@param name string
+---@param co function | thread
+---@param finally nil | function @A function to call after the coroutine is done.
+---@return function @Returns the created/added handler
+	local function addCoroHandler(event, name, co, finally)
+	if type(co) ~= "thread" then
+		co = coroutine.create(co)
+	end
+
+	if coroutine.status(co) == "dead" then
+		error("addCoroHandler(): stop stop he's already dead")
+	end
+
+	---@type function
+	local handler
+
+	handler = function(...)
+		-- check if the coroutine has returned since last resume
+		if coroutine.status(co) == "dead" then
+			log("addCoroHandler(): the coroutine yielded while we weren't looking!")
+			EventManager.removeHandler(event, handler)
+			return
+		end
+
+		-- credit to sharpo https://discordapp.com/channels/561645196757041163/561645230672183310/724161820163833878
+		local function check_and_call(cb, ok, ...)
+			if ok then
+				if coroutine.status(co) == "dead" then
+					EventManager.removeHandler(event, handler)
+					openHandlers[event][handler] = nil
+					cb(...)
+				else
+					openHandlers[event][handler] = { ...} -- could also be `= table.pack(...)`
+				end
+			else
+				error("addCoroHandler(): error in check_and_call: " .. inspect({...}))
+			end
+		end
+		check_and_call(finally, coroutine.resume(co))
+	end
+
+	results[name] = createResultsTable(handler)
+	EventManager.addHandler(event, handler)
+	return handler
+end
+
+return {addCoroHandler = addCoroHandler, results = results, cancellable = cancellable}
