@@ -3,6 +3,7 @@ local path = "side_menu"
 local contents = {
   "side_menu_solid",
   "side_menu_faded",
+  "swap",
 }
 
 return genTable(path, contents)
