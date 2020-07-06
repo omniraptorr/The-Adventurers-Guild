@@ -1,0 +1,110 @@
+local save_data = {}
+
+function onLoad(save_state)
+  if save_state ~= nil and save_state ~= "" then
+    save_data = JSON.decode(save_state)
+  end
+  self.createButton({
+    click_function = "save_click",
+    function_owner = self,
+    label          = "Save",
+    position       = Vector(0.55, -0.5, -0.8),
+    rotation       = Vector(0, 180, 0),
+    scale          = Vector(0.5, 0.5, 0.5),
+    width          = 1000,
+    height         = 400,
+    font_size      = 300,
+  })
+  self.createButton({
+    click_function = "load_click",
+    function_owner = self,
+    label          = "Load",
+    position       = Vector(-0.55, -0.5, -0.8),
+    rotation       = Vector(0, 180, 0),
+    scale          = Vector(0.5, 0.5, 0.5),
+    width          = 1000,
+    height         = 400,
+    font_size      = 300,
+  })
+end
+
+function save_click(obj, color, alt)
+  for _, obj in ipairs(Player[color].getSelectedObjects()) do
+		if obj ~= self then
+	    save_data[obj.guid] = {
+	      position = self.positionToLocal(obj.getPosition()),
+	      rotation = obj.getRotation() - self.getRotation(),
+	      lock = obj.getLock(),
+	    }
+	    obj.setLock(false)
+	    self.putObject(obj)
+		end
+  end
+  save()
+end
+
+function save()
+  local stored_objs = self.getObjects()
+  local stored_guids = {}
+  for _, obj in ipairs(stored_objs) do
+    stored_guids[obj.guid] = true
+  end
+  for guid, data in pairs(save_data) do
+    if stored_guids[guid] == nil then
+      save_data[guid] = nil
+    end
+  end
+  self.script_state = JSON.encode(save_data)
+end
+
+function load_click(obj, color, alt)
+	self.setLock(true)
+  for _, obj in ipairs(self.getObjects()) do
+    if save_data[obj.guid] ~= nil then
+      local take_params = {
+        position          = self.positionToWorld(save_data[obj.guid].position) + Vector(0, 1, 0),
+        rotation          = self.getRotation() + save_data[obj.guid].rotation,
+        smooth            = false,
+        guid              = obj.guid,
+				callback_function = function(take_obj)
+		      if save_data[obj.guid].lock then
+		        take_obj.setLock(true)
+		      end take_obj.setPositionSmooth(self.positionToWorld(save_data[obj.guid].position), false, false)
+					if take_obj.name == "Die_6" then
+						local player_color = getNearestHand()
+						take_obj.setColorTint(Color.fromString(player_color))
+					end
+				end
+      }
+      self.takeObject(take_params)
+    end
+  end
+end
+
+function getNearestHand()
+	local nearest = "Blue"
+	local min_distance = math.huge
+	for _, color in ipairs(Player.getAvailableColors()) do
+		local distance = (Player[color].getHandTransform().position - self.getPosition()):magnitude()
+		if distance < min_distance then
+			min_distance = distance
+			nearest = color
+		end
+	end
+	return nearest
+end
+
+function onDrop()
+	for _, hit in ipairs(Physics.cast({
+		origin       = self.getPosition(),
+		direction    = Vector(0, -1, 0),
+		type         = 1,
+		max_distance = 10,
+	})) do
+		if hit.hit_object.getName() == "Place Chest Here" then
+			self.setRotationSmooth(Vector(0, hit.hit_object.getRotation().y, 0), false, true)
+			self.setPositionSmooth(Vector(hit.hit_object.getPosition().x, self.getPosition().y, hit.hit_object.getPosition().z), false, true)
+			break
+		end
+	end
+end
