@@ -23,18 +23,58 @@ add_assets(require("The-Adventurers-Guild/ui_assets/start_menu/_contents"))
 add_assets(require("The-Adventurers-Guild/ui_assets/travel_menu/_contents"))
 add_assets(require("The-Adventurers-Guild/ui_assets/save_menu/_contents"))
 add_assets(require("The-Adventurers-Guild/ui_assets/class_menu/_contents"))
+add_assets(require("The-Adventurers-Guild/ui_assets/bottom_menu/_contents"))
+add_assets(require("The-Adventurers-Guild/ui_assets/side_menu/_contents"))
+
+local class_starter_JSONs = require("The-Adventurers-Guild/xml/class_starter_jsons")
 
 --TODO: use ge_tts event handler
 function loadXML(save_state)
   UI.setCustomAssets(CustomUIAssets)
-  UI.setXmlTable(require("The-Adventurers-Guild/xml/uitable"))
+  --UI.setXmlTable(require("The-Adventurers-Guild/xml/uitable"))
 end
+
+local bottom_menu_state = {
+	wait_IDs = {},
+	choices = {},
+	pending_dice = {Blue = 0, Teal = 0, Yellow = 0, White = 0, Green = 0, Orange = 0},
+	rolls = {Blue = 0, Teal = 0, Yellow = 0, White = 0, Green = 0, Orange = 0},
+	attack_targets = {}
+}
+
+local side_menu_state = {
+	order = {"Blue", "Teal", "Yellow", "White", "Green", "Orange"},
+	solid = {Blue = true, Teal = true, Yellow = true, White = true, Green = true, Orange = true},
+	active = nil,
+}
+
+local sheet_cast_positions = {
+    Blue = Vector(-25.28, 5, -48.40),
+    Teal = Vector(21.13, 5, -48.45),
+    Yellow = Vector(65.64, 5, -22.34),
+    White = Vector(65.66, 5, 22.31),
+    Green = Vector(23.30, 5, 48.42),
+    Orange = Vector(-21.95, 5, 48.44),
+}
+
+local to_hit_chart = {	--chart[attacker WS][defender WS]
+	{4, 4, 5, 6, 6, 6, 6, 6, 6, 6},
+	{3, 4, 4, 4, 5, 5, 6, 6, 6, 6},
+	{2, 3, 4, 4, 4, 4, 5, 5, 5, 6},
+	{2, 3, 3, 4, 4, 4, 4, 4, 5, 5},
+	{2, 3, 3, 3, 4, 4, 4, 4, 4, 4},
+	{2, 3, 3, 3, 3, 4, 4, 4, 4, 4},
+	{2, 3, 3, 3, 3, 3, 4, 4, 4, 4},
+	{2, 2, 3, 3, 3, 3, 3, 4, 4, 4},
+	{2, 2, 2, 3, 3, 3, 3, 3, 4, 4},
+	{2, 2, 2, 2, 3, 3, 3, 3, 3, 4},
+}
 
 local class_click_functions = {
   start_menu = function(player, value, id)
     if player.host then
       local mode = string.sub(id, 12)
-      game_mode = mode
+      Global.setVar("game_mode", mode)
       print(string.format("%s chose %s mode.", player.steam_name, mode))
       -- Global.UI.setAttribute("start_menu_panel", "active", "false")
 
@@ -44,18 +84,414 @@ local class_click_functions = {
         error("main menu id didn't match! it was " .. buttonLayout.attributes.id)
       end
       -- print(formatui(menutab))
-      for k,v in ipairs(buttonLayout.children) do
-        if v.attributes.class == "start_menu" then
-          Global.UI.setAttribute(v.attributes.id, "active", "0")
-        else
-          Global.UI.setAttribute(v.attributes.id, "active", "1")
+      if game_mode == "traveling" then
+        for k,v in ipairs(buttonLayout.children) do
+          if v.attributes.class == "start_menu" then
+            Global.UI.setAttribute(v.attributes.id, "active", "0")
+          else
+            Global.UI.setAttribute(v.attributes.id, "active", "1")
+          end
         end
+      else
+        Global.UI.setAttribute("start_menu/panel", "active", "false")
+				if game_mode == "adventure" then
+					Global.UI.setAttribute("bottom_menu/panel", "active", "true")
+					Global.UI.setAttribute("side_menu/panel", "active", "true")
+					Global.UI.setAttribute("side_menu/swap", "active", "true")
+					Global.UI.setAttribute("side_menu/text", "active", "true")
+				end
       end
     end
   end,
-  travel_menu = require("The-Adventurers-Guild/xml/TravelChatInterface")
+  travel_menu = require("The-Adventurers-Guild/xml/TravelChatInterface"),
+  save_menu = function(player, value, id)
+		local choice = string.sub(id, 11)
+		if choice == "new_character" then
+	    Global.UI.setAttribute(player.color .. "_class_menu/panel", "active", true)
+		else
+			player.broadcast("Please place your save chest on the designated area and press Load.")
+			local area = Global.getTable("chest_areas")[player.color]
+			Wait.time(function()
+				area.setColorTint(Color(0.858824, 0.101961, 0.094118, 0.45098))
+			end, 1, 5)
+			Wait.time(function()
+				Wait.time(function()
+					area.setColorTint(Color(1, 1, 1, 0.45098))
+				end, 1, 5)
+			end, 0.5)
+		end
+    Global.UI.setAttribute(player.color .. "_save_menu/panel", "active", false)
+  end,
+  class_menu = function(player, value, id)
+		local choice = string.sub(id, 12)
+		spawnObjectJSON({
+			json              = class_starter_JSONs[choice],
+			position          = Global.getTable("chest_areas")[player.color].getPosition() + vector(0, 2, 0),
+			rotation          = Global.getTable("chest_areas")[player.color].getRotation(),
+			callback_function = function(obj)
+				obj.setLock(false)
+				Wait.frames(function()
+					Wait.condition(
+						function() obj.call("load_click") end,
+						function() return obj.resting end, 3,
+						function() obj.call("load_click") end
+					)
+				end, 1)
+			end,
+		})
+    Global.UI.setAttribute(player.color .. "_class_menu/panel", "active", false)
+  end,
+	bottom_menu = function(player, value, id)
+		if bottom_menu_state.pending_dice[player.color] ~= 0 or bottom_menu_state.wait_IDs[player.color] ~= nil then
+			player.print(string.format("Error: please finish your %s roll or let it time out first.", bottom_menu_state.choices[player.color]))
+			return
+		end
+		local choice = string.sub(id, 13)
+		bottom_menu_state.choices[player.color] = choice
+		if choice == "pinning" then
+			local class = getClass(player.color)
+			if class == "Elf" then
+				player.broadcast("You are an Elf, so you always escape from being pinned.")
+				return
+			end
+			bottom_menu_state.pending_dice[player.color] = 1
+			bottom_menu_state.rolls[player.color] = 0
+			broadcastToAll(string.format("%s started a Pinning roll.", getName(player.color) or player.color), Color.fromString(player.color))
+			bottom_menu_state.wait_IDs[player.color] = Wait.condition(
+				function()
+					local pinning = getTotalPinning(player.color)
+					if pinning ~= nil then
+						if bottom_menu_state.rolls[player.color] >= getTotalPinning(player.color) then
+							broadcastToAll(string.format("%s escapes: rolled %i, needed %i.", getName(player.color) or player.color, bottom_menu_state.rolls[player.color], getTotalPinning(player.color)), Color.fromString(player.color))
+						else
+							broadcastToAll(string.format("%s does not escape: rolled %i, needed %i.", getName(player.color) or player.color, bottom_menu_state.rolls[player.color], getTotalPinning(player.color)), Color.fromString(player.color))
+						end
+					else
+						broadcastToAll(string.format("Error: cannot find %s's Pinning stat. Pinning roll: %i.", getName(player.color) or player.color, bottom_menu_state.rolls[player.color]), Color.fromString(player.color))
+					end
+					bottom_menu_state.wait_IDs[player.color] = nil
+					bottom_menu_state.choices[player.color] = nil
+				end,
+				function()
+					return bottom_menu_state.pending_dice[player.color] == 0
+				end, 10,
+				function()
+					bottom_menu_state.pending_dice[player.color] = 0
+					bottom_menu_state.rolls[player.color] = 0
+					bottom_menu_state.wait_IDs[player.color] = nil
+					bottom_menu_state.choices[player.color] = nil
+					broadcastToAll(string.format("%s's Pinning roll timed out.", getName(player.color) or player.color), Color.fromString(player.color))
+				end
+			)
+		elseif choice == "attack" then
+			player.broadcast("Please choose a target.")
+			bottom_menu_state.rolls[player.color] = 0
+			bottom_menu_state.wait_IDs[player.color] = Wait.condition(
+				function()
+					broadcastToAll(string.format("%s is attacking %s.", getName(player.color) or player.color, bottom_menu_state.attack_targets[player.color].getName()), Color.fromString(player.color))
+					bottom_menu_state.wait_IDs[player.color] = Wait.condition(
+						function()
+							local player_WS = getTotalWS(player.color)
+							local monster_stats = parseStats(bottom_menu_state.attack_targets[player.color])
+							local monster_WS
+							if monster_stats ~= nil then
+								monster_WS = monster_stats.WS
+							end
+							if player_WS ~= nil and monster_WS ~= nil then
+								if bottom_menu_state.rolls[player.color] >= to_hit_chart[player_WS][monster_WS] then
+									broadcastToAll(string.format("HIT! %s vs %s: rolled %i, needed %i.", getName(player.color) or player.color, bottom_menu_state.attack_targets[player.color].getName(), bottom_menu_state.rolls[player.color], to_hit_chart[player_WS][monster_WS]), Color.fromString(player.color))
+									player.broadcast("Please roll for damage.")
+								else
+									broadcastToAll(string.format("%s misses %s: rolled %i, needed %i.", getName(player.color) or player.color, bottom_menu_state.attack_targets[player.color].getName(), bottom_menu_state.rolls[player.color], to_hit_chart[player_WS][monster_WS]), Color.fromString(player.color))
+								end
+							else
+								broadcastToAll(string.format("Error: cannot find player or monster's weapon skill. Attack roll: %i.", bottom_menu_state.rolls[player.color]), Color.fromString(player.color))
+							end
+							bottom_menu_state.wait_IDs[player.color] = nil
+							bottom_menu_state.attack_targets[player.color].highlightOff()
+							bottom_menu_state.attack_targets[player.color] = nil
+							bottom_menu_state.choices[player.color] = nil
+						end,
+						function()
+							return bottom_menu_state.pending_dice[player.color] == 0
+						end, 10,
+						function()
+							bottom_menu_state.pending_dice[player.color] = 0
+							bottom_menu_state.rolls[player.color] = 0
+							bottom_menu_state.wait_IDs[player.color] = nil
+							bottom_menu_state.attack_targets[player.color].highlightOff()
+							bottom_menu_state.attack_targets[player.color] = nil
+							bottom_menu_state.choices[player.color] = nil
+							broadcastToAll(string.format("%s's Attack roll timed out.", getName(player.color) or player.color), Color.fromString(player.color))
+						end
+					)
+				end,
+				function()
+					return bottom_menu_state.attack_targets[player.color] ~= nil
+				end, 10,
+				function()
+					bottom_menu_state.pending_dice[player.color] = 0
+					bottom_menu_state.rolls[player.color] = 0
+					bottom_menu_state.wait_IDs[player.color] = nil
+					bottom_menu_state.attack_targets[player.color] = nil
+					bottom_menu_state.choices[player.color] = nil
+					broadcastToAll(string.format("%s's Attack roll timed out.", getName(player.color) or player.color), Color.fromString(player.color))
+				end
+			)
+		end
+	end,
+	side_menu = function(player, value, id)
+		local row = tonumber(string.sub(id, -1))
+		if side_menu_state.active ~= nil then
+			side_menu_state.solid[side_menu_state.active] = false
+		end
+		local all_done = true
+		for _, color in pairs(side_menu_state.order) do
+			if findSheet(color) ~= nil then
+				if side_menu_state.solid[color] then
+					all_done = false
+					break
+				end
+			end
+		end
+		if all_done then
+			for _, color in pairs(side_menu_state.order) do
+				if findSheet(color) ~= nil then
+					side_menu_state.solid[color] = true
+				else
+					side_menu_state.solid[color] = false
+				end
+			end
+		end
+		side_menu_state.active = side_menu_state.order[row]
+		refreshSideMenu()
+		broadcastToAll(string.format("It is now %s's turn.", getName(side_menu_state.order[row]) or side_menu_state.order[row]), Color.fromString(side_menu_state.order[row]))
+	end,
+	["side_menu/swap"] = function(player, value, id)
+		local row = tonumber(string.sub(id, -1))
+		side_menu_state.order[row], side_menu_state.order[row + 1] = side_menu_state.order[row + 1], side_menu_state.order[row]
+		refreshSideMenu()
+	end,
 }
 
+
+function refreshSideMenu()
+	for i = 1, 6 do
+		if side_menu_state.active == side_menu_state.order[i] then
+			setSideMenuState(i, "active")
+		elseif findSheet(side_menu_state.order[i]) == nil or not side_menu_state.solid[side_menu_state.order[i]] then
+			setSideMenuState(i, "faded")
+		else
+			setSideMenuState(i, "solid")
+		end
+	end
+end
+
+
+function setSideMenuState(row, state)	--state can be "solid", "faded", or "active"
+	if state == "solid" then
+		Global.UI.setAttributes("side_menu/" .. row, {
+			padding = "0 0 0 0",
+			icon = "side_menu/side_menu_solid",
+		})
+		Global.UI.setAttributes("side_menu_text/" .. row, {
+			text = getName(side_menu_state.order[row]) or side_menu_state.order[row],
+			color = side_menu_state.order[row],
+		})
+		Global.UI.setAttribute("side_menu_text_panel/" .. row, "padding", "0 0 0 0")
+	elseif state == "faded" then
+		Global.UI.setAttributes("side_menu/" .. row, {
+			padding = "0 0 0 0",
+			icon = "side_menu/side_menu_faded",
+		})
+		Global.UI.setAttributes("side_menu_text/" .. row, {
+			text = getName(side_menu_state.order[row]) or "",
+			color = side_menu_state.order[row],
+		})
+		Global.UI.setAttribute("side_menu_text_panel/" .. row, "padding", "0 0 0 0")
+	elseif state == "active" then
+		Global.UI.setAttributes("side_menu/" .. row, {
+			padding = "30 -30 0 0",
+			icon = "side_menu/side_menu_solid",
+		})
+		Global.UI.setAttributes("side_menu_text/" .. row, {
+			text = getName(side_menu_state.order[row]) or side_menu_state.order[row],
+			color = side_menu_state.order[row],
+		})
+		Global.UI.setAttribute("side_menu_text_panel/" .. row, "padding", "30 -30 0 0")
+	end
+end
+
+
+function onObjectRandomize(obj, color)
+	if Global.getVar("game_mode") ~= "adventure" then
+		return
+	end
+	if bottom_menu_state.pending_dice[color] == nil then
+		return
+	end
+	if obj.held_by_color ~= nil then
+		return
+	end
+	if bottom_menu_state.pending_dice[color] > 0 then
+		if obj.name == "Die_6" and obj.getColorTint() == Color.fromString(color) then
+			obj.interactable = false
+			Wait.condition(
+				function()
+					obj.interactable = true
+					bottom_menu_state.pending_dice[color] = bottom_menu_state.pending_dice[color] - 1
+					if bottom_menu_state.pending_dice[color] < 0 then
+						bottom_menu_state.pending_dice[color] = 0
+					end
+					bottom_menu_state.rolls[color] = bottom_menu_state.rolls[color] + obj.getRotationValue()
+				end,
+				function()
+					return obj == nil or obj.resting
+				end
+			)
+		end
+	end
+end
+
+
+function onObjectPickUp(color, obj)
+	if Global.getVar("game_mode") ~= "adventure" then
+		return
+	end
+	if bottom_menu_state.choices[color] ~= "attack" then
+		return
+	end
+	if bottom_menu_state.attack_targets[color] ~= nil then
+		return
+	end
+	local monster_stats = parseStats(obj)
+	if monster_stats == nil then
+		return
+	end
+	bottom_menu_state.pending_dice[color] = 1
+	bottom_menu_state.attack_targets[color] = obj
+	obj.highlightOn(Color.fromString(color))
+	obj.drop()
+end
+
+
+function parseStats(obj)
+	local desc = obj.getDescription()
+	local st, en, W, WS, S, T, A, D = string.find(desc, "W(%d+)%s*WS(%d+)%s*S(%d+)%s*T(%d+)%s*A(%d+)%s*D(%d+)%s*")
+	local st, en, AR = string.find(desc, ".*AR(%d+)%s*")
+	if W == nil or WS == nil or S == nil or T == nil or A == nil or D == nil then
+		return nil
+	end
+	if AR == nil then
+		AR = 0
+	end
+	return {W = tonumber(W), WS = tonumber(WS), S = tonumber(S), T = tonumber(T), A = tonumber(A), D = tonumber(D), AR = tonumber(AR)}
+end
+
+
+function displaySaveMenu(color)
+	if Global.getTable("chest_areas")[color] == nil then
+		return
+	end
+	if Global.getVar("game_mode") == "adventure" then
+		local chest = findChest(color)
+		if chest == nil then
+			Global.UI.setAttribute(color .. "_save_menu/panel", "active", true)
+		else
+			Global.UI.setAttribute(color .. "_save_menu/panel", "active", false)
+	    Global.UI.setAttribute(color .. "_class_menu/panel", "active", false)
+		end
+	end
+end
+
+
+function findChest(color)
+	for _, hit in ipairs(Physics.cast({
+		origin       = Global.getTable("chest_areas")[color].getPosition(),
+		direction    = Vector(0, 1, 0),
+		max_distance = 5,
+		type         = 1,
+	})) do
+		local buttons = hit.hit_object.getButtons()
+		if buttons ~= nil and #buttons == 2 and buttons[1].label == "Save" and buttons[2].label == "Load" then
+			return hit
+		end
+	end
+	return nil
+end
+
+
+function findSheet(color)
+	for _, hit in ipairs(Physics.cast({
+		origin       = sheet_cast_positions[color],
+		direction    = Vector(0, -1, 0),
+		max_distance = 10,
+		type         = 1,
+	})) do
+		local inputs = hit.hit_object.getInputs()
+		if inputs ~= nil and #inputs >= 2 and hit.hit_object.script_state ~= nil and hit.hit_object.script_state ~= "" then
+			return hit.hit_object
+		end
+	end
+	return nil
+end
+
+
+function getClass(color)
+	local sheet = findSheet(color)
+	if sheet == nil then
+		return ""
+	end
+	local inputs = sheet.getInputs()
+	if #inputs >= 6 then
+		return inputs[6].value
+	end
+	return ""
+end
+
+
+function getName(color)
+	local sheet = findSheet(color)
+	if sheet == nil then
+		return nil
+	end
+	local inputs = sheet.getInputs()
+	if #inputs >= 3 then
+		if inputs[3].value == "" then
+			return nil
+		else
+			return inputs[3].value
+		end
+	end
+	return nil
+end
+
+
+
+function getTotalPinning(color)
+	local sheet = findSheet(color)
+	if sheet == nil then
+		return nil
+	end
+	local buttons = sheet.getButtons()
+	if #buttons >= 64 then
+		return tonumber(buttons[64].label)
+	end
+	return nil
+end
+
+
+function getTotalWS(color)
+	local sheet = findSheet(color)
+	if sheet == nil then
+		return nil
+	end
+	local buttons = sheet.getButtons()
+	if #buttons >= 8 then
+		return tonumber(buttons[8].label)
+	end
+	return nil
+end
 
 
 function UIButtonClick(player, value, id)
