@@ -1,47 +1,3 @@
---- When missing element is accessed, gives an empty table
-local createWhenAccessed = {
-	__index = function(t,k)
-		t[k] = {}
-		return t[k]
-	end
-}
-
----@class resultsTable
----@field results table<tts__Player, any>
----@field handler function
----@field final function
-
---- A table of pending handlers, their results, and their 'final' callbacks.
---- Managed (except initial creation) from inside handlers.
----@type table<string, resultsTable>
-local activeHandlers = setmetatable({}, createWhenAccessed)
-
----@param callback fun(handlerResults: table<tts__Player, any>)
----@return resultsTable
-local function createResultsTable(handler, callback)
-	local results = {}
-	local function wrappedCallback()
-		return callback(results)
-	end
-	return {handler = handler, results = results, callback = wrappedCallback}
-end
-
---- A table of active handler names for each player that they can end manually.
---- Needs to be initialized from inside each handler! i.e. forward declared and inserted as a callback here
----@type table<tts__Player, table<string, true>>
-local cancellable = { setmetatable({}, createWhenAccessed) }
-
---- Universal pass function. Exits from current passable prompt(s) for the given player with the current result-
---- not guaranteed to work if the function is meant to have mandatory input.
---- Uses any callbacks placed in the aforementioned `cancellable` table for that player.
----@param player tts__Player
-local function pass(player)
-	for handlerCallback in next(cancellable[Player[player]]) do
-		handlerCallback()
-	end
-end
-addHotkey("Pass", pass) -- here it's a hotkey but it could also be an xml button
-
 -----@type function
 --local inspect = require("IO/inspect")
 
@@ -50,9 +6,10 @@ addHotkey("Pass", pass) -- here it's a hotkey but it could also be an xml button
 ---@param event string
 ---@param name string
 ---@param co function | thread
+---@param co function
 ---@param finally nil | function @A function to call after the coroutine is done.
 ---@return function @Returns the created/added handler
-local function addCoroHandler(event, name, co, finally)
+local function addCancellableCoroHandler(event, name, co, cancel, finally)
 	if type(co) ~= "thread" then
 		co = coroutine.create(co)
 	end
@@ -90,7 +47,6 @@ local function addCoroHandler(event, name, co, finally)
 		check_and_call(finally, coroutine.resume(co))
 	end
 
-	activeHandlers[name] = createResultsTable(handler)
 	EventManager.addHandler(event, handler)
 	return handler
 end

@@ -22,6 +22,34 @@ end
 local EventManager = require('ge_tts/EventManager')
 local Coroutine = require('ge_tts/Coroutine')
 
+--- When missing element is accessed, gives an empty table
+local createWhenAccessed = {
+	__index = function(t,k)
+		t[k] = {}
+		return t[k]
+	end
+}
+
+---@class resultsTable
+---@field results table<tts__Player, any>
+---@field handler function
+---@field final function
+
+--- A table of pending handlers, their results, and their 'final' callbacks.
+--- Managed (except initial creation) from inside handlers.
+---@type table<string, resultsTable>
+local activeHandlers = setmetatable({}, createWhenAccessed)
+
+---@param callback fun(handlerResults: table<tts__Player, any>)
+---@return resultsTable
+local function createResultsTable(handler, callback)
+	local results = {}
+	local function wrappedCallback()
+		return callback(results)
+	end
+	return {handler = handler, results = results, callback = wrappedCallback}
+end
+
 --- Creates and a handler that will be called with every event trigger until its coroutine returns, then removed.
 ---@param event string @ todo: add event callback names into tts-types
 ---@param co function | thread
@@ -59,6 +87,23 @@ local function addCoroHandler(event, co)
 	EventManager.addHandler(event, handler)
 	return handler
 end
+
+--- A table of active handler names for each player that they can end manually.
+--- Needs to be initialized from inside each handler! i.e. forward declared and inserted as a callback here
+---@type table<tts__Player, table<string, true>>
+local cancellable = { setmetatable({}, createWhenAccessed) }
+
+--- Universal pass function. Exits from current passable prompt(s) for the given player with the current result-
+--- not guaranteed to work if the function is meant to have mandatory input.
+--- Uses any callbacks placed in the aforementioned `cancellable` table for that player.
+---@param player tts__Player
+local function pass(player)
+	for handlerCallback in next(cancellable[Player[player]]) do
+		handlerCallback()
+	end
+end
+addHotkey("Pass", pass) -- here it's a hotkey but it could also be an xml button
+
 
 -- actual code below this line
 
