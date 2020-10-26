@@ -1,0 +1,22 @@
+{
+  "name": "the-adventurers-guild",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zbragames/The-Adventurers-Guild.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zbragames/The-Adventurers-Guild/issues"
+  },
+  "homepage": "https://github.com/zbragames/The-Adventurers-Guild#readme",
+  "dependencies": {
+    "symlink-dir": "^4.1.0"
+  }
+}
