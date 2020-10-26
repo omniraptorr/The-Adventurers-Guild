@@ -1,0 +1,162 @@
+local linked_bag
+local button_params = {
+    function_owner = self,
+    scale = Vector(2.083, 2.083, 2.083),
+    width = 600,
+    height = 120,
+}
+local button_start = Vector(-5.2, 0.5, -0.8)
+local button_x_step = 2.6
+local button_z_step = 0.5
+local take_position = Vector(-0.185047, 0.080664, 16.169115)
+
+function onLoad(save_state)
+    if save_state ~= "" then
+        local bag = getObjectFromGUID(save_state)
+        if bag and bag.tag == "Bag" then
+            linked_bag = bag
+            updateButtons()
+            return
+        end
+    end
+    askForBag()
+end
+
+function onCollisionEnter(collision_info)
+    linked_bag = collision_info.collision_object
+    updateButtons()
+end
+
+function askForBag()
+    self.clearButtons()
+    self.createButton({
+        click_function = "doNothing",
+        function_owner = self,
+        label          = "Put\nBag\nHere",
+        position       = Vector(0, 0.2, 0),
+        scale          = Vector(1, 1, 1),
+        width          = 0,
+        height         = 0,
+        font_size      = 200,
+        font_color     = Color.fromString("White"),
+    })
+end
+
+
+function updateButtons()
+    self.clearButtons()
+    if linked_bag == nil or linked_bag.tag ~= "Bag" then
+        askForBag()
+        return
+    end
+    local contents = linked_bag.getObjects()
+    local max_length = 0
+    for i, obj in ipairs(contents) do
+        local len = string.len(obj.name)
+        if len > max_length then
+            max_length = len
+        end
+    end
+    local names = {}
+    for i, obj in ipairs(contents) do
+        names[i] = obj.name
+    end
+    table.sort(names, function(v1, v2)
+        v1 = string.lower(v1)
+        v2 = string.lower(v2)
+        local length1 = string.len(v1)
+        local length2 = string.len(v2)
+        for i = 1, math.min(length1, length2) do
+            local byte1 = string.byte(v1, i)
+            local byte2 = string.byte(v2, i)
+            if byte1 < byte2 then
+                return true
+            elseif byte2 < byte1 then
+                return false
+            end
+        end
+        if length1 < length2 then
+            return true
+        end
+        return false
+    end)
+    for i, name in ipairs(names) do
+        local func_name = "button_func_" .. name
+        _G[func_name] = function(obj, color, alt_click)
+            local takeIndex = nil
+            for _, obj in ipairs(linked_bag.getObjects()) do
+                if obj.name == name then
+                    takeIndex = obj.index
+                    break
+                end
+            end
+            if takeIndex == nil then
+                print("Object not found. Please refresh.")
+                return
+            end
+            linked_bag.takeObject({
+                position          = linked_bag.positionToWorld(take_position),
+                smooth            = true,
+                index             = takeIndex,
+            })
+            Wait.time(function()
+                updateButtons()
+            end, 1)
+        end
+        local current_button_params = copyTable(button_params)
+        current_button_params.click_function = func_name
+        current_button_params.label = name
+        current_button_params.position = button_start + Vector(button_x_step * ((i - 1) % 5), 0, button_z_step * math.floor((i - 1) / 5))
+        current_button_params.font_size = math.min(1080 / max_length)
+        self.createButton(current_button_params)
+    end
+    self.createButton({
+        click_function = "updateButtons",
+        function_owner = self,
+        label          = "Refresh",
+        position       = Vector(-1.6, 0.5, button_z_step * (math.floor((#contents - 1) / 5) - 0.3)),
+        scale          = Vector(0.75, 0.75, 0.75),
+        width          = 2000,
+        height         = 500,
+        font_size      = 400,
+        color          = Color.fromString("Yellow"),
+    })
+    self.createButton({
+        click_function = "toggleSave",
+        function_owner = self,
+        label          = "Save",
+        position       = Vector(1.5, 0.5, button_z_step * (math.floor((#contents - 1) / 5) - 0.3)),
+        scale          = Vector(0.75, 0.75, 0.75),
+        width          = 2000,
+        height         = 500,
+        font_size      = 400,
+        color          = Color.fromString("Yellow"),
+    })
+end
+
+function toggleSave()
+    if self.script_state == "" and linked_bag ~= nil and linked_bag.tag == "Bag" then
+        self.script_state = linked_bag.getGUID()
+        print("This control panel will now link with \"" .. linked_bag.getName() .. "\" upon game load.")
+    else
+        self.script_state = ""
+        print("This control panel will no longer auto link upon game load.")
+    end
+end
+
+
+function copyTable(original)
+    if type(original) ~= "table" then
+        return original
+    else
+        local copy = {}
+        for i, v in pairs(original) do
+            copy[i] = copyTable(v)
+        end
+        return copy
+    end
+end
+
+function doNothing()
+    return
+end

@@ -1,0 +1,182 @@
+local button_params = {
+    function_owner = self,
+    label = "",
+    tooltip = "Left click to add, right click to remove",
+    position = Vector(3.15, 2.1, 1.3),
+    scale = Vector(0.5, 0.5, 0.5),
+    width = 2700,
+    height = 2100,
+    font_size = 400,
+}
+
+local button_extra_params = {
+    function_owner = self,
+    label = "",
+    tooltip = "Left click to add, right click to remove",
+    position = Vector(3.15, 2.4, 0),
+    scale = Vector(0.5, 0.5, 0.5),
+    color = Color(1, 1, 1, 0.1),
+    width = 2700,
+    height = 2700,
+    font_size = 400,
+}
+
+local display_params = {
+    click_function = "doNothing",
+    function_owner = self,
+    label = "0",
+    position = Vector(3.15, 2.1, -2.2),
+    scale = {1.5, 1.5, 1.5},
+    width = 0,
+    height = 0,
+    font_size = 1500,
+    font_color = {1, 1, 1, 1}
+}
+
+local asset_links = {
+    ["none"] = "http://cloud-3.steamusercontent.com/ugc/1028454921013860452/C01BD9545CAF1FC96410530012D08066735AE727/",
+    ["barbarian"] = "http://cloud-3.steamusercontent.com/ugc/1010438073443357392/779847ADD4A57CFE42AC004DE884C2775792A17C/",
+    ["wizard"] = "http://cloud-3.steamusercontent.com/ugc/1010438073443230106/EA9435EED1EFAF5BB55045A64758FC72DEBC63B0/",
+    ["dwarf"] = "http://cloud-3.steamusercontent.com/ugc/1010438073443392491/0F5ADEA8D1834D10460D6AFF7604B1E2DAF5087E/",
+    ["elf"] = "http://cloud-3.steamusercontent.com/ugc/1010438208444797721/9F6744DED56BDCCC1F0FCE72DA9945A0496B801A/",
+    ["pit fighter"] = "http://cloud-3.steamusercontent.com/ugc/1028454921013860892/AA5D69E9E66F4184E2F25BCA8C7A9A17FE184D8E/",
+    ["wardancer"] = "http://cloud-3.steamusercontent.com/ugc/1028454921013861103/5B0C2CC5A767DC7391CF89FB6F2BD823054D05F0/",
+    ["witch hunter"] = "http://cloud-3.steamusercontent.com/ugc/1028454921013861356/29F0B674B4EF49041345097D04B6304EA0A65EE5/",
+    ["imperial noble"] = "http://cloud-3.steamusercontent.com/ugc/1028455195043275732/93A0790F5A782DF24354E5001255BE1A09D68E99/",
+}
+
+local counts = {0, 0, 0, 0, 0, 0}
+local assigned_colors = {}
+
+local color_names = {"Blue", "Teal", "Yellow", "White", "Green", "Orange"}
+local inverse_color_names = {}
+for i, v in pairs(color_names) do
+    inverse_color_names[v] = i
+end
+
+local sheet_cast_positions = {
+    Blue = Vector(-25.28, 5, -48.40),
+    Teal = Vector(21.13, 5, -48.45),
+    Yellow = Vector(65.64, 5, -22.34),
+    White = Vector(65.66, 5, 22.31),
+    Green = Vector(23.30, 5, 48.42),
+    Orange = Vector(-21.95, 5, 48.44),
+}
+
+local obj_GUIDs = {
+    tokens = {"ff33ad", "3d5f08", "a5f20d", "144b05", "23ca1e", "19809c"},
+    bases = {"3ff28e", "bab152", "11d589", "13e63a", "f6b98a", "3d9934"},
+}
+local objs
+
+function onLoad()
+    objs = getObjectRefs(obj_GUIDs)
+    for i = 1, 6 do
+        _G["click_" .. i] = function(obj, color, alt)
+            if alt then
+                counts[i] = counts[i] - 1
+            else
+                counts[i] = counts[i] + 1
+            end
+            self.editButton({
+                index = i * 3 - 1,
+                label = counts[i],
+            })
+            if assigned_colors[i] ~= nil then
+                updateButton(i)
+            end
+        end
+        button_params.click_function = "click_" .. i
+        button_params.position.x = button_params.position.x - 3.15
+        button_params.color = Color.fromString("Grey")
+        button_extra_params.click_function = "click_" .. i
+        button_extra_params.position.x = button_extra_params.position.x - 3.15
+        self.createButton(button_params)
+        self.createButton(button_extra_params)
+        display_params.position.x = display_params.position.x - 3.15
+        self.createButton(display_params)
+        objs.bases[i].setColorTint(Color.fromString("Black"))
+    end
+    for _, color in ipairs(getSeatedPlayers()) do
+        onPlayerChangeColor(color)
+    end
+end
+
+
+function updateButton(i)
+    local sheet = false
+    for _, hit in ipairs(Physics.cast({
+        origin       = sheet_cast_positions[assigned_colors[i]],
+        direction    = Vector(0, -1, 0),
+        type         = 1,
+        max_distance = 10,
+    })) do
+        local inputs = hit.hit_object.getInputs()
+        if inputs ~= nil and #inputs >= 2 and hit.hit_object.script_state ~= nil and hit.hit_object.script_state ~= "" then
+            sheet = true
+            local name = inputs[3].value
+            local player = inputs[7].value
+            local class = string.lower(inputs[6].value)
+            self.editButton({
+                index = i * 3 - 3,
+                label = string.format("\n\n\n%s", name),
+                color = Color.fromString(assigned_colors[i]),
+            })
+            objs.bases[i].setColorTint(Color.fromString(assigned_colors[i]))
+            if asset_links[class] ~= nil then
+                objs.tokens[i].setCustomObject({image = asset_links[class]})
+            else
+                objs.tokens[i].setCustomObject({image = asset_links.none})
+            end
+            objs.tokens[i] = objs.tokens[i].reload()
+            break
+        end
+    end
+    if not sheet then
+        self.editButton({
+            index = i * 3 - 3,
+            label = "",
+            color = Color.fromString(assigned_colors[i]),
+        })
+        objs.bases[i].setColorTint(Color.fromString(assigned_colors[i]))
+        objs.tokens[i].setCustomObject({image = asset_links.none})
+        objs.tokens[i] = objs.tokens[i].reload()
+    end
+end
+
+
+function onPlayerChangeColor(color)
+    if inverse_color_names[color] == nil then
+        return
+    end
+    local button_index = nil
+    for i, assigned_color in ipairs(assigned_colors) do
+        if color == assigned_color then
+            button_index = i
+            break
+        end
+    end
+    if not button_index then
+        table.insert(assigned_colors, color)
+        button_index = #assigned_colors
+    end
+    updateButton(button_index)
+end
+
+
+function getObjectRefs(guids)
+    if type(guids) == "string" then
+        return getObjectFromGUID(guids) or guids
+    elseif type(guids) == "table" then
+        local output = {}
+        for i, v in pairs(guids) do
+            output[i] = getObjectRefs(v)
+        end
+        return output
+    else
+        return guids
+    end
+end
+
+
+function doNothing() return end

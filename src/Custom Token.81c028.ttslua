@@ -1,0 +1,1513 @@
+data = {
+    health = {
+        current = "1",
+        total = "1",
+    },
+    gold = "0",
+    gold_click_counter = 0,
+    name = "",
+    battle_level = "",
+    career_level = "",
+    class = "",
+    player = "",
+    attributes = {
+        move = {
+            base = 0,
+            modifier = 0,
+        },
+        weapon_skill = {
+            base = 0,
+            modifier = 0,
+        },
+        ballistic_skill = {
+            base = 0,
+            modifier = 0,
+        },
+        strength = {
+            base = 0,
+            modifier = 0,
+        },
+        toughness = {
+            base = 0,
+            modifier = 0,
+        },
+        initiative = {
+            base = 0,
+            modifier = 0,
+        },
+        attacks = {
+            base = 0,
+            modifier = 0,
+        },
+        damage = {
+            base = 0,
+            modifier = 0,
+        },
+        willpower = {
+            base = 0,
+            modifier = 0,
+        },
+        pinning = {
+            base = 0,
+            modifier = 0,
+        },
+        luck = {
+            base = 0,
+            modifier = 0,
+        },
+    },
+    notes = {
+        {
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+        },
+        {
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+        },
+        {
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+        },
+        {
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+        },
+        {
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+        },
+        {
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+        },
+        {
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+        },
+        {
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+        },
+        {
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+        },
+        {
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+            {
+                title = "",
+                body = "",
+            },
+        },
+    },
+    notes_state = {
+        current_card = 1,
+        current_page = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+    }
+}
+
+local coffin
+
+local input_params = {
+    {
+        input_function = "current_health_input",
+        function_owner = self,
+        label = "",
+        position = {-1.94, 0.41, -0.98},
+        scale = {0.5, 0.5, 0.5},
+        width = 280,
+        height = 183,
+        font_size = 160,
+        color = {0.9921, 0, 0, 1},
+        font_color = {1, 1, 1, 1},
+        alignment = 3,
+        tooltip = "Current Health",
+        value = ""
+    },	--current health
+    {
+        input_function = "total_health_input",
+        function_owner = self,
+        label = "",
+        position = {-2.17, 0.16, -0.8},
+        scale = {0.5, 0.5, 0.5},
+        width = 170,
+        height = 114,
+        font_size = 90,
+        color = {0, 0, 0, 1},
+        font_color = {1, 1, 1, 1},
+        alignment = 3,
+        tooltip = "Total Health",
+        value = ""
+    },	--input total health
+    {
+        input_function = "name_input",
+        function_owner = self,
+        label = "",
+        position = {1.94, 0.18, -1.27},
+        scale = {0.5, 0.5, 0.5},
+        width = 620,
+        height = 99,
+        font_size = 75,
+        color = {0, 0, 0, 1},
+        font_color = {1, 1, 1, 1},
+        value = ""
+    },	--name
+
+    {
+        input_function = "battle_level_input",
+        function_owner = self,
+        label = "",
+        position = {2.15, 0.19, -1.16},
+        scale = {0.5, 0.5, 0.5},
+        width = 210,
+        height = 99,
+        font_size = 75,
+        color = {0, 0, 0, 1},
+        font_color = {1, 1, 1, 1},
+        value = ""
+    },	--battle level
+
+    {
+        input_function = "career_level_input",
+        function_owner = self,
+        label = "",
+        position = {2.12, 0.18, -1.05},
+        scale = {0.5, 0.5, 0.5},
+        width = 255,
+        height = 99,
+        font_size = 75,
+        color = {0, 0, 0, 1},
+        font_color = {1, 1, 1, 1},
+        value = ""
+    },	--career level
+
+    {
+        input_function = "class_input",
+        function_owner = self,
+        label = "",
+        position = {1.91, 0.18, -0.94},
+        scale = {0.5, 0.5, 0.5},
+        width = 630,
+        height = 99,
+        font_size = 75,
+        color = {0, 0, 0, 1},
+        font_color = {1, 1, 1, 1},
+        value = ""
+    },	--class
+
+    {
+        input_function = "player_input",
+        function_owner = self,
+        label = "",
+        position = {1.96, 0.18, -0.832},
+        scale = {0.5, 0.5, 0.5},
+        width = 570,
+        height = 99,
+        font_size = 75,
+        color = {0, 0, 0, 1},
+        font_color = {1, 1, 1, 1},
+        value = ""
+    },	--player
+
+    {
+        input_function = "gold_input",
+        function_owner = self,
+        label = "",
+        position = {0.87, 0.43, -1.06},
+        scale = {0.5, 0.5, 0.5},
+        width = 410,
+        height = 153,
+        font_size = 130,
+        color = {0.4313, 0.3215, 0.1255, 1},
+        font_color = {1, 1, 1, 1},
+        alignment = 3,
+        value = ""
+    },	--gold
+
+    {
+        input_function = "title_1_input",
+        function_owner = self,
+        label = "",
+        position = {1.54, 0.14, -0.55},
+        scale = {0.5, 0.5, 0.5},
+        width = 1000,
+        height = 153,
+        font_size = 130,
+        color = {0.9921, 0.9411, 0.5882, 1},
+        alignment = 3,
+        value = ""
+    },	--title 1
+
+    {
+        input_function = "title_2_input",
+        function_owner = self,
+        label = "",
+        position = {1.54, 0.14, 0.09},
+        scale = {0.5, 0.5, 0.5},
+        width = 1000,
+        height = 153,
+        font_size = 130,
+        color = {0.9921, 0.9411, 0.5882, 1},
+        alignment = 3,
+        value = ""
+    },	--title 2
+
+    {
+        input_function = "title_3_input",
+        function_owner = self,
+        label = "",
+        position = {1.54, 0.14, 0.74},
+        scale = {0.5, 0.5, 0.5},
+        width = 1000,
+        height = 153,
+        font_size = 130,
+        color = {0.9921, 0.9411, 0.5882, 1},
+        alignment = 3,
+        value = ""
+    },	--title 3
+
+    {
+        input_function = "body_1_input",
+        function_owner = self,
+        label = "",
+        position = {1.54, 0.14, -0.29},
+        scale = {0.5, 0.5, 0.5},
+        width = 1350,
+        height = 324,
+        font_size = 75,
+        color = {0.9921, 0.9411, 0.5882, 1},
+        value = ""
+    },	--body 1
+
+
+    {
+        input_function = "body_2_input",
+        function_owner = self,
+        label = "",
+        position = {1.54, 0.14, 0.35},
+        scale = {0.5, 0.5, 0.5},
+        width = 1350,
+        height = 324,
+        font_size = 75,
+        color = {0.9921, 0.9411, 0.5882, 1},
+        value = ""
+    },	--body 2
+
+
+    {
+        input_function = "body_3_input",
+        function_owner = self,
+        label = "",
+        position = {1.54, 0.14, 1},
+        scale = {0.5, 0.5, 0.5},
+        width = 1350,
+        height = 324,
+        font_size = 75,
+        color = {0.9921, 0.9411, 0.5882, 1},
+        value = ""
+    },	--body 3
+
+
+    {
+        input_function = "gold_click_counter_input",
+        function_owner = self,
+        label = "",
+        position = {1.03, 0.16, -0.8},
+        scale = {0.5, 0.5, 0.5},
+        width = 170,
+        height = 114,
+        font_size = 90,
+        color = {0, 0, 0, 1},
+        font_color = {0.5, 1, 0.5, 1},
+        alignment = 3,
+        tooltip = "",
+        value = ""
+    },	--input total health
+}
+
+local button_stat_params = {
+    {
+        click_function = "doNothing",
+        function_owner = self,
+        label = "0",
+        position = {-1.12, 0.15, -0.36},
+        scale = {0.5, 0.5, 0.5},
+        width = 0,
+        height = 0,
+        font_size = 120
+     },	--move total
+
+    {
+        click_function = "doNothing",
+        function_owner = self,
+        label = "0",
+        position = {-1.12, 0.15, -0.19},
+        scale = {0.5, 0.5, 0.5},
+        width = 0,
+        height = 0,
+        font_size = 120
+     },	--weapon skill total
+
+    {
+        click_function = "doNothing",
+        function_owner = self,
+        label = "0",
+        position = {-1.12, 0.15, -0.01},
+        scale = {0.5, 0.5, 0.5},
+        width = 0,
+        height = 0,
+        font_size = 120
+     },	--ballistic skill total
+
+    {
+        click_function = "doNothing",
+        function_owner = self,
+        label = "0",
+        position = {-1.12, 0.15, 0.15},
+        scale = {0.5, 0.5, 0.5},
+        width = 0,
+        height = 0,
+        font_size = 120
+    },	--strength total
+
+    {
+        click_function = "doNothing",
+        function_owner = self,
+        label = "0",
+        position = {-1.12, 0.15, 0.31},
+        scale = {0.5, 0.5, 0.5},
+        width = 0,
+        height = 0,
+        font_size = 120
+    },	--toughness total
+
+    {
+        click_function = "doNothing",
+        function_owner = self,
+        label = "0",
+        position = {-1.12, 0.15, 0.45},
+        scale = {0.5, 0.5, 0.5},
+        width = 0,
+        height = 0,
+        font_size = 120
+    },	--initiative total
+
+    {
+        click_function = "doNothing",
+        function_owner = self,
+        label = "0",
+        position = {-1.12, 0.15, 0.58},
+        scale = {0.5, 0.5, 0.5},
+        width = 0,
+        height = 0,
+        font_size = 120
+    },	--attacks total
+
+    {
+        click_function = "doNothing",
+        function_owner = self,
+        label = "0",
+        position = {-1.12, 0.15, 0.73},
+        scale = {0.5, 0.5, 0.5},
+        width = 0,
+        height = 0,
+        font_size = 120
+    },	--damage total
+
+    {
+        click_function = "doNothing",
+        function_owner = self,
+        label = "0",
+        position = {-1.12, 0.15, 0.89},
+        scale = {0.5, 0.5, 0.5},
+        width = 0,
+        height = 0,
+        font_size = 120
+    },	--willpower total
+
+    {
+        click_function = "doNothing",
+        function_owner = self,
+        label = "0",
+        position = {-1.12, 0.15, 1.05},
+        scale = {0.5, 0.5, 0.5},
+        width = 0,
+        height = 0,
+        font_size = 120
+    },	--pinning total
+
+    {
+        click_function = "doNothing",
+        function_owner = self,
+        label = "0",
+        position = {-1.12, 0.15, 1.22},
+        scale = {0.5, 0.5, 0.5},
+        width = 0,
+        height = 0,
+        font_size = 120
+    },	--luck total
+}
+
+local button_stat_names = {"move", "weapon_skill", "ballistic_skill", "strength", "toughness", "initiative", "attacks", "damage", "willpower", "pinning", "luck",}
+
+local button_params = {
+    {
+        click_function = "gold_to_coffin",
+        function_owner = self,
+        label = " ",
+        color = Color(1, 1, 1, 0),
+        position = {0.65, 0.35, -0.82},
+        scale = {0.5, 0.5, 0.5},
+        width = 150,
+        height = 150,
+        font_size = 110,
+        tooltip = "Left click to add 5 to coffin, right click to remove"
+    },  --gold
+    {
+        click_function = "prev_page_1",
+        function_owner = self,
+        label = "<",
+        color = {252/255, 240/255, 150/255, 1},
+        position = {1.03, 0.13, -0.07},
+        scale = {0.5, 0.5, 0.5},
+        width = 400,
+        height = 140,
+        font_size = 110,
+        tooltip = "Previous Page"
+    },  --prev page 1
+    {
+        click_function = "next_page_1",
+        function_owner = self,
+        label = ">",
+        color = {252/255, 240/255, 150/255, 1},
+        position = {2.04, 0.13, -0.07},
+        scale = {0.5, 0.5, 0.5},
+        width = 400,
+        height = 140,
+        font_size = 110,
+        tooltip = "Next Page"
+    },  --next page 1
+    {
+        click_function = "prev_page_2",
+        function_owner = self,
+        label = "<",
+        color = {252/255, 240/255, 150/255, 1},
+        position = {1.03, 0.13, 0.57},
+        scale = {0.5, 0.5, 0.5},
+        width = 400,
+        height = 140,
+        font_size = 110,
+        tooltip = "Previous Page"
+    },  --prev page 2
+    {
+        click_function = "next_page_2",
+        function_owner = self,
+        label = ">",
+        color = {252/255, 240/255, 150/255, 1},
+        position = {2.04, 0.13, 0.57},
+        scale = {0.5, 0.5, 0.5},
+        width = 400,
+        height = 140,
+        font_size = 110,
+        tooltip = "Next Page"
+    },  --next page 2
+    {
+        click_function = "prev_page_3",
+        function_owner = self,
+        label = "<",
+        color = {252/255, 240/255, 150/255, 1},
+        position = {1.03, 0.13, 1.23},
+        scale = {0.5, 0.5, 0.5},
+        width = 400,
+        height = 140,
+        font_size = 110,
+        tooltip = "Previous Page"
+    },  --prev page 3
+    {
+        click_function = "next_page_3",
+        function_owner = self,
+        label = ">",
+        color = {252/255, 240/255, 150/255, 1},
+        position = {2.04, 0.13, 1.23},
+        scale = {0.5, 0.5, 0.5},
+        width = 400,
+        height = 140,
+        font_size = 110,
+        tooltip = "Next Page"
+    },  --next page 3
+    {
+        click_function = "doNothing",
+        function_owner = self,
+        label = "Page 1 of 10",
+        position = {1.53, 0.13, -0.07},
+        scale = {0.5, 0.5, 0.5},
+        width = 0,
+        height = 0,
+        font_size = 80,
+        tooltip = "Next Page"
+    },  --page number 1
+    {
+        click_function = "doNothing",
+        function_owner = self,
+        label = "Page 1 of 10",
+        position = {1.53, 0.13, 0.57},
+        scale = {0.5, 0.5, 0.5},
+        width = 0,
+        height = 0,
+        font_size = 80,
+        tooltip = "Next Page"
+    },  --page number 2
+    {
+        click_function = "doNothing",
+        function_owner = self,
+        label = "Page 1 of 10",
+        position = {1.53, 0.13, 1.23},
+        scale = {0.5, 0.5, 0.5},
+        width = 0,
+        height = 0,
+        font_size = 80,
+        tooltip = "Next Page"
+    },  --page number 3
+    {
+        click_function = "prev_card",
+        function_owner = self,
+        label = "<",
+        position = {2.38, 0.13, -0.4},
+        rotation = {0, 90, 0},
+        scale = {0.5, 0.5, 0.5},
+        width = 450,
+        height = 150,
+        font_size = 150,
+        color = {0, 0, 0, 1},
+        font_color = {1, 1, 1, 1},
+        tooltip = "Previous Card"
+    }, --previous card
+    {
+        click_function = "next_card",
+        function_owner = self,
+        label = ">",
+        position = {2.38, 0.13, 1.1},
+        rotation = {0, 90, 0},
+        scale = {0.5, 0.5, 0.5},
+        width = 450,
+        height = 150,
+        font_size = 150,
+        color = {0, 0, 0, 1},
+        font_color = {1, 1, 1, 1},
+        tooltip = "Next Card"
+    }, --next card
+    {
+        click_function = "doNothing",
+        function_owner = self,
+        label = "Cards 1-3 of 10",
+        position = {2.38, 0.13, 0.35},
+        rotation = {0, 90, 0},
+        scale = {0.5, 0.5, 0.5},
+        width = 0,
+        height = 0,
+        font_size = 100,
+        color = {0, 0, 0, 1},
+        font_color = {1, 1, 1, 1},
+        tooltip = ""
+    }, --card number
+
+    {
+        click_function = "health_down",
+        function_owner = self,
+        label = "-",
+        position = {-2.17, 0.17, -0.98},
+        scale = {0.5, 0.5, 0.5},
+        width = 180,
+        height = 150,
+        font_size = 110,
+        color = Color(1, 1, 1, 0),
+        hover_color = Color(0.9921, 0, 0, 1),
+        press_color = Color(0.9921, 0, 0, 1),
+        font_color = Color(0, 0, 0, 1),
+        tooltip = ""
+    },
+
+    {
+        click_function = "health_up",
+        function_owner = self,
+        label = "+",
+        position = {-1.7, 0.17, -0.98},
+        scale = {0.5, 0.5, 0.5},
+        width = 180,
+        height = 150,
+        font_size = 110,
+        color = Color(1, 1, 1, 0),
+        hover_color = Color(0.9921, 0, 0, 1),
+        press_color = Color(0.9921, 0, 0, 1),
+        font_color = Color(0, 0, 0, 1),
+        tooltip = ""
+    },
+}
+
+
+function onLoad()
+    for i, params in ipairs(input_params) do
+        self.createInput(params)
+    end
+    for i, params in ipairs(button_stat_params) do
+        if i == 2 or i == 4 or i == 5 then
+            params.font_color = Color(65/255, 105/255, 225/255, 1)
+        end
+        self.createButton(params)
+        params.font_size = 110
+        params.position[1] = -0.78
+        if i == 2 or i == 4 or i == 5 then
+            params.font_color = Color(0, 0, 0, 1)
+        end
+        self.createButton(params)
+        params.position[1] = -0.44
+        self.createButton(params)
+        _G[button_stat_names[i] .. "_base_down"] = function(obj, color, alt)
+            if alt == false then
+                data.attributes[button_stat_names[i]].base = data.attributes[button_stat_names[i]].base - 1
+                updateSheet(button_stat_names[i])
+            end
+        end
+        _G[button_stat_names[i] .. "_base_up"] = function(obj, color, alt)
+            if alt == false then
+                data.attributes[button_stat_names[i]].base = data.attributes[button_stat_names[i]].base + 1
+                updateSheet(button_stat_names[i])
+            end
+        end
+        _G[button_stat_names[i] .. "_mod_down"] = function(obj, color, alt)
+            if alt == false then
+                data.attributes[button_stat_names[i]].modifier = data.attributes[button_stat_names[i]].modifier - 1
+                updateSheet(button_stat_names[i])
+            end
+        end
+        _G[button_stat_names[i] .. "_mod_up"] = function(obj, color, alt)
+            if alt == false then
+                data.attributes[button_stat_names[i]].modifier = data.attributes[button_stat_names[i]].modifier + 1
+                updateSheet(button_stat_names[i])
+            end
+        end
+        params.width = 140
+        params.height = 120
+        params.color = Color(1, 1, 1, 0)
+        params.hover_color = Color(1, 1, 1, 1)
+        params.press_color = Color(1, 1, 1, 1)
+        params.click_function = button_stat_names[i] .. "_base_down"
+        params.position[1] = -0.85
+        params.label = "-"
+        self.createButton(params)
+        params.click_function = button_stat_names[i] .. "_base_up"
+        params.position[1] = -0.7
+        params.label = "+"
+        self.createButton(params)
+        params.click_function = button_stat_names[i] .. "_mod_down"
+        params.position[1] = -0.515
+        params.label = "-"
+        self.createButton(params)
+        params.click_function = button_stat_names[i] .. "_mod_up"
+        params.position[1] = -0.35
+        params.label = "+"
+        self.createButton(params)
+    end
+    for i, params in ipairs(button_params) do
+        self.createButton(params)
+    end
+    if self.script_state ~= nil and self.script_state ~= "" then
+        data = JSON.decode(self.script_state)
+    end
+    updateSheet()
+end
+
+
+function onSave()
+    self.script_state = JSON.encode(data)
+end
+
+
+function current_health_input(obj, color, value, selected)
+    data.health.current = value
+end
+
+
+function total_health_input(obj, color, value, selected)
+    data.health.total = value
+end
+
+
+function name_input(obj, color, value, selected)
+    data.name = value
+end
+
+
+function battle_level_input(obj, color, value, selected)
+    data.battle_level = value
+end
+
+
+function career_level_input(obj, color, value, selected)
+    data.career_level = value
+end
+
+
+function class_input(obj, color, value, selected)
+    data.class = value
+end
+
+
+function player_input(obj, color, value, selected)
+    data.player = value
+end
+
+
+function gold_input(obj, color, value, selected)
+    data.gold = value
+end
+
+
+function gold_click_counter_input(obj, color, value, selected)
+    data.gold_input_click_counter = value
+end
+
+
+function gold_to_coffin(obj, color, alt)
+    local amount
+    if alt then
+        amount = -5
+    else
+        amount = 5
+    end
+    getCoffin()
+    if coffin == nil then
+        print("Coffin not found.")
+    else
+        local st, en, current, remaining = string.find(coffin.getDescription(), "^(%-?%d+)(.*)")
+        current = (tonumber(current) or 0) + amount
+        if remaining == nil then
+            remaining = " from character sheet"
+        end
+        coffin.setDescription(current .. remaining)
+        coffin.call("updateValue")
+    end
+    data.gold_click_counter = data.gold_click_counter + amount / 5
+    updateSheet("gold")
+end
+
+
+function getCoffin()
+    if coffin ~= nil then
+        return
+    end
+    local bounds = self.getBounds()
+    for i, hit in ipairs(Physics.cast({
+        origin       = bounds.center,
+        direction    = Vector(0, 1, 0),
+        type         = 3,
+        size         = bounds.size * 2,
+        orientation  = self.getRotation(),
+        max_distance = 5,
+    })) do
+        if string.find(string.lower(hit.hit_object.getName()), "coffin") then
+            coffin = hit.hit_object
+            return
+        end
+    end
+end
+
+
+for i = 1, 3 do
+    _G["prev_page_" .. i] = function(obj, color, alt)
+        if data.notes_state.current_page[data.notes_state.current_card + i - 1] > 1 then
+            data.notes_state.current_page[data.notes_state.current_card + i - 1] = data.notes_state.current_page[data.notes_state.current_card + i - 1] - 1
+        end
+        updateSheet("card_" .. i)
+    end
+    _G["next_page_" .. i] = function(obj, color, alt)
+        if data.notes_state.current_page[data.notes_state.current_card + i - 1] < 10 then
+            data.notes_state.current_page[data.notes_state.current_card + i - 1] = data.notes_state.current_page[data.notes_state.current_card + i - 1] + 1
+        end
+        updateSheet("card_" .. i)
+    end
+    _G["title_" .. i .. "_input"] = function(obj, color, value, selected)
+        data.notes[data.notes_state.current_card + i - 1][data.notes_state.current_page[data.notes_state.current_card + i - 1]].title = value
+    end
+    _G["body_" .. i .. "_input"] = function(obj, color, value, selected)
+        data.notes[data.notes_state.current_card + i - 1][data.notes_state.current_page[data.notes_state.current_card + i - 1]].body = value
+    end
+end
+
+
+function prev_card(obj, color, alt)
+    if data.notes_state.current_card > 1 then
+        data.notes_state.current_card = data.notes_state.current_card - 1
+    end
+    updateSheet("cards")
+end
+
+
+function next_card(obj, color, alt)
+    if data.notes_state.current_card < 8 then
+        data.notes_state.current_card = data.notes_state.current_card + 1
+    end
+    updateSheet("cards")
+end
+
+
+function health_down(obj, color, alt)
+    local health = tonumber(data.health.current)
+    if health ~= nil then
+        health = math.ceil(health - 1.5)
+        data.health.current = health
+        updateSheet("current_health")
+    end
+end
+
+
+function health_up(obj, color, alt)
+    local health = tonumber(data.health.current)
+    if health ~= nil then
+        health = math.floor(health + 1.5)
+        data.health.current = health
+        updateSheet("current_health")
+    end
+end
+
+
+function updateSheet(field)
+    if field == nil then
+        updateSheet("current_health")
+        updateSheet("total_health")
+        updateSheet("name")
+        updateSheet("battle_level")
+        updateSheet("career_level")
+        updateSheet("class")
+        updateSheet("player")
+        updateSheet("gold")
+        updateSheet("cards")
+        updateSheet("move")
+        updateSheet("weapon_skill")
+        updateSheet("ballistic_skill")
+        updateSheet("strength")
+        updateSheet("toughness")
+        updateSheet("initiative")
+        updateSheet("attacks")
+        updateSheet("damage")
+        updateSheet("willpower")
+        updateSheet("pinning")
+        updateSheet("luck")
+    elseif field == "current_health" then
+        self.editInput({
+            index = 0,
+            value = data.health.current
+        })
+    elseif field == "total_health" then
+        self.editInput({
+            index = 1,
+            value = data.health.total
+        })
+    elseif field == "name" then
+        self.editInput({
+            index = 2,
+            value = data.name
+        })
+    elseif field == "battle_level" then
+        self.editInput({
+            index = 3,
+            value = data.battle_level
+        })
+    elseif field == "career_level" then
+        self.editInput({
+            index = 4,
+            value = data.career_level
+        })
+    elseif field == "class" then
+        self.editInput({
+            index = 5,
+            value = data.class
+        })
+    elseif field == "player" then
+        self.editInput({
+            index = 6,
+            value = data.player
+        })
+    elseif field == "gold" then
+        self.editInput({
+            index = 7,
+            value = data.gold
+        })
+        self.editInput({
+            index = 14,
+            value = data.gold_click_counter
+        })
+    elseif field == "cards" then
+        self.editButton({
+            index = 89,
+            label = "Cards " .. data.notes_state.current_card .. "-" .. data.notes_state.current_card + 2 .. " of 10"
+        })
+        updateSheet("card_1")
+        updateSheet("card_2")
+        updateSheet("card_3")
+    elseif field == "card_1" then
+        self.editButton({
+            index = 84,
+            label = "Page " .. data.notes_state.current_page[data.notes_state.current_card + 0] .. " of 10"
+        })
+        self.editInput({
+            index = 8,
+            value = data.notes[data.notes_state.current_card + 0][data.notes_state.current_page[data.notes_state.current_card + 0]].title
+        })
+        self.editInput({
+            index = 11,
+            value = data.notes[data.notes_state.current_card + 0][data.notes_state.current_page[data.notes_state.current_card + 0]].body
+        })
+    elseif field == "card_2" then
+        self.editButton({
+            index = 85,
+            label = "Page " .. data.notes_state.current_page[data.notes_state.current_card + 1] .. " of 10"
+        })
+        self.editInput({
+            index = 9,
+            value = data.notes[data.notes_state.current_card + 1][data.notes_state.current_page[data.notes_state.current_card + 1]].title
+        })
+        self.editInput({
+            index = 12,
+            value = data.notes[data.notes_state.current_card + 1][data.notes_state.current_page[data.notes_state.current_card + 1]].body
+        })
+    elseif field == "card_3" then
+        self.editButton({
+            index = 86,
+            label = "Page " .. data.notes_state.current_page[data.notes_state.current_card + 2] .. " of 10"
+        })
+        self.editInput({
+            index = 10,
+            value = data.notes[data.notes_state.current_card + 2][data.notes_state.current_page[data.notes_state.current_card + 2]].title
+        })
+        self.editInput({
+            index = 13,
+            value = data.notes[data.notes_state.current_card + 2][data.notes_state.current_page[data.notes_state.current_card + 2]].body
+        })
+    elseif field == "move" then
+        self.editButton({
+            index = 0,
+            label = data.attributes.move.base + data.attributes.move.modifier
+        })
+        self.editButton({
+            index = 1,
+            label = data.attributes.move.base
+        })
+        self.editButton({
+            index = 2,
+            label = data.attributes.move.modifier
+        })
+    elseif field == "weapon_skill" then
+        self.editButton({
+            index = 7,
+            label = data.attributes.weapon_skill.base + data.attributes.weapon_skill.modifier
+        })
+        self.editButton({
+            index = 8,
+            label = data.attributes.weapon_skill.base
+        })
+        self.editButton({
+            index = 9,
+            label = data.attributes.weapon_skill.modifier
+        })
+    elseif field == "ballistic_skill" then
+        self.editButton({
+            index = 14,
+            label = data.attributes.ballistic_skill.base + data.attributes.ballistic_skill.modifier
+        })
+        self.editButton({
+            index = 15,
+            label = data.attributes.ballistic_skill.base
+        })
+        self.editButton({
+            index = 16,
+            label = data.attributes.ballistic_skill.modifier
+        })
+    elseif field == "strength" then
+        self.editButton({
+            index = 21,
+            label = data.attributes.strength.base + data.attributes.strength.modifier
+        })
+        self.editButton({
+            index = 22,
+            label = data.attributes.strength.base
+        })
+        self.editButton({
+            index = 23,
+            label = data.attributes.strength.modifier
+        })
+    elseif field == "toughness" then
+        self.editButton({
+            index = 28,
+            label = data.attributes.toughness.base + data.attributes.toughness.modifier
+        })
+        self.editButton({
+            index = 29,
+            label = data.attributes.toughness.base
+        })
+        self.editButton({
+            index = 30,
+            label = data.attributes.toughness.modifier
+        })
+    elseif field == "initiative" then
+        self.editButton({
+            index = 35,
+            label = data.attributes.initiative.base + data.attributes.initiative.modifier
+        })
+        self.editButton({
+            index = 36,
+            label = data.attributes.initiative.base
+        })
+        self.editButton({
+            index = 37,
+            label = data.attributes.initiative.modifier
+        })
+    elseif field == "attacks" then
+        self.editButton({
+            index = 42,
+            label = data.attributes.attacks.base + data.attributes.attacks.modifier
+        })
+        self.editButton({
+            index = 43,
+            label = data.attributes.attacks.base
+        })
+        self.editButton({
+            index = 44,
+            label = data.attributes.attacks.modifier
+        })
+    elseif field == "damage" then
+        self.editButton({
+            index = 49,
+            label = data.attributes.damage.base + data.attributes.damage.modifier
+        })
+        self.editButton({
+            index = 50,
+            label = data.attributes.damage.base
+        })
+        self.editButton({
+            index = 51,
+            label = data.attributes.damage.modifier
+        })
+    elseif field == "willpower" then
+        self.editButton({
+            index = 56,
+            label = data.attributes.willpower.base + data.attributes.willpower.modifier
+        })
+        self.editButton({
+            index = 57,
+            label = data.attributes.willpower.base
+        })
+        self.editButton({
+            index = 58,
+            label = data.attributes.willpower.modifier
+        })
+    elseif field == "pinning" then
+        self.editButton({
+            index = 63,
+            label = data.attributes.pinning.base + data.attributes.pinning.modifier
+        })
+        self.editButton({
+            index = 64,
+            label = data.attributes.pinning.base
+        })
+        self.editButton({
+            index = 65,
+            label = data.attributes.pinning.modifier
+        })
+    elseif field == "luck" then
+        self.editButton({
+            index = 70,
+            label = data.attributes.luck.base + data.attributes.luck.modifier
+        })
+        self.editButton({
+            index = 71,
+            label = data.attributes.luck.base
+        })
+        self.editButton({
+            index = 72,
+            label = data.attributes.luck.modifier
+        })
+    end
+end
+
+function doNothing()
+    return
+end

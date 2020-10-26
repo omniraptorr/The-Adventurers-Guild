@@ -1,0 +1,29 @@
+local bool rolled = false
+local bool loading = true
+
+function update()
+  if loading == false then
+    if self.resting == true and rolled == true and self.getRotationValue() == 1 then
+      rolled = false;
+      getObjectFromGUID("964004").AssetBundle.playTriggerEffect(0)
+    else if self.resting == true and rolled == true and self.getRotationValue() == 6 then
+      rolled = false;
+      getObjectFromGUID("964004").AssetBundle.playTriggerEffect(1)
+    end
+    end
+  end
+end
+
+function onPickUp(player_color)
+    loading = false
+end
+
+function onDrop(player_color)
+  if self.getVelocity()[0] ~= 0 and self.getVelocity()[1] ~= 0 then
+    rolled = true
+  end
+end
+
+function onRandomize(player_color)
+  rolled = true
+end

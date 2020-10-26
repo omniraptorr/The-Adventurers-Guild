@@ -1,0 +1,7 @@
+--Clone bag
+
+function onObjectLeaveContainer(container, object)
+    if container == self then
+        self.putObject(object.clone({['position'] = {self.getPosition().x, self.getPosition().y + 2, self.getPosition().z} }))
+    end
+end
