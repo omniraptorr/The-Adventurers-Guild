@@ -1,3 +1,4 @@
+#include <vscode/console>
 local game_mode = nil
 
 local auto_shuffle_obj_GUIDs = {"a6ecac", "142f1f", "966f7b", "9ceba2", "a24bfb", "e2355f", "28992e", "31dbfe", "851ed6",}

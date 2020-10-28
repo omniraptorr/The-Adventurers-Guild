@@ -42,7 +42,7 @@ end
 
 function imCopy()
     if zz > 5 then  cb = nil
-        if self.guid != "2d647a" then
+        if self.guid ~= "2d647a" then
             broadcastToAll("Stage Copies will not work. Save the original Directly to your TTS Saved Objects Chest!", {0.943, 0.745, 0.14})
             self.destruct()
         end
@@ -50,7 +50,7 @@ function imCopy()
 end
 
 function btnBag()
-    if cb or Global.getVar("hld") != 0 then broadcastToAll("The Current Set is Busy...", {0.943, 0.745, 0.14})  do return  end  end
+    if cb or Global.getVar("hld") ~= 0 then broadcastToAll("The Current Set is Busy...", {0.943, 0.745, 0.14})  do return  end  end
     local n = 1  ss = ""  prs = ""  local f  local p  local u = "@649822@059864@3761d8@ff9bc3@2deca3@"
     if not getObjectFromGUID(Global.getVar("i_M")) then benDare() end
     local l = ""  if getObjectFromGUID(Global.getVar("i_M")) then l = getObjectFromGUID(Global.getVar("i_M")).getLuaScript() end
@@ -60,13 +60,13 @@ function btnBag()
         p = g.getPosition()  f = g.getGUID()
         if math.abs(p[3]) < 26 and math.abs(p[1]) < 44 and math.abs(p[2]) < 26 then
             if string.find(u, f) then Global.setVar("hld", 0)  do return  end  end
-            if not string.find(v, g.name) and not string.find(l, g.guid) and g.getName() != "_OW_vBase" then
+            if not string.find(v, g.name) and not string.find(l, g.guid) and g.getName() ~= "_OW_vBase" then
                 local r = g.getRotation()  ss = ss..f  prs = prs.."--"..f..k..p[1]..k..p[2]..k..p[3]..k..r[1]..k..r[2]..k..r[3]..a
             end
         end
         n = n+1  g = aoj[n]
     end
-    if ss != "" then
+    if ss ~= "" then
         local op = {} op.type = "Bag" op.callback_owner = self
         op.callback = "cbBag" op.position = {70, 67, 70}  local obj = spawnObject(op)
         if bb then getObjectFromGUID(bb).destruct()  bb = nil end
@@ -127,11 +127,11 @@ function endStowAway()
 end
 
 function btnTrash()
-    if cb or Global.getVar("hld") != 0 then broadcastToAll("The Current Set is Busy...", {0.943, 0.745, 0.14})  do return  end  end
+    if cb or Global.getVar("hld") ~= 0 then broadcastToAll("The Current Set is Busy...", {0.943, 0.745, 0.14})  do return  end  end
     if bb then
         local p  local s = getObjectFromGUID(bb).getLuaScript()
-        if string.sub(s, string.len(s)-1) != string.char(13)..string.char(10) then s = s..string.char(13)..string.char(10) end
-        while s != "" do
+        if string.sub(s, string.len(s)-1) ~= string.char(13)..string.char(10) then s = s..string.char(13)..string.char(10) end
+        while s ~= "" do
             if getObjectFromGUID(string.sub(s, 3, 8)) then
                 p = getObjectFromGUID(string.sub(s, 3, 8)).getPosition()
                 if math.abs(p[3]) < 26 and math.abs(p[1]) < 44 and math.abs(p[2]) < 15 then
@@ -146,14 +146,14 @@ end
 
 function onCollisionEnter(c)
     if cb == "imCopy" then do return  end  end
-    if cb or Global.getVar("hld") != 0 then broadcastToAll("The Current Set is Busy...", {0.943, 0.745, 0.14})  do return  end  end
+    if cb or Global.getVar("hld") ~= 0 then broadcastToAll("The Current Set is Busy...", {0.943, 0.745, 0.14})  do return  end  end
     if  string.sub(c.collision_object.getName(), 1, 4) == "SET_" and c.collision_object.name == "Bag" then
         local v = {}  v = c.collision_object.getObjects()
         local x  local y  local z  local ct = 1  local n  local p  ss = ""
         if getObjectFromGUID("649822") then getObjectFromGUID("649822").setVar("ulk", nil) end
         prs = c.collision_object.getLuaScript()  btnTrash()  btnGetSod()  Global.setVar("hld", 1)  p = self.getPosition()
         while v[ct] do
-            if getObjectFromGUID(v[ct].guid) and zz != 0.02 then  zz = 0.02  Global.setVar("hld", 0)
+            if getObjectFromGUID(v[ct].guid) and zz ~= 0.02 then  zz = 0.02  Global.setVar("hld", 0)
                 c.collision_object.setPosition({p[1], p[2]+0.6, p[3]})  c.collision_object.setPositionSmooth({p[1], p[2]+0.3, p[3]})
                 do return  end
             end  ct = ct+1
@@ -166,7 +166,7 @@ function onCollisionEnter(c)
         bb = c.collision_object.getGUID()  c.collision_object.lock()  c.collision_object.setName("tras_h")
         c.collision_object.setScale({0, 0, 0})  c.collision_object.setPosition({90, 90, 90})
         prs = string.gsub(prs, string.char(13)..string.char(10), string.char(44))
-        if string.sub(prs, string.len(prs)) != "," then prs = prs.."," end
+        if string.sub(prs, string.len(prs)) ~= "," then prs = prs.."," end
         while v[ct] do
             local t = {}  t.guid = v[ct].guid  t.position = {0, ct*2, 0}
             n = string.find(prs, "-"..v[ct].guid)
@@ -235,7 +235,7 @@ function popSet()
     end
     if zz > 99 then print("Failed Alignment.")  zz = 0  end
     if zz == 0 then ss = string.sub(ss, 7)  z2 = 0
-        if getObjectFromGUID(g).getName() != "" and string.sub(getObjectFromGUID(g).getName(), 1, 4) != "SBx_" then uls = uls..g  end
+        if getObjectFromGUID(g).getName() ~= "" and string.sub(getObjectFromGUID(g).getName(), 1, 4) ~= "SBx_" then uls = uls..g  end
     end
 end
 
@@ -263,7 +263,7 @@ function btnGetSod()
 end
 
 function btnUnlock()
-    if cb or Global.getVar("hld") != 0 then broadcastToAll("The Current Set is Busy...", {0.943, 0.745, 0.14})  do return  end  end
+    if cb or Global.getVar("hld") ~= 0 then broadcastToAll("The Current Set is Busy...", {0.943, 0.745, 0.14})  do return  end  end
     local g  local i  print("Unlocking Named Set Objects...")
     if getObjectFromGUID("649822") then
         getObjectFromGUID("649822").setVar("ulk", 1)

@@ -28,7 +28,7 @@ function btnStep()
   local r = self.getRotation()  local g = "sqr"  if r[3] > 150 then g = "hex" end
   local n = 0  gd = gd+20  if gd == 120 then  gd = 20  n = 90  end  getObjectFromGUID(id).setRotation({n, 0, 0})
   local i = {}  i.diffuse = "https://sites.google.com/site/rolesystemssky/"..g..gd..".png"
-  if gd != 20 then  getObjectFromGUID(id).setCustomObject(i)  getObjectFromGUID(id).reload()  end
+  if gd ~= 20 then  getObjectFromGUID(id).setCustomObject(i)  getObjectFromGUID(id).reload()  end
 end
 
 function onDestroy()
