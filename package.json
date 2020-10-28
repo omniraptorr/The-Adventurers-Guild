@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "echo \"Building minimial scripts\" && bash util/build.sh",
+    "start": "echo \"Symlinking files\" && bash util/start.sh"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,7 @@
   },
   "homepage": "https://github.com/zbragames/The-Adventurers-Guild#readme",
   "dependencies": {
+    "luamin": "^1.0.4",
     "symlink-dir": "^4.1.0"
   }
 }
