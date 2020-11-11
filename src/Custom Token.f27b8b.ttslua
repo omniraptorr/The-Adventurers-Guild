@@ -1,0 +1,109 @@
+--How much the scale is increased or decreased, 0.1 is 10%
+scaleFactor = 0.1
+
+---- End of functions designed to be edited, edit further at your own risk ----
+
+function onSave()
+    local data_to_save = scale
+    saved_data = JSON.encode(data_to_save)
+    return saved_data
+end
+
+--Loads saved scale
+function onload(saved_data)
+    --loads saved data
+    if saved_data ~= nil and saved_data ~= "" then
+        local loaded_data = JSON.decode(saved_data)
+        scale = loaded_data
+        print(#scale)
+    else
+        --default scale
+        scale = {1, 1, 1}
+        print("No Saved Scale Found")
+    end
+    createButtons()
+    if foundTable == nil then
+        broadcastToAll("No foundTable detected. Place the tool directly onto the foundTable.", {1,1,1})
+    else
+        foundTable.setScale(scale)
+    end
+end
+
+--Finds foundTable. CONSTANTLY.
+--This is required due to not being able to save entities and the foundTable not having a guid
+function onCollisionStay(collision_info)
+--function onCollisionEnter(collision_info)
+    if collision_info.collision_object.tag == "Surface" then
+        foundTable = collision_info.collision_object
+    end
+end
+
+function xAdd()
+    if foundTable == nil then
+        broadcastToAll("No foundTable detected. Place the tool directly onto the foundTable.", {1,1,1})
+    else
+        scale = {scale[1] + scaleFactor, scale[2], scale[3]}
+        foundTable.setScale(scale)
+    end
+end
+
+function xSub()
+    if foundTable == nil then
+        broadcastToAll("No foundTable detected. Place the tool directly onto the foundTable.", {1,1,1})
+    else
+        scale = {scale[1] - scaleFactor, scale[2], scale[3]}
+        foundTable.setScale(scale)
+    end
+end
+
+function zAdd()
+    if foundTable == nil then
+        broadcastToAll("No foundTable detected. Place the tool directly onto the foundTable.", {1,1,1})
+    else
+        scale = {scale[1], scale[2], scale[3] + scaleFactor}
+        foundTable.setScale(scale)
+    end
+end
+
+function zSub()
+    if foundTable == nil then
+        broadcastToAll("No foundTable detected. Place the tool directly onto the foundTable.", {1,1,1})
+    else
+        scale = {scale[1], scale[2], scale[3] - scaleFactor}
+        foundTable.setScale(scale)
+    end
+end
+
+--Resets the scale to default
+function resetScale()
+    if foundTable == nil then
+        broadcastToAll("No foundTable detected. Place the tool directly onto the foundTable.", {1,1,1})
+    else
+        scale = {1,1,1}
+        foundTable.setScale(scale)
+    end
+end
+
+--Creates the buttons, triggered in onload()
+function createButtons()
+    self.createButton({
+        label=string.char(171)..string.char(187), click_function="xAdd", function_owner=self,
+        position={-0.9,0.15,-1.1}, height=400, width=400, font_size=300
+    })
+    self.createButton({
+        label=string.char(187)..string.char(171), click_function="xSub", function_owner=self,
+        position={-0.9,0.15,1.1}, height=400, width=400, font_size=300
+    })
+    self.createButton({
+        label=string.char(171)..string.char(187), click_function="zAdd", function_owner=self,
+        position={0.9,0.15,-1.1}, height=400, width=400, font_size=300
+    })
+    self.createButton({
+        label=string.char(187)..string.char(171), click_function="zSub", function_owner=self,
+        position={0.9,0.15,1.1}, height=400, width=400, font_size=300
+    })
+    self.createButton({
+        label="Reset\nScale", click_function="resetScale", function_owner=self,
+        position={0,0.15,0}, height=400, width=400, font_size=150
+    })
+end

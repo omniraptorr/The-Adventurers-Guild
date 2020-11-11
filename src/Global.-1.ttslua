@@ -1,0 +1,232 @@
+#include <vscode/console>
+local game_mode = nil
+
+local auto_shuffle_obj_GUIDs = {"a6ecac", "142f1f", "966f7b", "9ceba2", "a24bfb", "e2355f", "28992e", "31dbfe", "851ed6",}
+local auto_shuffle_objs = {}
+
+local intangible_wall_obj_GUIDs = {"1d0f87", "fc0a7d",}
+local intangible_wall_objs = {}
+
+local sheet_cast_positions = {
+    Vector(-25.28, 5, -48.40),
+    Vector(21.13, 5, -48.45),
+    Vector(65.64, 5, -22.34),
+    Vector(65.66, 5, 22.31),
+    Vector(23.30, 5, 48.42),
+    Vector(-21.95, 5, 48.44),
+}
+
+local animation_positions = {   --local to sheet
+    Vector(1.833978, 0.25, -0.852725),
+    Vector(1.857946, 0.25, -1.119718),
+    Vector(2.003896, 0.25, -1.099295),
+}
+local animation_skull_position = Vector(1.904984, 1.15126, -1.21655)   --local to sheet
+local animation_skull_rotation = Vector(333.95, 0.00, 0.00)
+local animation_skull_rotation_y = {180, 180, 90, 90, 0, 0}
+
+local animation_rotation_y = {84.68, 54.81, -43.31}
+
+local animation_obj_GUIDs = {
+    {
+        {"96910b", "5ad8ca", "9f3c19"},
+        {"f31f27", "467a29", "cd5f5f"},
+        {"27e1a2", "0b5b0a", "94a722"},
+    },
+    {
+        {"9d0e13", "ed0041", "5b0e6e"},
+        {"cb9bab", "1b10e2", "479d4d"},
+        {"7b79b5", "a3b246", "571ebd"},
+    },
+    {
+        {"d98240", "564d86", "4a98e0"},
+        {"0d6207", "cfc442", "b8885e"},
+        {"e8ab87", "62f577", "935404"},
+    },
+    {
+        {"834196", "2b0b9d", "46446a"},
+        {"439e69", "1cfba1", "e9afb2"},
+        {"c0d25f", "024caf", "d4ef89"},
+    },
+    {
+        {"532f14", "e29e4e", "5d04b6"},
+        {"1f4f03", "1d4e8f", "29e24b"},
+        {"7a2dab", "0c784a", "2415f3"},
+    },
+    {
+        {"de25f4", "d64ba3", "2e0c06"},
+        {"3555d8", "dcf9d8", "e370e2"},
+        {"b09e53", "05a617", "16339f"},
+    },
+}
+
+local animation_objs = {{}, {}, {}, {}, {}, {}}
+
+local animation_skull_GUIDs = {"d3b6ca", "3b5bfe", "93dcbc", "cd3d07", "04bb19", "7142ff"}
+local animation_skulls = {}
+
+local uninteractable_guids = {
+  "13e3ed", "05cc20", "f5c4fe", "1ee78f", "b1cad7", "902919", "a70352", "265fe3", "c53adc", "80362e", "161f27", "e749d8",
+  "c85280", "c43ec4", "f70c76", "de4968", "0e1c2e", "b539e0", "bafdf1", "633e85", "b0c4ed", "ccc070", "93bec1", "2eaaa1",
+  "d13bd4", "e3a6a1", "2e554e", "96798f", "a0d6a4", "581ef1", "9607c9", "2e8545", "28c93d"
+}
+
+function onLoad()
+    for k,objguid in ipairs(uninteractable_guids) do
+      local obj = getObjectFromGUID(objguid)
+      obj.interactable = false
+    end
+
+    auto_shuffle_objs = getObjectRefs(auto_shuffle_obj_GUIDs)
+    for _, obj in ipairs(auto_shuffle_objs) do
+        obj.shuffle()
+    end
+    intangible_wall_objs = getObjectRefs(intangible_wall_obj_GUIDs)
+    for _, obj in ipairs(intangible_wall_objs) do
+        obj.getComponents()[6].set("enabled", false)
+    end
+    animation_objs = getObjectRefs(animation_obj_GUIDs)
+    for _, player in ipairs(animation_objs) do
+        for _, level in ipairs(player) do
+            for _, obj in ipairs(level) do
+                obj.setColorTint(Color(1, 1, 1, 1))
+                obj.setScale(Vector(0, 0, 0))
+                obj.AssetBundle.playLoopingEffect(0)
+                obj.interactable = false
+            end
+        end
+    end
+    animation_skulls = getObjectRefs(animation_skull_GUIDs)
+    for _, obj in ipairs(animation_skulls) do
+        obj.setPosition(Vector(0, -10, 0))
+        obj.interactable = false
+    end
+    Wait.time(function()
+        for i, position in ipairs(sheet_cast_positions) do
+            local found = false
+            for _, hit in ipairs(Physics.cast({
+                origin       = position,
+                direction    = Vector(0, -1, 0),
+                type         = 1,
+                max_distance = 10,
+            })) do
+                local inputs = hit.hit_object.getInputs()
+                if inputs ~= nil and #inputs >= 2 and hit.hit_object.script_state ~= nil and hit.hit_object.script_state ~= "" then
+                    found = true
+                    local current = inputs[1].value
+                    local total = inputs[2].value
+                    current = tonumber(current)
+                    total = tonumber(total)
+                    if current == nil or total == nil or current == 0 or total == 0 or current >= total then
+                        for j, level in ipairs(animation_objs[i]) do
+                            for _, obj in ipairs(level) do
+                                obj.setPosition(Vector(0, -10, 0))
+                                obj.AssetBundle.playLoopingEffect(0)
+                            end
+                        end
+                        if current == 0 then
+                            animation_skulls[i].setPosition(hit.hit_object.positionToWorld(animation_skull_position))
+                            animation_skulls[i].setRotation(Vector(animation_skull_rotation.x, animation_skull_rotation_y[i], animation_skull_rotation.z))
+                        else
+                            animation_skulls[i].setPosition(Vector(0, -10, 0))
+                        end
+                    else
+                        animation_skulls[i].setPosition(Vector(0, -10, 0))
+                        if current / total >= 0.8 then
+                            for j, level in ipairs(animation_objs[i]) do
+                                if j ~= 1 then
+                                    for _, obj in ipairs(level) do
+                                        obj.setPosition(Vector(0, -10, 0))
+                                        obj.AssetBundle.playLoopingEffect(0)
+                                    end
+                                else
+                                    for k, obj in ipairs(level) do
+                                        obj.setPosition(hit.hit_object.positionToWorld(animation_positions[k] + Vector(0, 0.3, 0)))
+                                        local sheet_rotation = hit.hit_object.getRotation()
+                                        obj.setRotation(Vector(0, sheet_rotation.y + animation_rotation_y[k], 0))
+                                        if obj.AssetBundle.getLoopingEffectIndex() ~= 2 then
+                                            obj.AssetBundle.playLoopingEffect(2)
+                                        end
+                                    end
+                                end
+                            end
+                        elseif current / total >= 0.2 then
+                            for j, level in ipairs(animation_objs[i]) do
+                                if j ~= 2 then
+                                    for _, obj in ipairs(level) do
+                                        obj.setPosition(Vector(0, -10, 0))
+                                        obj.AssetBundle.playLoopingEffect(0)
+                                    end
+                                else
+                                    for k, obj in ipairs(level) do
+                                        obj.setPosition(hit.hit_object.positionToWorld(animation_positions[k]))
+                                        local sheet_rotation = hit.hit_object.getRotation()
+                                        obj.setRotation(Vector(0, sheet_rotation.y + animation_rotation_y[k], 0))
+                                        if obj.AssetBundle.getLoopingEffectIndex() ~= 2 then
+                                            obj.AssetBundle.playLoopingEffect(2)
+                                        end
+                                    end
+                                end
+                            end
+                        elseif current / total > 0 then
+                            for j, level in ipairs(animation_objs[i]) do
+                                if j ~= 3 then
+                                    for _, obj in ipairs(level) do
+                                        obj.setPosition(Vector(0, -10, 0))
+                                        obj.AssetBundle.playLoopingEffect(0)
+                                    end
+                                else
+                                    for k, obj in ipairs(level) do
+                                        obj.setPosition(hit.hit_object.positionToWorld(animation_positions[k]))
+                                        local sheet_rotation = hit.hit_object.getRotation()
+                                        obj.setRotation(Vector(0, sheet_rotation.y + animation_rotation_y[k], 0))
+                                        if obj.AssetBundle.getLoopingEffectIndex() ~= 2 then
+                                            obj.AssetBundle.playLoopingEffect(2)
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                    break
+                end
+            end
+            if not found then
+                for j, level in ipairs(animation_objs[i]) do
+                    for _, obj in ipairs(level) do
+                        obj.setPosition(Vector(0, -10, 0))
+                        obj.AssetBundle.playLoopingEffect(0)
+                    end
+                end
+                animation_skulls[i].setPosition(Vector(0, -10, 0))
+            end
+        end
+    end, 5, -1)
+end
+
+
+function UIButtonClick(player, value, id)
+    if string.sub(id, 1, 10) == "start_menu" then
+        if player.host then
+            local mode = string.sub(id, 12)
+            game_mode = mode
+            print(string.format("%s chose %s mode.", player.steam_name, mode))
+            Global.UI.setAttribute("start_menu_panel", "active", "false")
+        end
+    end
+end
+
+
+function getObjectRefs(guids)
+    if type(guids) == "string" then
+        return getObjectFromGUID(guids) or guids
+    elseif type(guids) == "table" then
+        local output = {}
+        for i, v in pairs(guids) do
+            output[i] = getObjectRefs(v)
+        end
+        return output
+    else
+        return guids
+    end
+end

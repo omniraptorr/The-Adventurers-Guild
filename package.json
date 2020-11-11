@@ -1,0 +1,24 @@
+{
+  "name": "the-adventurers-guild",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "echo \"Building minimial scripts\" && bash util/build.sh",
+    "start": "echo \"Symlinking files\" && bash util/start.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zbragames/The-Adventurers-Guild.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zbragames/The-Adventurers-Guild/issues"
+  },
+  "homepage": "https://github.com/zbragames/The-Adventurers-Guild#readme",
+  "dependencies": {
+    "luamin": "^1.0.4",
+    "symlink-dir": "^4.1.0"
+  }
+}

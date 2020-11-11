@@ -1,0 +1,3 @@
+function onLoad(save_state)
+    self.setColorTint(Color(1, 1, 1, 0))
+end

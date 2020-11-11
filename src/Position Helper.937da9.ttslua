@@ -1,0 +1,33 @@
+--This script is for the little position finder utility item
+--It is not part of the character sheet at all
+--This is not meant to be edited (unless, you know, you want to)
+
+decimal = 3
+
+function onLoad()
+    sheet = getObjectFromGUID("eda22b")
+    Timer.create({
+        identifier="localPosFinder", function_name="updateLocalPos",
+        function_owner=self, delay=1, repetitions=0,
+    })
+end
+
+function updateLocalPos()
+    if sheet == nil then
+        Timer.destroy("localPosFinder")
+        return
+    end
+
+    local pos = sheet.positionToLocal(self.getPosition())
+    local note = "{"
+    note = note .. round(-pos.x) .. ","
+    note = note .. round(pos.y)-0.05 .. ","
+    note = note .. round(pos.z) .. "}"
+    setNotes(note)
+end
+
+--Round number (num) to the Nth decimal (dec)
+function round(num)
+  local mult = 10^(decimal or 0)
+  return math.floor(num * mult + 0.5) / mult
+end
