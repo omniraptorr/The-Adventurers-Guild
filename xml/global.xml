@@ -1,11 +1,19 @@
 <!-- color format: "normalColor|highlightedColor|pressedColor|disabledColor"  -->
 <Defaults>
-    <Button colors = "#FFFFFF00||#FFFFFF99|#FFFFFF00" onClick = "UIButtonClick"></Button>
-    <Button class = "start_menu" colors = "#FFFFFF00||#FFFFFF99|#FFFFFF00" onClick = "UIButtonClick"></Button>
+    <Panel class = "menu_background" width = "343" height = "341"></Panel>
+    <Button colors = "#FFFFFF00|#FFFFFF99|#FFFFFFFF|#FFFFFF00" onClick = "UIButtonClick"></Button>
+    <Button class = "start_menu" colors = "#FFFFFF00|#FFFFFF99|#FFFFFFFF|#FFFFFF00" onClick = "UIButtonClick"></Button>
     <Button class = "travel_menu" active = "0"></Button>
+    <Button class = "class_menu" colors = "#FFFFFF00|#FFFFFF33|#FFFFFF99|#FFFFFF00" onClick = "UIButtonClick"></Button>
+    <Button class = "save_menu" colors = "#FFFFFF00|#FFFFFF33|#FFFFFF99|#FFFFFF00" onClick = "UIButtonClick"></Button>
+    <Button class = "bottom_menu" colors = "#FFFFFF00|#FFFFFF33|#FFFFFF99|#FFFFFF00" onClick = "UIButtonClick"></Button>
+		<Button class = "side_menu" colors = "#FFFFFF00|#FFFFFF33|#FFFFFF99|#FFFFFF00" onClick = "UIButtonClick" padding = "0 0 0 0"></Button>
+		<Button class = "side_menu/swap" colors = "#FFFFFF00|#FFFFFF33|#FFFFFF99|#FFFFFF00" onClick = "UIButtonClick" icon = "side_menu/swap" iconWidth = "41.25"></Button>
+		<Text class = "side_menu/text" text = "" fontStyle = "Bold" fontSize = "19" color = "White"></Text>
+		<Panel class = "side_menu/text/panel" padding = "0 0 0 0"></Panel>
 </Defaults>
 
-<Panel id = "start_menu/panel" width = "343" height = "341" visibility = "Host" active = "true">
+<Panel id = "start_menu/panel" class = "menu_background" visibility = "Host" active = "true">
   <Image id = "start_menu/background" image = "start_menu/background"></Image>
   <VerticalLayout id = "start_menu/buttons" spacing = "4" width = "243" height = "236">
     <Button class = "start_menu" id = "start_menu/adventure" icon = "start_menu/adventure"></Button>
@@ -16,4 +24,206 @@
     <Button class = "travel_menu" id = "travel_menu/town" icon = "travel_menu/town" active = "0"></Button>
     <Button class = "travel_menu" id = "travel_menu/village" icon = "travel_menu/village" active = "0"></Button>
   </VerticalLayout>
+</Panel>
+
+<Panel id = "bottom_menu/panel" visibility = "Blue|Teal|Yellow|White|Orange|Green" rectAlignment = "LowerCenter" width = "534" height = "66" active = "false">
+	<HorizontalLayout>
+		<Button class = "bottom_menu" id = "bottom_menu/pinning" icon = "bottom_menu/pinning"></Button>
+		<Button class = "bottom_menu" id = "bottom_menu/attack" icon = "bottom_menu/attack"></Button>
+		<Button class = "bottom_menu" id = "bottom_menu/ranged" icon = "bottom_menu/ranged"></Button>
+	</HorizontalLayout>
+</Panel>
+
+<Panel id = "side_menu/panel" visibility = "Blue|Teal|Yellow|White|Orange|Green|Black" rectAlignment = "MiddleLeft" width = "274.5" height = "247.5" offsetXY = "0 -58.75" active = "false">
+	<VerticalLayout>
+		<Button class = "side_menu" id = "side_menu/1" icon = "side_menu/side_menu_solid"></Button>
+		<Button class = "side_menu" id = "side_menu/2" icon = "side_menu/side_menu_solid"></Button>
+		<Button class = "side_menu" id = "side_menu/3" icon = "side_menu/side_menu_solid"></Button>
+		<Button class = "side_menu" id = "side_menu/4" icon = "side_menu/side_menu_solid"></Button>
+		<Button class = "side_menu" id = "side_menu/5" icon = "side_menu/side_menu_solid"></Button>
+		<Button class = "side_menu" id = "side_menu/6" icon = "side_menu/side_menu_solid"></Button>
+	</VerticalLayout>
+</Panel>
+
+<Panel id = "side_menu/swap" visibility = "Blue|Teal|Yellow|White|Orange|Green|Black" rectAlignment = "MiddleLeft" width = "41.25" height = "206.25" offsetXY = "274.5 -38.125" active = "false">
+	<VerticalLayout>
+		<Button class = "side_menu/swap" id = "side_menu/swap/1" icon = "side_menu/swap"></Button>
+		<Button class = "side_menu/swap" id = "side_menu/swap/2" icon = "side_menu/swap"></Button>
+		<Button class = "side_menu/swap" id = "side_menu/swap/3" icon = "side_menu/swap"></Button>
+		<Button class = "side_menu/swap" id = "side_menu/swap/4" icon = "side_menu/swap"></Button>
+		<Button class = "side_menu/swap" id = "side_menu/swap/5" icon = "side_menu/swap"></Button>
+	</VerticalLayout>
+</Panel>
+
+<Panel id = "side_menu/text" visibility = "Blue|Teal|Yellow|White|Orange|Green|Black" rectAlignment = "MiddleLeft" width = "274.5" height = "247.5" offsetXY = "-30 -55.75" active = "false">
+	<VerticalLayout>
+		<Panel class = "side_menu/text/panel" id = "side_menu_text_panel/1"><Text class = "side_menu/text" id = "side_menu_text/1"></Text></Panel>
+		<Panel class = "side_menu/text/panel" id = "side_menu_text_panel/2"><Text class = "side_menu/text" id = "side_menu_text/2"></Text></Panel>
+		<Panel class = "side_menu/text/panel" id = "side_menu_text_panel/3"><Text class = "side_menu/text" id = "side_menu_text/3"></Text></Panel>
+		<Panel class = "side_menu/text/panel" id = "side_menu_text_panel/4"><Text class = "side_menu/text" id = "side_menu_text/4"></Text></Panel>
+		<Panel class = "side_menu/text/panel" id = "side_menu_text_panel/5"><Text class = "side_menu/text" id = "side_menu_text/5"></Text></Panel>
+		<Panel class = "side_menu/text/panel" id = "side_menu_text_panel/6"><Text class = "side_menu/text" id = "side_menu_text/6"></Text></Panel>
+	</VerticalLayout>
+</Panel>
+
+<Panel id = "Blue_save_menu/panel" class = "menu_background" visibility = "Blue" active = "false">
+    <Image id = "save_menu/background" image = "start_menu/background"></Image>
+    <VerticalLayout id = "save_menu/buttons" spacing = "60" width = "243" height = "236">
+        <Button class = "save_menu" id = "save_menu/new_character" icon = "save_menu/new_character"></Button>
+        <Button class = "save_menu" id = "save_menu/saved_character" icon = "save_menu/saved_character"></Button>
+    </VerticalLayout>
+</Panel>
+
+<Panel id = "Blue_class_menu/panel" width = "686" height = "682" visibility = "Blue" active = "false">
+    <Image id = "class_menu/background" image = "start_menu/background"></Image>
+    <Panel id = "class_menu/header_panel" width = "402" height = "208" padding = "0 0 -150 0">
+        <Image id = "class_menu_header" image = "class_menu/please_choose_your_class"></Image>
+    </Panel>
+    <Panel id = "class_menu/grid_panel" width = "590" height = "290" padding = "0 0 140 0">
+        <GridLayout id = "class_menu/grid" spacing = "10" constraint = "FixedColumnCount" constraintCount = "4" cellSize = "140 140">
+            <Button class = "class_menu" id = "class_menu/barbarian" icon = "class_menu/barbarian"></Button>
+            <Button class = "class_menu" id = "class_menu/wizard" icon = "class_menu/wizard"></Button>
+            <Button class = "class_menu" id = "class_menu/dwarf" icon = "class_menu/dwarf"></Button>
+            <Button class = "class_menu" id = "class_menu/elf" icon = "class_menu/elf"></Button>
+            <Button class = "class_menu" id = "class_menu/imperial_noble" icon = "class_menu/imperial_noble"></Button>
+            <Button class = "class_menu" id = "class_menu/pit_fighter" icon = "class_menu/pit_fighter"></Button>
+            <Button class = "class_menu" id = "class_menu/wardancer" icon = "class_menu/wardancer"></Button>
+            <Button class = "class_menu" id = "class_menu/witch_hunter" icon = "class_menu/witch_hunter"></Button>
+        </GridLayout>
+    </Panel>
+</Panel>
+
+<Panel id = "Teal_save_menu/panel" class = "menu_background" visibility = "Teal" active = "false">
+    <Image id = "save_menu/background" image = "start_menu/background"></Image>
+    <VerticalLayout id = "save_menu/buttons" spacing = "60" width = "243" height = "236">
+        <Button class = "save_menu" id = "save_menu/new_character" icon = "save_menu/new_character"></Button>
+        <Button class = "save_menu" id = "save_menu/saved_character" icon = "save_menu/saved_character"></Button>
+    </VerticalLayout>
+</Panel>
+
+<Panel id = "Teal_class_menu/panel" width = "686" height = "682" visibility = "Teal" active = "false">
+    <Image id = "class_menu/background" image = "start_menu/background"></Image>
+    <Panel id = "class_menu/header_panel" width = "402" height = "208" padding = "0 0 -150 0">
+        <Image id = "class_menu_header" image = "class_menu/please_choose_your_class"></Image>
+    </Panel>
+    <Panel id = "class_menu/grid_panel" width = "590" height = "290" padding = "0 0 140 0">
+        <GridLayout id = "class_menu/grid" spacing = "10" constraint = "FixedColumnCount" constraintCount = "4" cellSize = "140 140">
+            <Button class = "class_menu" id = "class_menu/barbarian" icon = "class_menu/barbarian"></Button>
+            <Button class = "class_menu" id = "class_menu/wizard" icon = "class_menu/wizard"></Button>
+            <Button class = "class_menu" id = "class_menu/dwarf" icon = "class_menu/dwarf"></Button>
+            <Button class = "class_menu" id = "class_menu/elf" icon = "class_menu/elf"></Button>
+            <Button class = "class_menu" id = "class_menu/imperial_noble" icon = "class_menu/imperial_noble"></Button>
+            <Button class = "class_menu" id = "class_menu/pit_fighter" icon = "class_menu/pit_fighter"></Button>
+            <Button class = "class_menu" id = "class_menu/wardancer" icon = "class_menu/wardancer"></Button>
+            <Button class = "class_menu" id = "class_menu/witch_hunter" icon = "class_menu/witch_hunter"></Button>
+        </GridLayout>
+    </Panel>
+</Panel>
+
+<Panel id = "Yellow_save_menu/panel" class = "menu_background" visibility = "Yellow" active = "false">
+    <Image id = "save_menu/background" image = "start_menu/background"></Image>
+    <VerticalLayout id = "save_menu/buttons" spacing = "60" width = "243" height = "236">
+        <Button class = "save_menu" id = "save_menu/new_character" icon = "save_menu/new_character"></Button>
+        <Button class = "save_menu" id = "save_menu/saved_character" icon = "save_menu/saved_character"></Button>
+    </VerticalLayout>
+</Panel>
+
+<Panel id = "Yellow_class_menu/panel" width = "686" height = "682" visibility = "Yellow" active = "false">
+    <Image id = "class_menu/background" image = "start_menu/background"></Image>
+    <Panel id = "class_menu/header_panel" width = "402" height = "208" padding = "0 0 -150 0">
+        <Image id = "class_menu_header" image = "class_menu/please_choose_your_class"></Image>
+    </Panel>
+    <Panel id = "class_menu/grid_panel" width = "590" height = "290" padding = "0 0 140 0">
+        <GridLayout id = "class_menu/grid" spacing = "10" constraint = "FixedColumnCount" constraintCount = "4" cellSize = "140 140">
+            <Button class = "class_menu" id = "class_menu/barbarian" icon = "class_menu/barbarian"></Button>
+            <Button class = "class_menu" id = "class_menu/wizard" icon = "class_menu/wizard"></Button>
+            <Button class = "class_menu" id = "class_menu/dwarf" icon = "class_menu/dwarf"></Button>
+            <Button class = "class_menu" id = "class_menu/elf" icon = "class_menu/elf"></Button>
+            <Button class = "class_menu" id = "class_menu/imperial_noble" icon = "class_menu/imperial_noble"></Button>
+            <Button class = "class_menu" id = "class_menu/pit_fighter" icon = "class_menu/pit_fighter"></Button>
+            <Button class = "class_menu" id = "class_menu/wardancer" icon = "class_menu/wardancer"></Button>
+            <Button class = "class_menu" id = "class_menu/witch_hunter" icon = "class_menu/witch_hunter"></Button>
+        </GridLayout>
+    </Panel>
+</Panel>
+
+<Panel id = "White_save_menu/panel" class = "menu_background" visibility = "White" active = "false">
+    <Image id = "save_menu/background" image = "start_menu/background"></Image>
+    <VerticalLayout id = "save_menu/buttons" spacing = "60" width = "243" height = "236">
+        <Button class = "save_menu" id = "save_menu/new_character" icon = "save_menu/new_character"></Button>
+        <Button class = "save_menu" id = "save_menu/saved_character" icon = "save_menu/saved_character"></Button>
+    </VerticalLayout>
+</Panel>
+
+<Panel id = "White_class_menu/panel" width = "686" height = "682" visibility = "White" active = "false">
+    <Image id = "class_menu/background" image = "start_menu/background"></Image>
+    <Panel id = "class_menu/header_panel" width = "402" height = "208" padding = "0 0 -150 0">
+        <Image id = "class_menu_header" image = "class_menu/please_choose_your_class"></Image>
+    </Panel>
+    <Panel id = "class_menu/grid_panel" width = "590" height = "290" padding = "0 0 140 0">
+        <GridLayout id = "class_menu/grid" spacing = "10" constraint = "FixedColumnCount" constraintCount = "4" cellSize = "140 140">
+            <Button class = "class_menu" id = "class_menu/barbarian" icon = "class_menu/barbarian"></Button>
+            <Button class = "class_menu" id = "class_menu/wizard" icon = "class_menu/wizard"></Button>
+            <Button class = "class_menu" id = "class_menu/dwarf" icon = "class_menu/dwarf"></Button>
+            <Button class = "class_menu" id = "class_menu/elf" icon = "class_menu/elf"></Button>
+            <Button class = "class_menu" id = "class_menu/imperial_noble" icon = "class_menu/imperial_noble"></Button>
+            <Button class = "class_menu" id = "class_menu/pit_fighter" icon = "class_menu/pit_fighter"></Button>
+            <Button class = "class_menu" id = "class_menu/wardancer" icon = "class_menu/wardancer"></Button>
+            <Button class = "class_menu" id = "class_menu/witch_hunter" icon = "class_menu/witch_hunter"></Button>
+        </GridLayout>
+    </Panel>
+</Panel>
+
+<Panel id = "Green_save_menu/panel" class = "menu_background" visibility = "Green" active = "false">
+    <Image id = "save_menu/background" image = "start_menu/background"></Image>
+    <VerticalLayout id = "save_menu/buttons" spacing = "60" width = "243" height = "236">
+        <Button class = "save_menu" id = "save_menu/new_character" icon = "save_menu/new_character"></Button>
+        <Button class = "save_menu" id = "save_menu/saved_character" icon = "save_menu/saved_character"></Button>
+    </VerticalLayout>
+</Panel>
+
+<Panel id = "Green_class_menu/panel" width = "686" height = "682" visibility = "Green" active = "false">
+    <Image id = "class_menu/background" image = "start_menu/background"></Image>
+    <Panel id = "class_menu/header_panel" width = "402" height = "208" padding = "0 0 -150 0">
+        <Image id = "class_menu_header" image = "class_menu/please_choose_your_class"></Image>
+    </Panel>
+    <Panel id = "class_menu/grid_panel" width = "590" height = "290" padding = "0 0 140 0">
+        <GridLayout id = "class_menu/grid" spacing = "10" constraint = "FixedColumnCount" constraintCount = "4" cellSize = "140 140">
+            <Button class = "class_menu" id = "class_menu/barbarian" icon = "class_menu/barbarian"></Button>
+            <Button class = "class_menu" id = "class_menu/wizard" icon = "class_menu/wizard"></Button>
+            <Button class = "class_menu" id = "class_menu/dwarf" icon = "class_menu/dwarf"></Button>
+            <Button class = "class_menu" id = "class_menu/elf" icon = "class_menu/elf"></Button>
+            <Button class = "class_menu" id = "class_menu/imperial_noble" icon = "class_menu/imperial_noble"></Button>
+            <Button class = "class_menu" id = "class_menu/pit_fighter" icon = "class_menu/pit_fighter"></Button>
+            <Button class = "class_menu" id = "class_menu/wardancer" icon = "class_menu/wardancer"></Button>
+            <Button class = "class_menu" id = "class_menu/witch_hunter" icon = "class_menu/witch_hunter"></Button>
+        </GridLayout>
+    </Panel>
+</Panel>
+
+<Panel id = "Orange_save_menu/panel" class = "menu_background" visibility = "Orange" active = "false">
+    <Image id = "save_menu/background" image = "start_menu/background"></Image>
+    <VerticalLayout id = "save_menu/buttons" spacing = "60" width = "243" height = "236">
+        <Button class = "save_menu" id = "save_menu/new_character" icon = "save_menu/new_character"></Button>
+        <Button class = "save_menu" id = "save_menu/saved_character" icon = "save_menu/saved_character"></Button>
+    </VerticalLayout>
+</Panel>
+
+<Panel id = "Orange_class_menu/panel" width = "686" height = "682" visibility = "Orange" active = "false">
+    <Image id = "class_menu/background" image = "start_menu/background"></Image>
+    <Panel id = "class_menu/header_panel" width = "402" height = "208" padding = "0 0 -150 0">
+        <Image id = "class_menu_header" image = "class_menu/please_choose_your_class"></Image>
+    </Panel>
+    <Panel id = "class_menu/grid_panel" width = "590" height = "290" padding = "0 0 140 0">
+        <GridLayout id = "class_menu/grid" spacing = "10" constraint = "FixedColumnCount" constraintCount = "4" cellSize = "140 140">
+            <Button class = "class_menu" id = "class_menu/barbarian" icon = "class_menu/barbarian"></Button>
+            <Button class = "class_menu" id = "class_menu/wizard" icon = "class_menu/wizard"></Button>
+            <Button class = "class_menu" id = "class_menu/dwarf" icon = "class_menu/dwarf"></Button>
+            <Button class = "class_menu" id = "class_menu/elf" icon = "class_menu/elf"></Button>
+            <Button class = "class_menu" id = "class_menu/imperial_noble" icon = "class_menu/imperial_noble"></Button>
+            <Button class = "class_menu" id = "class_menu/pit_fighter" icon = "class_menu/pit_fighter"></Button>
+            <Button class = "class_menu" id = "class_menu/wardancer" icon = "class_menu/wardancer"></Button>
+            <Button class = "class_menu" id = "class_menu/witch_hunter" icon = "class_menu/witch_hunter"></Button>
+        </GridLayout>
+    </Panel>
 </Panel>

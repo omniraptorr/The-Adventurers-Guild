@@ -1,5 +1,5 @@
 local repoName = "Fly-n-dad/The-Adventurers-Guild/"
-local branch = "self_hosted_ui"
+local branch = "save,-character-menus"
 local basePath = "/ui_assets/"
 local baseUrl = "https://raw.githubusercontent.com/" .. repoName .. branch .. basePath
 

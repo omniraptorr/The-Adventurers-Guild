@@ -1,0 +1,47 @@
+local coroutineUtils = {}
+
+-- currently unused, commented out
+-- -- [[async]] pauses the current coroutine for a number of frames.
+-- function coroutineUtils.yieldFrames(frames)
+--   local running = coroutine.running()
+--   Wait.frames(function() coroutine.resume(running) end, frames)
+--   coroutine.yield()
+-- end
+
+-- [[async]] pauses the current coroutine until a condition is true, with
+-- optional timeout. Returns true if the condition passed before the timeout,
+-- false if it didn't.
+function coroutineUtils.yieldUntil(condition, timeout)
+  local running = coroutine.running()
+  if timeout then
+    Wait.condition(
+      function() coroutine.resume(running, true) end,
+      condition,
+      timeout,
+      function() coroutine.resume(running, false) end
+    )
+  else
+    Wait.condition(function() coroutine.resume(running) end, condition)
+  end
+  return coroutine.yield()
+end
+
+-- currently unused, commented out
+-- -- [[async]] pauses the current coroutine until a callback is run.
+-- function coroutineUtils.yieldCallback(assigner)
+--   local running = coroutine.running()
+--   assigner(function(...) coroutine.resume(running, ...) end)
+--   return coroutine.yield()
+-- end
+
+function coroutineUtils.launchAndReportErrors(func, ...)
+  local args = {...}
+  local co = coroutine.create(function()
+    local st, res = pcall(function() func(table.unpack(args)) end)
+    if st then return res end
+    log(res)
+  end)
+  return coroutine.resume(co)
+end
+
+return coroutineUtils
