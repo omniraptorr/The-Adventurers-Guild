@@ -1,5 +1,7 @@
 require("The-Adventurers-Guild/xml/script")
 
+local monsterUtils = require "The-Adventurers-Guild/monster-utils"
+
 game_mode = nil
 
 local auto_shuffle_obj_GUIDs = {"a6ecac", "142f1f", "966f7b", "9ceba2", "a24bfb", "e2355f", "28992e", "31dbfe", "851ed6",}
@@ -7,6 +9,9 @@ local auto_shuffle_objs = {}
 
 local intangible_wall_obj_GUIDs = {"1d0f87", "fc0a7d",}
 local intangible_wall_objs = {}
+
+local sheet_bag_id = "561d73"
+local sheet_bag_obj
 
 local sheet_cast_positions = {
     Vector(-25.28, 5, -48.40),
@@ -88,6 +93,9 @@ function onLoad()
       local obj = getObjectFromGUID(objguid)
       obj.interactable = false
     end
+
+    monsterUtils.kill_coffin_objs = getObjectRefs(monsterUtils.KILL_COFFIN_IDS)
+    sheet_bag_obj = getObjectFromGUID(sheet_bag_id)
 
     auto_shuffle_objs = getObjectRefs(auto_shuffle_obj_GUIDs)
     for _, obj in ipairs(auto_shuffle_objs) do
@@ -220,6 +228,31 @@ end
 
 function onPlayerChangeColor(color)
 	displaySaveMenu(color)
+end
+
+function onObjectSpawn(obj)
+    upgradeSheetMaybe(obj)
+end
+
+function onObjectLeaveContainer(obj)
+    upgradeSheetMaybe(obj)
+end
+
+function upgradeSheetMaybe(obj)
+    local data = obj.getTable("data")
+    if not data then return end -- not a sheet
+    local version = obj.getVar("version") or 1
+    if version >= 1.1 then return end -- up to date
+    log("here")
+    log(version)
+    if version < 1.1 then
+        data.equipped_items = {}
+        data.sheet_version = 1.1
+    end
+
+    obj.script_code = sheet_bag_obj.getData().ContainedObjects[1].LuaScript
+    obj.script_state = JSON.encode(data)
+    obj.reload()
 end
 
 --[[

@@ -1,0 +1,400 @@
+--------------------------------------------------------------------------
+-- NOTE                                                                 --
+-- This file uses two events:                                           --
+--                                                                      --
+-- onObjectRandomize                                                    --
+-- onObjectPickUp                                                       --
+--                                                                      --
+-- and thus will overwrite/be overwritten by any other file on the same --
+-- script that also uses them.                                          --
+--------------------------------------------------------------------------
+
+local characterUtils = require "The-Adventurers-Guild/character-utils"
+local coroutineUtils = require "The-Adventurers-Guild/coroutine-utils"
+local monsterUtils = require "The-Adventurers-Guild/monster-utils"
+
+local TO_HIT_CHART = { -- TO_HIT_CHART[attackerWeaponSkill][defenderWeaponSkill]
+  {4, 4, 5, 6, 6, 6, 6, 6, 6, 6},
+  {3, 4, 4, 4, 5, 5, 6, 6, 6, 6},
+  {2, 3, 4, 4, 4, 4, 5, 5, 5, 6},
+  {2, 3, 3, 4, 4, 4, 4, 4, 5, 5},
+  {2, 3, 3, 3, 4, 4, 4, 4, 4, 4},
+  {2, 3, 3, 3, 3, 4, 4, 4, 4, 4},
+  {2, 3, 3, 3, 3, 3, 4, 4, 4, 4},
+  {2, 2, 3, 3, 3, 3, 3, 4, 4, 4},
+  {2, 2, 2, 3, 3, 3, 3, 3, 4, 4},
+  {2, 2, 2, 2, 3, 3, 3, 3, 3, 4},
+}
+
+local SECONDS_TO_PINNING_ROLL_TIMEOUT = 10
+local SECONDS_TO_ATTACK_TARGET_TIMEOUT = 10
+local SECONDS_TO_ATTACK_HIT_ROLL_TIMEOUT = 10
+local SECONDS_TO_ATTACK_DAMAGE_ROLL_TIMEOUT = 18
+local SECONDS_TO_RANGED_TARGET_TIMEOUT = 10
+local SECONDS_TO_RANGED_HIT_ROLL_TIMEOUT = 10
+local SECONDS_TO_RANGED_DAMAGE_ROLL_TIMEOUT = 18
+local RANGED_WEAPON_KEYWORD = "Ranged Weapon"
+
+local interactionSystem = {}
+interactionSystem.state = {}
+
+for _, color in ipairs(Player.getAvailableColors()) do
+  interactionSystem.state[color] = {
+    runningProcess = false,
+    pendingDice = 0,
+    rollTotal = 0,
+    target = nil
+  }
+end
+
+local function cleanup(player)
+  interactionSystem.state[player.color].runningProcess = nil
+  if interactionSystem.state[player.color].target then
+    interactionSystem.state[player.color].target.highlightOff()
+    interactionSystem.state[player.color].target = nil
+  end
+  interactionSystem.state[player.color].pendingDice = 0
+  interactionSystem.state[player.color].rollTotal = 0
+end
+
+function interactionSystem.pinningProcessCoroutine(player)
+  interactionSystem.state[player.color].runningProcess = "pinning"
+  local class = characterUtils.getClass(player)
+  if class == "Elf" then
+    player.broadcast("You are an Elf, so you always escape from being pinned.")
+    return
+  end
+  local playerName = characterUtils.getCharacterName(player) or player.color
+  local playerDisplayColor = Color.fromString(player.color)
+
+  broadcastToAll(string.format("%s started a Pinning roll.", playerName), Color.fromString(player.color))
+  interactionSystem.state[player.color].rollTotal = 0
+  interactionSystem.state[player.color].pendingDice = 1
+  local pinningDiceRolled = coroutineUtils.yieldUntil(
+    function() return interactionSystem.state[player.color].pendingDice == 0 end,
+    SECONDS_TO_PINNING_ROLL_TIMEOUT
+  )
+  if not pinningDiceRolled then
+    broadcastToAll(string.format("%s's Pinning roll timed out.", playerName), playerDisplayColor)
+    return
+  end
+  local valueRolledToEscape = interactionSystem.state[player.color].rollTotal
+
+  local pinning = characterUtils.getTotalPinning(player)
+  if not pinning then
+    broadcastToAll(string.format("Error: cannot find %s's Pinning stat. Pinning roll: %i.", playerName, valueRolledToEscape), playerDisplayColor)
+    return
+  end
+  if valueRolledToEscape >= pinning then
+    broadcastToAll(string.format("%s escapes: rolled %i, needed %i.", playerName, valueRolledToEscape, pinning), playerDisplayColor)
+  else
+    broadcastToAll(string.format("%s does not escape: rolled %i, needed %i.", playerName, valueRolledToEscape, pinning), playerDisplayColor)
+  end
+end
+
+function interactionSystem.attackProcessCoroutine(player)
+  interactionSystem.state[player.color].runningProcess = "attack"
+  local playerName = characterUtils.getCharacterName(player) or player.color
+  local playerDisplayColor = Color.fromString(player.color)
+
+  player.broadcast("Please choose a target.")
+  local targetChosen = coroutineUtils.yieldUntil(
+    function() return interactionSystem.state[player.color].target ~= nil end,
+    SECONDS_TO_ATTACK_TARGET_TIMEOUT
+  )
+  log(1)
+  if not targetChosen then
+    broadcastToAll(string.format("%s's Attack target selection timed out.", playerName), playerDisplayColor)
+    return
+  end
+  log(2)
+  local monster = interactionSystem.state[player.color].target
+  log(3)
+  monster.highlightOn(playerDisplayColor)
+  log(4)
+  local targetName = monster.getName()
+  log(5)
+  broadcastToAll(string.format("%s is attacking %s.", playerName, targetName), playerDisplayColor)
+  log(6)
+  
+  local player_WS = characterUtils.getStatTotal(player, "WS") -- Weapon Skill
+  log("player_WS")
+  log(player_WS)
+  local monster_stats = monsterUtils.getStats(monster)
+  log("monster_stats")
+  log(monster_stats)
+  if monster_stats == nil then
+    broadcastToAll("Error: cannot find any monster stats.", playerDisplayColor)
+    return
+  end
+  local monster_WS = monster_stats.WS
+  if player_WS == nil then
+    broadcastToAll("Error: cannot find player's weapon skill.", playerDisplayColor)
+    return
+  end
+  if monster_WS == nil then
+    broadcastToAll("Error: cannot find monster's weapon skill.", playerDisplayColor)
+    return
+  end
+  log(7)
+  player.broadcast("Please roll to hit.")
+  interactionSystem.state[player.color].rollTotal = 0
+  interactionSystem.state[player.color].pendingDice = 1
+  log(8)
+  local hitDiceRolled = coroutineUtils.yieldUntil(
+    function() return interactionSystem.state[player.color].pendingDice == 0 end,
+    SECONDS_TO_ATTACK_HIT_ROLL_TIMEOUT
+  )
+  log(9)
+  if not hitDiceRolled then
+    broadcastToAll(string.format("%s's Attack roll timed out.", playerName), playerDisplayColor)
+    return
+  end
+  log(10)
+  local valueRolledToHit = interactionSystem.state[player.color].rollTotal
+  log(11)
+
+  local valueNeededToHit = TO_HIT_CHART[player_WS][monster_WS]
+  log(valueRolledToHit)
+  log(valueNeededToHit)
+  if valueRolledToHit < valueNeededToHit then
+    broadcastToAll(string.format("%s misses %s: rolled %i, needed %i.", playerName, targetName, valueRolledToHit, valueNeededToHit), playerDisplayColor)
+  else
+    broadcastToAll(string.format("HIT! %s vs %s: rolled %i, needed %i.", playerName, targetName, valueRolledToHit, valueNeededToHit), playerDisplayColor)
+    log(12)
+
+    local player_D = characterUtils.getStatTotal(player, "D") -- Damage
+    if player_D == nil then
+      broadcastToAll("Error: cannot find player's damage.", playerDisplayColor)
+      return
+    end
+    player.broadcast(string.format("Please roll for damage. (%dd6)", player_D))
+    interactionSystem.state[player.color].rollTotal = 0
+    interactionSystem.state[player.color].pendingDice = player_D
+    local damageDiceRolled = coroutineUtils.yieldUntil(
+      function() return interactionSystem.state[player.color].pendingDice == 0 end,
+      SECONDS_TO_ATTACK_DAMAGE_ROLL_TIMEOUT
+    )
+    if not damageDiceRolled then
+      broadcastToAll(string.format("%s's attack roll timed out.", playerName), playerDisplayColor)
+      return
+    end
+    local valueRolledForDamage = interactionSystem.state[player.color].rollTotal
+
+    local player_S = characterUtils.getStatTotal(player, "S") -- Strength
+    local monster_T = monster_stats.T
+    if player_S == nil then
+      broadcastToAll("Error: cannot find player's strength.", playerDisplayColor)
+      return
+    end
+    if monster_T == nil then
+      broadcastToAll("Error: cannot find monster's toughness.", playerDisplayColor)
+      return
+    end
+    local monster_AR = monster_stats.AR or 0 -- not all monsters have armor
+
+    local totalDamage = valueRolledForDamage + player_S - monster_T - monster_AR
+    if totalDamage <= 0 then
+      broadcastToAll(string.format("It wasn't enough to hurt %s...", targetName), playerDisplayColor)
+      return
+    end
+
+    local oldWounds = monsterUtils.getCurrentWounds(monster)
+    -- if no dice then assume its at max wounds
+    if oldWounds == 0 then oldWounds = monster_stats.W end
+
+    local newWounds = oldWounds - totalDamage
+    if newWounds <= 0 then
+      if oldWounds >= monster_stats.W then
+        broadcastToAll(string.format("%s dealt %d damage to %s, [b]DEATH-BLOW!!![/b].", playerName, totalDamage, targetName), playerDisplayColor)
+      else
+        broadcastToAll(string.format("%s dealt %d damage to %s, slaying it.", playerName, totalDamage, targetName), playerDisplayColor)
+      end
+      monsterUtils.clearCurrentWounds(monster)
+      monsterUtils.placeNextToKillCoffin(monster, player)
+    else
+      broadcastToAll(string.format("%s dealt %d damage to %s", playerName, totalDamage, targetName), playerDisplayColor)
+      monsterUtils.setCurrentWounds(monster, newWounds)
+    end
+  end
+end
+
+function interactionSystem.rangedProcessCoroutine(player)
+  interactionSystem.state[player.color].runningProcess = "ranged"
+  local playerName = characterUtils.getCharacterName(player) or player.color
+  local playerDisplayColor = Color.fromString(player.color)
+
+  player.broadcast("Please choose a target.")
+  local targetChosen = coroutineUtils.yieldUntil(
+    function() return interactionSystem.state[player.color].target ~= nil end,
+    SECONDS_TO_RANGED_TARGET_TIMEOUT
+  )
+  if not targetChosen then
+    broadcastToAll(string.format("%s's ranged target selection timed out.", playerName), playerDisplayColor)
+    return
+  end
+  local monster = interactionSystem.state[player.color].target
+  monster.highlightOn(playerDisplayColor)
+  local targetName = monster.getName()
+  broadcastToAll(string.format("%s is attacking %s.", playerName, targetName), playerDisplayColor)
+
+  local player_BS = characterUtils.getStatTotal(player, "BS") -- Ballistic Skill
+  local monster_stats = monsterUtils.getStats(monster)
+  if monster_stats == nil then
+    broadcastToAll("Error: cannot find any monster stats.", playerDisplayColor)
+    return
+  end
+  if player_BS == nil then
+    broadcastToAll("Error: cannot find player's ballistic skill.", playerDisplayColor)
+    return
+  end
+
+  player.broadcast("Please roll to hit.")
+  interactionSystem.state[player.color].rollTotal = 0
+  interactionSystem.state[player.color].pendingDice = 1
+  local hitDiceRolled = coroutineUtils.yieldUntil(
+    function() return interactionSystem.state[player.color].pendingDice == 0 end,
+    SECONDS_TO_RANGED_HIT_ROLL_TIMEOUT
+  )
+  if not hitDiceRolled then
+    broadcastToAll(string.format("%s's ranged attack roll timed out.", playerName), playerDisplayColor)
+    return
+  end
+  local valueRolledToHit = interactionSystem.state[player.color].rollTotal
+
+  local valueNeededToHit = player_BS
+  if valueRolledToHit < valueNeededToHit then
+    broadcastToAll(string.format("%s misses %s: rolled %i, needed %i.", playerName, targetName, valueRolledToHit, valueNeededToHit), playerDisplayColor)
+    return
+  end
+
+  broadcastToAll(string.format("HIT! %s vs %s: rolled %i, needed %i.", playerName, targetName, valueRolledToHit, valueNeededToHit), playerDisplayColor)
+
+  local weapon
+  log(characterUtils.getEquippedItems(player))
+  for _, item in ipairs(characterUtils.getEquippedItems(player)) do
+    for _, kw in ipairs(characterUtils.getItemKeywords(item)) do
+      if kw == RANGED_WEAPON_KEYWORD then
+        weapon = item
+        break
+      end
+    end
+    if weapon then break end
+  end
+  if not weapon then
+    broadcastToAll("Error: cannot find an equipped ranged weapon.", playerDisplayColor)
+    return
+  end
+  local weaponStats = characterUtils.getWeaponStats(weapon)
+  if not weaponStats then
+    broadcastToAll("Error: cannot find weapon stats on the equipped weapon.", playerDisplayColor)
+    return
+  end
+  local weaponDamage = weaponStats.damage
+  player.broadcast("Please roll for damage.")
+  interactionSystem.state[player.color].rollTotal = 0
+  interactionSystem.state[player.color].pendingDice = 1
+  local damageDiceRolled = coroutineUtils.yieldUntil(
+    function() return interactionSystem.state[player.color].pendingDice == 0 end,
+    SECONDS_TO_RANGED_DAMAGE_ROLL_TIMEOUT
+  )
+  if not damageDiceRolled then
+    broadcastToAll(string.format("%s's Attack roll timed out.", playerName), playerDisplayColor)
+    return
+  end
+  local valueRolledForDamage = interactionSystem.state[player.color].rollTotal
+
+  local monster_T = monster_stats.T
+  if weaponDamage == nil then
+    broadcastToAll("Error: cannot find weapon's damage.", playerDisplayColor)
+    return
+  end
+  if monster_T == nil then
+    broadcastToAll("Error: cannot find monster's toughness.", playerDisplayColor)
+    return
+  end
+  local monster_AR = monster_stats.AR or 0 -- not all monsters have armor
+
+  local totalDamage = valueRolledForDamage + weaponDamage - monster_T - monster_AR
+  if totalDamage <= 0 then
+    broadcastToAll(string.format("It wasn't enough to hurt %s...", targetName), playerDisplayColor)
+    return
+  end
+
+  local oldWounds = monsterUtils.getCurrentWounds(monster)
+  -- if no dice then assume its at max wounds
+  if oldWounds == 0 then oldWounds = monster_stats.W end
+
+  local newWounds = oldWounds - totalDamage
+  if newWounds <= 0 then
+    broadcastToAll(string.format("%s dealt %d damage to %s, slaying it.", playerName, totalDamage, targetName), playerDisplayColor)
+    monsterUtils.clearCurrentWounds(monster)
+    monsterUtils.placeNextToKillCoffin(monster, player)
+  else
+    broadcastToAll(string.format("%s dealt %d damage to %s", playerName, totalDamage, targetName), playerDisplayColor)
+    monsterUtils.setCurrentWounds(monster, newWounds)
+  end
+end
+
+function interactionSystem.launchPinningProcess(player)
+  coroutineUtils.launchAndReportErrors(function()
+    interactionSystem.state[player.color].runningProcess = "pinning"
+    interactionSystem.pinningProcessCoroutine(player)
+    cleanup(player)
+  end)
+end
+
+function interactionSystem.launchAttackProcess(player)
+  coroutineUtils.launchAndReportErrors(function()
+    interactionSystem.state[player.color].runningProcess = "attack"
+    interactionSystem.attackProcessCoroutine(player)
+    cleanup(player)
+  end)
+end
+
+function interactionSystem.launchRangedProcess(player)
+  coroutineUtils.launchAndReportErrors(function()
+    interactionSystem.state[player.color].runningProcess = "ranged"
+    interactionSystem.rangedProcessCoroutine(player)
+    cleanup(player)
+  end)
+end
+
+------------
+-- Events --
+------------
+
+function onObjectRandomize(obj, color)
+  if interactionSystem.state[color].pendingDice > 0 then
+    if obj.name == "Die_6" and obj.getColorTint() == Color.fromString(color) then
+      obj.interactable = false
+      Wait.condition(
+        function()
+          if obj == nil then return end
+          obj.interactable = true
+
+          -- in case more dice were rolled than needed
+          if interactionSystem.state[color].pendingDice > 0 then
+            interactionSystem.state[color].pendingDice = interactionSystem.state[color].pendingDice - 1
+            interactionSystem.state[color].rollTotal = interactionSystem.state[color].rollTotal + obj.getRotationValue()
+          end
+        end,
+        function() return obj == nil or obj.resting end
+      )
+    end
+  end
+end
+
+function onObjectPickUp(color, obj)
+  if not (
+    Global.getVar("game_mode") == "adventure" and
+    interactionSystem.state[color].runningProcess and
+    interactionSystem.state[color].target == nil
+  ) then return end
+
+  local monster_stats = monsterUtils.getStats(obj)
+  if monster_stats == nil then return end
+  interactionSystem.state[color].target = obj
+end
+
+return interactionSystem

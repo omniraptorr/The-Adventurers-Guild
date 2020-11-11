@@ -3,6 +3,7 @@ local path = "bottom_menu"
 local contents = {
   "pinning",
   "attack",
+  "ranged",
 }
 
 return genTable(path, contents)

@@ -26,10 +26,11 @@
   </VerticalLayout>
 </Panel>
 
-<Panel id = "bottom_menu/panel" visibility = "Blue|Teal|Yellow|White|Orange|Green" rectAlignment = "LowerCenter" width = "356" height = "66" active = "false">
+<Panel id = "bottom_menu/panel" visibility = "Blue|Teal|Yellow|White|Orange|Green" rectAlignment = "LowerCenter" width = "534" height = "66" active = "false">
 	<HorizontalLayout>
 		<Button class = "bottom_menu" id = "bottom_menu/pinning" icon = "bottom_menu/pinning"></Button>
 		<Button class = "bottom_menu" id = "bottom_menu/attack" icon = "bottom_menu/attack"></Button>
+		<Button class = "bottom_menu" id = "bottom_menu/ranged" icon = "bottom_menu/ranged"></Button>
 	</HorizontalLayout>
 </Panel>
 

@@ -4,6 +4,9 @@
 
 -- local formatui = require "xmlui/formatui"
 
+local interactionSystem = require "The-Adventurers-Guild/interaction-system"
+local characterUtils = require "The-Adventurers-Guild/character-utils"
+
 local CustomUIAssets = {}
 local function add_assets(sourceTable)
   local names = {}
@@ -34,14 +37,6 @@ function loadXML(save_state)
   --UI.setXmlTable(require("The-Adventurers-Guild/xml/uitable"))
 end
 
-local bottom_menu_state = {
-	wait_IDs = {},
-	choices = {},
-	pending_dice = {Blue = 0, Teal = 0, Yellow = 0, White = 0, Green = 0, Orange = 0},
-	rolls = {Blue = 0, Teal = 0, Yellow = 0, White = 0, Green = 0, Orange = 0},
-	attack_targets = {}
-}
-
 local side_menu_state = {
 	order = {"Blue", "Teal", "Yellow", "White", "Green", "Orange"},
 	solid = {Blue = true, Teal = true, Yellow = true, White = true, Green = true, Orange = true},
@@ -55,19 +50,6 @@ local sheet_cast_positions = {
     White = Vector(65.66, 5, 22.31),
     Green = Vector(23.30, 5, 48.42),
     Orange = Vector(-21.95, 5, 48.44),
-}
-
-local to_hit_chart = {	--chart[attacker WS][defender WS]
-	{4, 4, 5, 6, 6, 6, 6, 6, 6, 6},
-	{3, 4, 4, 4, 5, 5, 6, 6, 6, 6},
-	{2, 3, 4, 4, 4, 4, 5, 5, 5, 6},
-	{2, 3, 3, 4, 4, 4, 4, 4, 5, 5},
-	{2, 3, 3, 3, 4, 4, 4, 4, 4, 4},
-	{2, 3, 3, 3, 3, 4, 4, 4, 4, 4},
-	{2, 3, 3, 3, 3, 3, 4, 4, 4, 4},
-	{2, 2, 3, 3, 3, 3, 3, 4, 4, 4},
-	{2, 2, 2, 3, 3, 3, 3, 3, 4, 4},
-	{2, 2, 2, 2, 3, 3, 3, 3, 3, 4},
 }
 
 local class_click_functions = {
@@ -133,7 +115,8 @@ local class_click_functions = {
 				Wait.frames(function()
 					Wait.condition(
 						function() obj.call("load_click") end,
-						function() return obj.resting end, 3,
+						function() return obj.resting end,
+						3,
 						function() obj.call("load_click") end
 					)
 				end, 1)
@@ -142,102 +125,24 @@ local class_click_functions = {
     Global.UI.setAttribute(player.color .. "_class_menu/panel", "active", false)
   end,
 	bottom_menu = function(player, value, id)
-		if bottom_menu_state.pending_dice[player.color] ~= 0 or bottom_menu_state.wait_IDs[player.color] ~= nil then
-			player.print(string.format("Error: please finish your %s roll or let it time out first.", bottom_menu_state.choices[player.color]))
+		local running = interactionSystem.state[player.color].runningProcess
+		if running then
+			if running == "pinning" then
+				player.print("Error: please finish your pinning roll or let it time out first.")
+			elseif running == "attack" then
+				player.print("Error: please finish your attack roll or let it time out first.")
+			elseif running == "ranged" then
+				player.print("Error: please finish your ranged attack roll or let it time out first.")
+			end
 			return
 		end
 		local choice = string.sub(id, 13)
-		bottom_menu_state.choices[player.color] = choice
 		if choice == "pinning" then
-			local class = getClass(player.color)
-			if class == "Elf" then
-				player.broadcast("You are an Elf, so you always escape from being pinned.")
-				return
-			end
-			bottom_menu_state.pending_dice[player.color] = 1
-			bottom_menu_state.rolls[player.color] = 0
-			broadcastToAll(string.format("%s started a Pinning roll.", getName(player.color) or player.color), Color.fromString(player.color))
-			bottom_menu_state.wait_IDs[player.color] = Wait.condition(
-				function()
-					local pinning = getTotalPinning(player.color)
-					if pinning ~= nil then
-						if bottom_menu_state.rolls[player.color] >= getTotalPinning(player.color) then
-							broadcastToAll(string.format("%s escapes: rolled %i, needed %i.", getName(player.color) or player.color, bottom_menu_state.rolls[player.color], getTotalPinning(player.color)), Color.fromString(player.color))
-						else
-							broadcastToAll(string.format("%s does not escape: rolled %i, needed %i.", getName(player.color) or player.color, bottom_menu_state.rolls[player.color], getTotalPinning(player.color)), Color.fromString(player.color))
-						end
-					else
-						broadcastToAll(string.format("Error: cannot find %s's Pinning stat. Pinning roll: %i.", getName(player.color) or player.color, bottom_menu_state.rolls[player.color]), Color.fromString(player.color))
-					end
-					bottom_menu_state.wait_IDs[player.color] = nil
-					bottom_menu_state.choices[player.color] = nil
-				end,
-				function()
-					return bottom_menu_state.pending_dice[player.color] == 0
-				end, 10,
-				function()
-					bottom_menu_state.pending_dice[player.color] = 0
-					bottom_menu_state.rolls[player.color] = 0
-					bottom_menu_state.wait_IDs[player.color] = nil
-					bottom_menu_state.choices[player.color] = nil
-					broadcastToAll(string.format("%s's Pinning roll timed out.", getName(player.color) or player.color), Color.fromString(player.color))
-				end
-			)
+			interactionSystem.launchPinningProcess(player)
 		elseif choice == "attack" then
-			player.broadcast("Please choose a target.")
-			bottom_menu_state.rolls[player.color] = 0
-			bottom_menu_state.wait_IDs[player.color] = Wait.condition(
-				function()
-					broadcastToAll(string.format("%s is attacking %s.", getName(player.color) or player.color, bottom_menu_state.attack_targets[player.color].getName()), Color.fromString(player.color))
-					bottom_menu_state.wait_IDs[player.color] = Wait.condition(
-						function()
-							local player_WS = getTotalWS(player.color)
-							local monster_stats = parseStats(bottom_menu_state.attack_targets[player.color])
-							local monster_WS
-							if monster_stats ~= nil then
-								monster_WS = monster_stats.WS
-							end
-							if player_WS ~= nil and monster_WS ~= nil then
-								if bottom_menu_state.rolls[player.color] >= to_hit_chart[player_WS][monster_WS] then
-									broadcastToAll(string.format("HIT! %s vs %s: rolled %i, needed %i.", getName(player.color) or player.color, bottom_menu_state.attack_targets[player.color].getName(), bottom_menu_state.rolls[player.color], to_hit_chart[player_WS][monster_WS]), Color.fromString(player.color))
-									player.broadcast("Please roll for damage.")
-								else
-									broadcastToAll(string.format("%s misses %s: rolled %i, needed %i.", getName(player.color) or player.color, bottom_menu_state.attack_targets[player.color].getName(), bottom_menu_state.rolls[player.color], to_hit_chart[player_WS][monster_WS]), Color.fromString(player.color))
-								end
-							else
-								broadcastToAll(string.format("Error: cannot find player or monster's weapon skill. Attack roll: %i.", bottom_menu_state.rolls[player.color]), Color.fromString(player.color))
-							end
-							bottom_menu_state.wait_IDs[player.color] = nil
-							bottom_menu_state.attack_targets[player.color].highlightOff()
-							bottom_menu_state.attack_targets[player.color] = nil
-							bottom_menu_state.choices[player.color] = nil
-						end,
-						function()
-							return bottom_menu_state.pending_dice[player.color] == 0
-						end, 10,
-						function()
-							bottom_menu_state.pending_dice[player.color] = 0
-							bottom_menu_state.rolls[player.color] = 0
-							bottom_menu_state.wait_IDs[player.color] = nil
-							bottom_menu_state.attack_targets[player.color].highlightOff()
-							bottom_menu_state.attack_targets[player.color] = nil
-							bottom_menu_state.choices[player.color] = nil
-							broadcastToAll(string.format("%s's Attack roll timed out.", getName(player.color) or player.color), Color.fromString(player.color))
-						end
-					)
-				end,
-				function()
-					return bottom_menu_state.attack_targets[player.color] ~= nil
-				end, 10,
-				function()
-					bottom_menu_state.pending_dice[player.color] = 0
-					bottom_menu_state.rolls[player.color] = 0
-					bottom_menu_state.wait_IDs[player.color] = nil
-					bottom_menu_state.attack_targets[player.color] = nil
-					bottom_menu_state.choices[player.color] = nil
-					broadcastToAll(string.format("%s's Attack roll timed out.", getName(player.color) or player.color), Color.fromString(player.color))
-				end
-			)
+			interactionSystem.launchAttackProcess(player)
+		elseif choice == "ranged" then
+			interactionSystem.launchRangedProcess(player)
 		end
 	end,
 	side_menu = function(player, value, id)
@@ -322,59 +227,6 @@ function setSideMenuState(row, state)	--state can be "solid", "faded", or "activ
 	end
 end
 
-
-function onObjectRandomize(obj, color)
-	if Global.getVar("game_mode") ~= "adventure" then
-		return
-	end
-	if bottom_menu_state.pending_dice[color] == nil then
-		return
-	end
-	if obj.held_by_color ~= nil then
-		return
-	end
-	if bottom_menu_state.pending_dice[color] > 0 then
-		if obj.name == "Die_6" and obj.getColorTint() == Color.fromString(color) then
-			obj.interactable = false
-			Wait.condition(
-				function()
-					obj.interactable = true
-					bottom_menu_state.pending_dice[color] = bottom_menu_state.pending_dice[color] - 1
-					if bottom_menu_state.pending_dice[color] < 0 then
-						bottom_menu_state.pending_dice[color] = 0
-					end
-					bottom_menu_state.rolls[color] = bottom_menu_state.rolls[color] + obj.getRotationValue()
-				end,
-				function()
-					return obj == nil or obj.resting
-				end
-			)
-		end
-	end
-end
-
-
-function onObjectPickUp(color, obj)
-	if Global.getVar("game_mode") ~= "adventure" then
-		return
-	end
-	if bottom_menu_state.choices[color] ~= "attack" then
-		return
-	end
-	if bottom_menu_state.attack_targets[color] ~= nil then
-		return
-	end
-	local monster_stats = parseStats(obj)
-	if monster_stats == nil then
-		return
-	end
-	bottom_menu_state.pending_dice[color] = 1
-	bottom_menu_state.attack_targets[color] = obj
-	obj.highlightOn(Color.fromString(color))
-	obj.drop()
-end
-
-
 function parseStats(obj)
 	local desc = obj.getDescription()
 	local st, en, W, WS, S, T, A, D = string.find(desc, "W(%d+)%s*WS(%d+)%s*S(%d+)%s*T(%d+)%s*A(%d+)%s*D(%d+)%s*")
@@ -436,20 +288,6 @@ function findSheet(color)
 	return nil
 end
 
-
-function getClass(color)
-	local sheet = findSheet(color)
-	if sheet == nil then
-		return ""
-	end
-	local inputs = sheet.getInputs()
-	if #inputs >= 6 then
-		return inputs[6].value
-	end
-	return ""
-end
-
-
 function getName(color)
 	local sheet = findSheet(color)
 	if sheet == nil then
@@ -465,34 +303,6 @@ function getName(color)
 	end
 	return nil
 end
-
-
-
-function getTotalPinning(color)
-	local sheet = findSheet(color)
-	if sheet == nil then
-		return nil
-	end
-	local buttons = sheet.getButtons()
-	if #buttons >= 64 then
-		return tonumber(buttons[64].label)
-	end
-	return nil
-end
-
-
-function getTotalWS(color)
-	local sheet = findSheet(color)
-	if sheet == nil then
-		return nil
-	end
-	local buttons = sheet.getButtons()
-	if #buttons >= 8 then
-		return tonumber(buttons[8].label)
-	end
-	return nil
-end
-
 
 function UIButtonClick(player, value, id)
   local buttonClass = UI.getAttribute(id, "class")
