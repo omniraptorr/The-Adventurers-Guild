@@ -1,0 +1,195 @@
+local SHEET_CAST_POSITIONS = {
+  Blue = Vector(-25.28, 5, -48.40),
+  Teal = Vector(21.13, 5, -48.45),
+  Yellow = Vector(65.64, 5, -22.34),
+  White = Vector(65.66, 5, 22.31),
+  Green = Vector(23.30, 5, 48.42),
+  Orange = Vector(-21.95, 5, 48.44),
+}
+
+local STB_INITIAL_INDEX = 1
+local STB_OFFSET = 7
+local STAT_TOTAL_BUTTON_INDEXES = {
+  M  = STB_INITIAL_INDEX + STB_OFFSET * 0,  -- Move
+  WS = STB_INITIAL_INDEX + STB_OFFSET * 1,  -- Weapon Skill
+  BS = STB_INITIAL_INDEX + STB_OFFSET * 2,  -- Ballistic Skill
+  S  = STB_INITIAL_INDEX + STB_OFFSET * 3,  -- Strength
+  T  = STB_INITIAL_INDEX + STB_OFFSET * 4,  -- Toughness
+  I  = STB_INITIAL_INDEX + STB_OFFSET * 5,  -- Initiative
+  A  = STB_INITIAL_INDEX + STB_OFFSET * 6,  -- Attacks
+  D  = STB_INITIAL_INDEX + STB_OFFSET * 7,  -- Damage
+  WP = STB_INITIAL_INDEX + STB_OFFSET * 8,  -- Willpower
+  P  = STB_INITIAL_INDEX + STB_OFFSET * 9,  -- Pinning
+  L  = STB_INITIAL_INDEX + STB_OFFSET * 10, -- Luck
+}
+
+local characterUtils = {}
+
+function characterUtils.findSheet(player)
+  for _, hit in ipairs(Physics.cast({
+    origin       = SHEET_CAST_POSITIONS[player.color],
+    direction    = Vector(0, -1, 0),
+    max_distance = 10,
+    type         = 1,
+  })) do
+    local inputs = hit.hit_object.getInputs()
+    if inputs ~= nil and #inputs >= 2 and hit.hit_object.script_state ~= nil and hit.hit_object.script_state ~= "" then
+      return hit.hit_object
+    end
+  end
+  return nil
+end
+
+function characterUtils.getStatTotal(player, stat)
+  local btnIndex = STAT_TOTAL_BUTTON_INDEXES[stat]
+  local sheet = characterUtils.findSheet(player)
+  if sheet == nil or btnIndex == nil then
+    return nil
+  end
+  local buttons = sheet.getButtons()
+  if #buttons >= btnIndex then
+    return tonumber(buttons[btnIndex].label)
+  end
+  return nil
+end
+
+function characterUtils.getCharacterName(player)
+  local sheet = characterUtils.findSheet(player)
+  if sheet == nil then
+    return nil
+  end
+  local inputs = sheet.getInputs()
+  if #inputs >= 3 then
+    if inputs[3].value == "" then
+      return nil
+    else
+      return inputs[3].value
+    end
+  end
+  return nil
+end
+
+function characterUtils.getClass(player)
+	local sheet = characterUtils.findSheet(player)
+	if sheet == nil then
+		return ""
+	end
+	local inputs = sheet.getInputs()
+	if #inputs >= 6 then
+		return inputs[6].value
+	end
+	return ""
+end
+
+function characterUtils.getTotalPinning(player)
+	local sheet = characterUtils.findSheet(player)
+	if sheet == nil then
+		return nil
+	end
+	local buttons = sheet.getButtons()
+	if #buttons >= 64 then
+		return tonumber(buttons[64].label)
+	end
+	return nil
+end
+
+function characterUtils.getItemStatMods(obj)
+  local desc = obj.getDescription()
+  local move            = string.match(desc, "%f[%w]M%s*([%+%-]?%d+)")  -- M
+  local weapon_skill    = string.match(desc, "%f[%w]WS%s*([%+%-]?%d+)") -- WS
+  local ballistic_skill = string.match(desc, "%f[%w]BS%s*([%+%-]?%d+)") -- BS
+  local strength        = string.match(desc, "%f[%w]S%s*([%+%-]?%d+)")  -- S
+  local toughness       = string.match(desc, "%f[%w]T%s*([%+%-]?%d+)")  -- T
+  local initiative      = string.match(desc, "%f[%w]I%s*([%+%-]?%d+)")  -- I
+  local attacks         = string.match(desc, "%f[%w]A%s*([%+%-]?%d+)")  -- A
+  local damage          = string.match(desc, "%f[%w]D%s*([%+%-]?%d+)")  -- D
+  local willpower       = string.match(desc, "%f[%w]W%s*([%+%-]?%d+)")  -- W
+  local pinning         = string.match(desc, "%f[%w]P%s*([%+%-]?%d+)")  -- P
+  local luck            = string.match(desc, "%f[%w]L%s*([%+%-]?%d+)")  -- L
+  if not (
+    move or
+    weapon_skill or
+    ballistic_skill or
+    strength or
+    toughness or
+    initiative or
+    attacks or
+    damage or
+    willpower or
+    pinning or
+    luck
+  ) then
+    return nil
+  end
+  return {
+    move            = tonumber(move) or 0,
+    weapon_skill    = tonumber(weapon_skill) or 0,
+    ballistic_skill = tonumber(ballistic_skill) or 0,
+    strength        = tonumber(strength) or 0,
+    toughness       = tonumber(toughness) or 0,
+    initiative      = tonumber(initiative) or 0,
+    attacks         = tonumber(attacks) or 0,
+    damage          = tonumber(damage) or 0,
+    willpower       = tonumber(willpower) or 0,
+    pinning         = tonumber(pinning) or 0,
+    luck            = tonumber(luck) or 0,
+  }
+end
+
+function characterUtils.getEquippedItems(player)
+  local sheet = characterUtils.findSheet(player)
+  local items = {}
+  for id, v in pairs(sheet.getTable("data").equipped_items) do
+    if v then table.insert(items, getObjectFromGUID(id)) end
+  end
+  return items
+end
+
+function characterUtils.getWeaponStats(obj)
+  local desc = obj.getDescription()
+  local damage = string.match(desc, "%f[%w]WD%s*([%+%-]?%d+)")  -- WD
+  if not damage then
+    return nil
+  end
+  return {
+    damage = tonumber(damage) or 0,
+  }
+end
+
+function characterUtils.getItemKeywords(obj)
+  local keywords = {}
+  for kw in string.gmatch(obj.getDescription(), "%[(.-)%]") do
+    keywords[#keywords + 1] = kw
+  end
+  return keywords
+end
+
+function characterUtils.applyItemStatMods(item, player)
+  local mods = characterUtils.getItemStatMods(item)
+  if not mods then return end
+  local sheet = characterUtils.findSheet(player)
+  local data = sheet.getTable("data")
+
+  for k, v in pairs(mods) do
+    data.attributes[k].modifier = data.attributes[k].modifier + v
+  end
+
+  sheet.setTable("data", data)
+  sheet.call("updateSheet")
+end
+
+function characterUtils.unapplyItemStatMods(item, player)
+  local mods = characterUtils.getItemStatMods(item)
+  if not mods then return end
+  local sheet = characterUtils.findSheet(player)
+  local data = sheet.getTable("data")
+
+  for k, v in pairs(mods) do
+    data.attributes[k].modifier = data.attributes[k].modifier - v
+  end
+
+  sheet.setTable("data", data)
+  sheet.call("updateSheet")
+end
+
+return characterUtils

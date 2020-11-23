@@ -1,0 +1,130 @@
+local WOUNDS_MARKER_DIE_NAME = "Wounds_Die"
+local WOUNDS_MARKER_DIE = {
+  Name = "Die_6_Rounded",
+  Nickname = "Wounds_Die",
+  Transform = { scaleX = 1, scaleY = 1, scaleZ = 1 },
+  ColorDiffuse = { r = 0.9, g = 0.01, b = 0.01 },
+  Rigidbody = {
+    Mass = 0.0,
+    Drag = 0.0,
+    AngularDrag = 0.0,
+    UseGravity = true
+  }
+}
+
+local ROTATION_VALUES = {
+  Vector(0.0, 0.0, 0.0),
+  Vector(90.0, 0.0, 0.0),
+  Vector(0.0, 0.0, 90.0),
+  Vector(0.0, 0.0, -90.0),
+  Vector(-90.0, 0.0, 0.0),
+  Vector(0.0, 0.0, -180.0)
+}
+
+local KILL_COFFIN_IDS = {
+  Blue = "1f8391",
+  Teal = "cafff5",
+  Yellow = "4c8a0e",
+  White = "22ad17",
+  Green = "af5b74",
+  Orange = "3d6f0d",
+}
+
+local monsterUtils = { KILL_COFFIN_IDS = KILL_COFFIN_IDS }
+
+function monsterUtils.getStats(obj)
+  local desc = obj.getDescription()
+  local W  = string.match(desc, "%f[%w]W%s*(%d+)")
+  local WS = string.match(desc, "%f[%w]WS%s*(%d+)")
+  local S  = string.match(desc, "%f[%w]S%s*(%d+)")
+  local T  = string.match(desc, "%f[%w]T%s*(%d+)")
+  local A  = string.match(desc, "%f[%w]A%s*(%d+)")
+  local D  = string.match(desc, "%f[%w]D%s*(%d+)")
+  local AR = string.match(desc, "%f[%w]AR%s*(%d+)")
+  if not (W or WS or S or T or A or D or AR) then
+    return nil
+  end
+  return {
+    W = tonumber(W) or 0,
+    WS = tonumber(WS) or 0,
+    S = tonumber(S) or 0,
+    T = tonumber(T) or 0,
+    A = tonumber(A) or 0,
+    D = tonumber(D) or 0,
+    AR = tonumber(AR) or 0
+  }
+end
+
+function monsterUtils.getKeywords(obj)
+  local keywords = {}
+  for kw in string.gmatch(obj.getDescription(), "%[(.-)%]") do
+    keywords[#keywords + 1] = kw
+  end
+end
+
+function monsterUtils.clearCurrentWounds(obj)
+  local offset = -1 -- minus 1 because its zero based
+  for i, child in ipairs(obj.getAttachments()) do
+    if child.name == WOUNDS_MARKER_DIE_NAME then
+      obj.destroyAttachment(i + offset)
+      offset = offset - 1 -- because we modify as we iterate, so indexes misalign
+    end
+  end
+end
+
+function monsterUtils.getCurrentWounds(obj)
+  local total = 0
+  for i, child in ipairs(obj.getAttachments()) do
+    if child.name == WOUNDS_MARKER_DIE_NAME then
+      total = total + tonumber(child.description)
+    end
+  end
+  -- commented out so caller can decide what happens if there are no dice
+  -- -- if no dice then assume its at max wounds
+  -- if total == 0 then return monsterUtils.getStats(obj).W end
+  return total
+end
+
+function monsterUtils.setCurrentWounds(obj, value)
+  monsterUtils.clearCurrentWounds(obj)
+  if value <= 0 then return end
+  local scale = obj.getBoundsNormalized().size.x/3
+  
+  local extraDice = math.ceil(value / 6) - 1
+  for i = 1, extraDice do
+    local die = spawnObjectData({
+      data = WOUNDS_MARKER_DIE,
+      position = obj.positionToWorld({scale * extraDice / 2 - scale * i, 0.2, -0.7}),
+      rotation = ROTATION_VALUES[6],
+      scale = Vector(scale, scale, scale)
+    })
+    die.setDescription(6)
+    obj.addAttachment(die)
+  end
+  local die = spawnObjectData({
+    data = WOUNDS_MARKER_DIE,
+    position = obj.positionToWorld({scale * extraDice / 2, 0.2, -0.7}),
+    rotation = ROTATION_VALUES[(value - 1) % 6 + 1],
+    scale = Vector(scale, scale, scale)
+  })
+  die.setDescription((value - 1) % 6 + 1)
+  obj.addAttachment(die)
+end
+
+function monsterUtils.placeNextToKillCoffin(monster, player)
+  local coffin = monsterUtils.kill_coffin_objs[player.color]
+  local num = 0
+  for _, v in ipairs(Physics.cast({
+    type         = 3,
+    origin       = coffin.positionToWorld({-5, 0, 0}),
+    orientation  = coffin.getRotation(),
+    size         = Vector(10, 5, 3),
+    direction    = Vector(0, -1, 0),
+    max_distance = 0,
+  })) do
+    if monsterUtils.getStats(v.hit_object) then num = num + 1 end
+  end
+  monster.setPositionSmooth(coffin.positionToWorld({-2 * num, 1, 0}))
+end
+
+return monsterUtils
